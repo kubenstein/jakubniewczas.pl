@@ -1,0 +1,31 @@
+.clearfix {
+  @include clearfix();
+}
+
+.hidden {
+  display: none !important;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.margin-center {
+  margin: 0 auto;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.box-bordered {
+  @include border-radius(0, 10px, 0, 0);
+}

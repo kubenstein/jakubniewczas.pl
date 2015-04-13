@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title Jakub Niewczas
+    meta charset="utf-8"
+    meta name="description" content="Personal website, cv"
+    meta content="Jakub Niewczas" name="author"
+    meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport" /
+    = stylesheet_link_tag 'application'
+
+  = partial 'ga'
+  = yield
+
+= javascript_include_tag 'application'
