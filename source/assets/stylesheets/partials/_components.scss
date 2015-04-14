@@ -33,3 +33,72 @@
     }
   }
 }
+
+
+.about-me-section {
+  padding: 40px 0;
+  background: image-url('pattern.jpg') $brown;
+
+  $shadow: 8px;
+  -moz-box-shadow: inset 0 $shadow $shadow (-$shadow) $black,
+                   inset 0 (-$shadow) $shadow (-$shadow) $black;
+  -webkit-box-shadow: inset 0 $shadow $shadow (-$shadow) $black,
+                      inset 0 (-$shadow) $shadow (-$shadow) $black;
+  box-shadow: inset 0 $shadow $shadow (-$shadow) $black,
+              inset 0 (-$shadow) $shadow (-$shadow) $black;
+
+  .inner-wrapper {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1024px;
+  }
+
+  .avatar {
+    float: left;
+  }
+
+  .text {
+    color: $white;
+    margin-left: 180px;
+    text-align: justify;
+  }
+
+  .header {
+    display: block;
+    font-size: 19px;
+    margin-bottom: 9px;
+  }
+}
+
+.avatar {
+  -webkit-border-radius: 75px;
+  -moz-border-radius: 75px;
+  border-radius: 75px;
+  -webkit-box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
+box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
+}
+
+.social-section {
+  margin-top: 22px;
+  text-align: center;
+
+  .item {
+    color: $white;
+    text-decoration: none;
+    font-size: 32px;
+    letter-spacing: 22px;
+
+    // set fontello font
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    // -------
+  }
+}
