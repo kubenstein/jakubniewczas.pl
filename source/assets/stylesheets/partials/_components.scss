@@ -75,10 +75,7 @@
 }
 
 .avatar {
-  -webkit-border-radius: 75px;
-  -moz-border-radius: 75px;
-  border-radius: 75px;
-  
+  @include border-radius(75px,75px,75px,75px);  
   -webkit-box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
   -moz-box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
   box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
@@ -107,18 +104,31 @@
   }
 }
 
-.work-section {
+.two-cols-section {
   @extend .inner-wrapper;
   @extend .two-cols-narrower;
   .section-title { @extend .col-one; }
   .section-body { @extend .col-two; }
-  padding: 20px 0;
-
   .title {
     font-size: 23px;
     color: $brown;
     border-bottom: 2px solid $green;
   }
+  padding: 20px 0;
+}
+
+.with-separator {
+  &:after {
+    width: 96%;
+    display: block;
+    height: 1px;
+    background-color: $light_gray;
+    margin: 40px auto 0 auto;
+  }
+}
+
+.work-section {
+  @extend .two-cols-section;
 
   .item {
     margin-bottom: 40px;
@@ -139,6 +149,48 @@
 
   .item-body {
     line-height: 22px;
+  }
+}
+
+.skills-section {
+  @extend .two-cols-section;
+}
+
+.skills-matrix {
+  margin: 50px 0 0 50px;
+  .item {
+    @extend .two-cols;
+    margin-bottom: 50px; 
+  }
+
+  .skill-title {
+    @extend .col-one;
+    font-size: 20px;
+  }
+
+  .body {
+    @extend .col-two;
+    color: $gray;
+  }
+
+  .review-bar {
+    @include border-radius(5px, 5px, 5px, 5px);
+    overflow: hidden;
+    width: 400px;
+    height: 25px;
+    background-color: $gray;
+    margin-bottom: 5px;
+    &:after {
+      content: ' ';
+      width: 0;
+      display: block;
+      height: 100%;
+      background-color: $green;
+    }
+  }
+
+  @for $i from 1 through 10 {
+    .review-bar.fill-#{$i*10}:after { width: #{$i*10%} }
   }
 }
 

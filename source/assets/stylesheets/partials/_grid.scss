@@ -1,21 +1,21 @@
 .two-cols {
   @extend .clearfix;
-  .col-one {
+   &>.col-one {
     float: left;
     width: 180px;
   }
-  .col-two {
+   &>.col-two {
     margin-left: 180px;
   }
 }
 
 .two-cols-narrower {
   @extend .clearfix;
-  .col-one {
+  &>.col-one {
     float: left;
     width: 100px;
   }
-  .col-two {
+  &>.col-two {
     margin-left: 100px;
   }
 }
