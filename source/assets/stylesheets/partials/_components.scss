@@ -10,6 +10,12 @@
               inset 0 (-$shadow) $shadow (-$shadow) $black;
 }
 
+.inner-wrapper {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1024px;
+}
+
 .header-section {
   width: 100%;
   padding: 80px 0 80px 0;
@@ -51,19 +57,9 @@
 .about-me-section {
   @extend .odd-section;
   padding: 40px 0;
-  .inner-wrapper {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1024px;
-  }
-
-  .avatar {
-    float: left;
-  }
 
   .text {
     color: $white;
-    margin-left: 180px;
     text-align: justify;
   }
 
@@ -111,8 +107,39 @@
   }
 }
 
-.skills-section {
-  height: 500px;
+.work-section {
+  @extend .inner-wrapper;
+  @extend .two-cols-narrower;
+  .section-title { @extend .col-one; }
+  .section-body { @extend .col-two; }
+  padding: 20px 0;
+
+  .title {
+    font-size: 23px;
+    color: $brown;
+    border-bottom: 2px solid $green;
+  }
+
+  .item {
+    margin-bottom: 40px;
+  }
+
+  .item-title {
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .item-subtitle {
+    display: block;
+    color: $gray;
+    font-size: 14px;
+    margin: 3px 0;
+  }
+
+  .item-body {
+    line-height: 22px;
+  }
 }
 
 .footer-section {
