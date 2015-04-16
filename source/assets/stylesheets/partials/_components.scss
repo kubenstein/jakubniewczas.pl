@@ -127,6 +127,13 @@
   }
 }
 
+.language-disclaimer-section {
+  @extend .odd-section;
+  background: $yellow;
+  padding: 15px 0;
+  text-align: center;
+}
+
 .work-section {
   @extend .two-cols-section;
 
