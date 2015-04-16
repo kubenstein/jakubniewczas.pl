@@ -2,22 +2,21 @@
 set :css_dir, 'assets/stylesheets'
 set :js_dir, 'assets/javascripts'
 set :images_dir, 'assets/images'
-set :layouts_dir, 'views/layouts'
-set :partials_dir, 'views/partials'
-set :layout, 'application'
+set :frontmatter_extensions, %w(.html .slim)
 
 ignore 'views/*'
 ignore 'pages/*'
 
+## slim in assets
+::Sprockets.register_engine('.slim', Slim::Template)
+
 ## extensions
-activate :directory_indexes
-activate :livereload
+activate :livereload, apply_js_live: false
 
 configure :build do
   activate :minify_css
   activate :minify_javascript
   activate :minify_html
-  activate :asset_hash, ignore: [/images/]
-  activate :relative_assets
-  activate :gzip
+  activate :asset_hash, exts: (Middleman::Extensions::AssetHash.config[:exts] << '.template')
+  activate :gzip, exts: (Middleman::Extensions::Gzip.config[:exts] << '.template')
 end

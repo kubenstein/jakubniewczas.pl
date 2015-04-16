@@ -1,75 +1,20 @@
-.header-section
-  .main-header
-    h1 Jakub Niewczas
-    h2 Rails and iOS developer
-    h3 With Passion!
-.about-me-section
-  .inner-wrapper
-    .two-cols
-      .col-one
-        = image_tag 'me.jpg', class: 'avatar'
-      .col-two  
-        p.text
-          span.header About me 
-          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        .social-section
-          = link_to '&#xe802;', 'mailto:niewczas.jakub@gmail.com', class: 'item email'
-          = link_to '&#xe801;', 'https://github.com/kubenstein', class: 'item github', target: '_blank'
-          = link_to '&#xe800;', 'https://twitter.com/j_niewczas', class: 'item twitter', target: '_blank'
-.language-disclaimer-section
-  p.text Unfortunately I don't speak Chinese. The page was translated for me by my friend from China. 
+doctype html
+html ng-app='jakubniewczas'
+  head
+    title Jakub Niewczas
+    meta charset="utf-8"
+    meta name="description" content="Personal website, cv"
+    meta content="Jakub Niewczas" name="author"
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+  javascript:
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-.skills-section.with-separator
-  .section-title
-    span.title Skills
-  .section-body
-    p.item-body Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-    .skills-matrix
-      .item
-        .skill-title Ruby on Rails:
-        .body
-          .review-bar
-            .complete style="width: 80%"
-          | Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      .item
-        .skill-title iOS:
-        .body
-          .review-bar
-            .complete style="width: 50%"
-          | Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      .item
-        .skill-title
-          | (S)CSS:
-        .body
-          .review-bar
-            .complete style="width: 60%"
-          | Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      .item
-        .skill-title Angular:
-        .body
-          .review-bar
-            .complete style="width: 20%"
-          | Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    ga('create', 'UA-1825831-6', 'auto');
+    ga('send', 'pageview');
 
-
-.work-section
-  .section-title
-    span.title Work
-  .section-body
-    .item
-      span.item-title Mobica
-      span.item-subtitle iOS developer • September 2014 - Present
-      p.item-body Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-    .item
-      span.item-title App'n'Roll/Foap
-      span.item-subtitle iOS developer • September 2014 - Present
-      p.item-body Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-    .item
-      span.item-title codequest
-      span.item-subtitle iOS developer • September 2014 - Present
-      p.item-body Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-.footer-section
-  span Jakub Niewczas &copy; 2015
+body
+  div ng-include=("'#{asset_url('assets/javascripts/application/layout.html.template')}'") 
