@@ -180,17 +180,11 @@
     height: 25px;
     background-color: $gray;
     margin-bottom: 5px;
-    &:after {
-      content: ' ';
-      width: 0;
+    .complete {
       display: block;
       height: 100%;
       background-color: $green;
     }
-  }
-
-  @for $i from 1 through 10 {
-    .review-bar.fill-#{$i*10}:after { width: #{$i*10%} }
   }
 }
 
