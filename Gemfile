@@ -7,6 +7,7 @@ gem 'middleman'
 gem 'middleman-minify-html'
 gem 'middleman-livereload'
 gem 'slim'
+gem 'require_all'
 
 gem 'rails-assets-angular'
 

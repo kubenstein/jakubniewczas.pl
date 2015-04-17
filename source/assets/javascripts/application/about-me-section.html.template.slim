@@ -1,0 +1,13 @@
+.about-me-section
+  .inner-wrapper
+    .two-cols
+      .col-one
+        = image_tag 'me.jpg', class: 'avatar'
+      .col-two  
+        p.text
+          span.header About me 
+          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        .social-section
+          = link_to '&#xe802;', 'mailto:niewczas.jakub@gmail.com', class: 'item email'
+          = link_to '&#xe801;', 'https://github.com/kubenstein', class: 'item github', target: '_blank'
+          = link_to '&#xe800;', 'https://twitter.com/j_niewczas', class: 'item twitter', target: '_blank'

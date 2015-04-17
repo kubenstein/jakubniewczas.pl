@@ -7,6 +7,12 @@ set :frontmatter_extensions, %w(.html .slim)
 ignore 'views/*'
 ignore 'pages/*'
 
+## load helpers
+helpers do
+  load_all 'source/helpers/'
+end
+
+
 ## slim in assets
 ::Sprockets.register_engine('.slim', Slim::Template)
 
