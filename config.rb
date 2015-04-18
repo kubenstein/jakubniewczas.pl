@@ -6,6 +6,7 @@ set :images_dir, 'assets/images'
 ignore 'views/*'
 ignore 'pages/*'
 ignore 'helpers/*'
+ignore 'assets/app/components/**/*.css'
 
 ## load helpers
 helpers do
@@ -22,6 +23,6 @@ configure :build do
   activate :minify_css
   activate :minify_javascript
   activate :minify_html
-  # activate :asset_hash, exts: (Middleman::Extensions::AssetHash.config[:exts] << '.template')
-  activate :gzip, exts: (Middleman::Extensions::Gzip.config[:exts] << '.template')
+  activate :asset_hash, ignore: 'index.html', exts: (Middleman::Extensions::AssetHash.config[:exts] << '.html')
+  activate :gzip
 end
