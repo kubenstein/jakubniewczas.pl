@@ -2,7 +2,6 @@
 set :css_dir, 'assets/stylesheets'
 set :js_dir, 'assets/javascripts'
 set :images_dir, 'assets/images'
-set :frontmatter_extensions, %w(.html .slim)
 
 ignore 'views/*'
 ignore 'pages/*'
