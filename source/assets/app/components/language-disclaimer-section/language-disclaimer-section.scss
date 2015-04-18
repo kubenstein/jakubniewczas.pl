@@ -1,0 +1,8 @@
+@import 'components/common/common';
+
+.language-disclaimer-section {
+  @extend .odd-section;
+  background: $yellow;
+  padding: 15px 0;
+  text-align: center;
+}

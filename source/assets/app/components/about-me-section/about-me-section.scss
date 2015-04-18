@@ -1,0 +1,51 @@
+@import 'components/common/common';
+
+.about-me-section {
+  @extend .odd-section;
+  padding: 40px 0;
+
+  .text {
+    color: $white;
+    text-align: justify;
+  }
+
+  .header {
+    display: block;
+    font-size: 19px;
+    margin-bottom: 9px;
+  }
+
+  .social-section {
+    margin-top: 22px;
+  }
+}
+
+.avatar {
+  @include border-radius(75px,75px,75px,75px);  
+  -webkit-box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
+  -moz-box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
+  box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
+}
+
+.social-section {
+  text-align: center;
+
+  .item {
+    color: $white;
+    text-decoration: none;
+    font-size: 32px;
+    letter-spacing: 22px;
+
+    // set fontello font
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    // -------
+  }
+}

@@ -1,0 +1,37 @@
+@import 'components/common/common';
+
+.skills-section {
+  @extend .two-cols-section;
+}
+
+.skills-matrix {
+  margin: 50px 0 0 50px;
+  .item {
+    @extend .two-cols;
+    margin-bottom: 50px; 
+  }
+
+  .skill-title {
+    @extend .col-one;
+    font-size: 20px;
+  }
+
+  .body {
+    @extend .col-two;
+    color: $gray;
+  }
+
+  .review-bar {
+    @include border-radius(5px, 5px, 5px, 5px);
+    overflow: hidden;
+    width: 400px;
+    height: 25px;
+    background-color: $gray;
+    margin-bottom: 5px;
+    .complete {
+      display: block;
+      height: 100%;
+      background-color: $green;
+    }
+  }
+}

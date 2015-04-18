@@ -1,0 +1,50 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: Tahoma, Geneva, sans-serif;
+}
+
+.clearfix {
+  @include clearfix();
+}
+
+.odd-section {
+  background: image-url('pattern.jpg') $brown;
+
+  $shadow: 8px;
+  -moz-box-shadow: inset 0 $shadow $shadow (-$shadow) $black,
+                   inset 0 (-$shadow) $shadow (-$shadow) $black;
+  -webkit-box-shadow: inset 0 $shadow $shadow (-$shadow) $black,
+                      inset 0 (-$shadow) $shadow (-$shadow) $black;
+  box-shadow: inset 0 $shadow $shadow (-$shadow) $black,
+              inset 0 (-$shadow) $shadow (-$shadow) $black;
+}
+
+.inner-wrapper {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1024px;
+}
+
+.two-cols-section {
+  @extend .inner-wrapper;
+  @extend .two-cols-narrower;
+  .section-title { @extend .col-one; }
+  .section-body { @extend .col-two; }
+  .title {
+    font-size: 23px;
+    color: $brown;
+    border-bottom: 2px solid $green;
+  }
+  padding: 20px 0;
+}
+
+.with-separator {
+  &:after {
+    width: 96%;
+    display: block;
+    height: 1px;
+    background-color: $light_gray;
+    margin: 40px auto 0 auto;
+  }
+}

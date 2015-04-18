@@ -1,0 +1,47 @@
+@import 'components/common/common';
+
+.header-section {
+  width: 100%;
+  padding: 80px 0 80px 0;
+  background: center center no-repeat $brown;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-image: image-url('header.jpg');
+  .main-header {
+    margin: 0 auto;
+  }
+}
+
+.main-header {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  text-align: center;
+  width: 680px;
+  color: $white;
+  font-style: italic;
+
+  * {
+    font-weight: lighter;
+  }
+
+  h1 {
+    display: inline-block;
+    font-size: 70px;
+    border-bottom: 1px solid $white;
+    padding-bottom: 10px;
+    margin-bottom: 13px;
+  }
+
+  h2, h3 {
+    font-size: 38px;
+  }
+}
+
+.footer-section {
+  @extend .odd-section;
+  font-size: 10px;
+  text-align: center;
+  color: $gray;
+  padding: 20px 0;
+}
