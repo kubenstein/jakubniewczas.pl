@@ -1,0 +1,34 @@
+angular.module('jakubniewczas')
+  .directive('skillsSection', function() {
+    return {
+      scope: {
+        title: '@',
+        text: '@'
+      },
+      templateUrl: '<%= ng_template_url("skills-section/") %>',
+      link: function(scope, element, attrs) {
+        scope.items = [
+          {
+            name: 'Ruby on Rails',
+            subtext: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            progress: 80
+          },
+          {
+            name: 'iOS',
+            subtext: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            progress: 50
+          },
+          {
+            name: '(S)CSS',
+            subtext: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            progress: 60
+          },
+          {
+            name: 'Angular',
+            subtext: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            progress: 30
+          },          
+        ];
+      }
+    }
+  })
