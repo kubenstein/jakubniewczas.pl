@@ -6,7 +6,8 @@ html ng-app='jakubniewczas'
     meta name="description" content="Personal website, cv"
     meta content="Jakub Niewczas" name="author"
     = stylesheet_link_tag 'application'
-    = javascript_include_tag 'application'
 
 body
   div ng-include=("'#{ng_template_url('main/')}'")
+
+= javascript_include_tag 'application'  

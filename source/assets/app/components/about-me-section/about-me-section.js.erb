@@ -1,0 +1,10 @@
+angular.module('jakubniewczas')
+  .directive('aboutMeSection', function() {
+    return {
+      scope: {
+        title: '@',
+        text: '@'
+      },
+      templateUrl: '<%= ng_template_url("about-me-section/") %>'
+    }
+  })
