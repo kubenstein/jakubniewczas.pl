@@ -1,0 +1,12 @@
+.list-section
+  .section-title
+    span.title 
+      | {{title}}
+  .section-body
+    .item ng-repeat='item in items'
+      span.item-title
+        | {{item.title}}
+      span.item-subtitle 
+        | {{item.subtext}}
+      p.item-body
+        | {{item.text}}
