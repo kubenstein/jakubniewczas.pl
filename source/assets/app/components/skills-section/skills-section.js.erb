@@ -1,5 +1,13 @@
 angular.module('jakubniewczas')
-  .directive('skillsSection', function() {
+  .directive('skillsSection', ['$http', function($http) {
+
+    function getData() {
+      return $http({
+        method: 'get',
+        url: 'api/v1/skills.json',
+      });
+    }
+
     return {
       scope: {
         name: '@',
@@ -7,28 +15,9 @@ angular.module('jakubniewczas')
       },
       templateUrl: '<%= ng_template_url("skills-section/") %>',
       link: function(scope, element, attrs) {
-        scope.items = [
-          {
-            name: 'Ruby on Rails',
-            subtext: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-            progress: 80
-          },
-          {
-            name: 'iOS',
-            subtext: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-            progress: 50
-          },
-          {
-            name: '(S)CSS',
-            subtext: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-            progress: 60
-          },
-          {
-            name: 'Angular',
-            subtext: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-            progress: 30
-          },          
-        ];
+        getData().then(function(response) {
+          scope.items = response.data;
+        });
       }
     }
-  })
+  }])
