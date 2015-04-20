@@ -2,10 +2,7 @@ angular.module('jakubniewczas')
   .directive('workSection', ['$http', function($http) {
 
     function getData() {
-      return $http({
-        method: 'get',
-        url: 'api/v1/works.json',
-      });
+      return $http.get('api/v1/works.json');
     }
 
     return {

@@ -2,10 +2,7 @@ angular.module('jakubniewczas')
   .directive('skillsSection', ['$http', function($http) {
 
     function getData() {
-      return $http({
-        method: 'get',
-        url: 'api/v1/skills.json',
-      });
+      return $http.get('api/v1/skills.json');
     }
 
     return {
