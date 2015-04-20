@@ -1,0 +1,9 @@
+<script>
+angular.module('jakubniewczas').run(['$http', '$cacheFactory', function($httpProvider, $cacheFactory) {  
+  $httpProvider.defaults.cache = true;
+  httpCache = $cacheFactory.get('$http');
+  <% sitemap.resources.select { |r| r.path.include?('.json') }.each do |json_file| %>
+    httpCache.put("<%= json_file.path %>", "<%= json_file.render.gsub('"', '\"') %>");
+  <% end %>
+}]);
+</script>
