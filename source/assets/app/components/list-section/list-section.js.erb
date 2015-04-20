@@ -2,7 +2,7 @@ angular.module('jakubniewczas')
   .directive('listSection', function() {
     return {
       scope: {
-        title: '@',
+        name: '@',
         items: '@'
       },
       templateUrl: '<%= ng_template_url("list-section/") %>',
