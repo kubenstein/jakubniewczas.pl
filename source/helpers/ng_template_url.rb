@@ -6,5 +6,5 @@ def ng_template_url(template_rel_path)
                     template_rel_path
                   end
 
-  asset_url("assets/app/components/#{template_path}.tpl.html")
+  asset_url("/assets/app/components/#{template_path}.tpl.html")
 end
