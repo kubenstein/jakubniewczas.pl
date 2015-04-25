@@ -1,16 +1,22 @@
 angular.module('jakubniewczas')
-  .directive('workSection', ['$http', function($http) {
-
-    function getData() {
-      return $http.get('api/v1/works.json');
-    }
+  .directive('workSection', ['$rootScope', '$http', '$translate', function($rootScope, $http, $translate) {
 
     return {
       require: 'listSection',
       link: function(scope, element, attrs, listSection) {
-        getData().then(function(response) {
-          listSection.setItems(response.data);
+
+
+        function loadData() {
+          $http.get('/api/v1/works/'+ $translate.use() +'.json').then(function(response) {
+            listSection.setItems(response.data);
+          });
+        }
+        
+        $rootScope.$on('$translateChangeSuccess', function() {
+          loadData();
         });
+        loadData();
+        
       }
     }
   }])

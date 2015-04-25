@@ -3,7 +3,7 @@ angular.module('jakubniewczas')
     $translateProvider.useLoaderCache(true);
     $translateProvider.preferredLanguage('en');
     $translateProvider.useStaticFilesLoader({
-      prefix: 'api/v1/i18n/locale-',
+      prefix: '/api/v1/i18n/locale-',
       suffix: '.json'
     });
 }]);
