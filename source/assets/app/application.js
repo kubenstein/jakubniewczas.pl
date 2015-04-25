@@ -3,5 +3,7 @@
 // it loads components javascripts
 // 
 //= require angular
+//= require angular-translate
+//= require angular-translate-loader-static-files
 //= require app
 //= require_tree ./

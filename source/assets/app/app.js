@@ -1,1 +1,3 @@
-angular.module('jakubniewczas', []);
+angular.module('jakubniewczas', [
+  'pascalprecht.translate',
+]);

@@ -10,6 +10,8 @@ gem 'slim'
 gem 'require_all'
 
 gem 'rails-assets-angular'
+gem 'rails-assets-angular-translate'
+gem 'rails-assets-angular-translate-loader-static-files'
 
 
 gem 'puma'

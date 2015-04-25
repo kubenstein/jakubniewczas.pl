@@ -1,0 +1,10 @@
+angular.module('jakubniewczas')
+  .directive('main', function() {
+    return {
+      scope: {
+        name: '@',
+        text: '@'
+      },
+      templateUrl: '<%= ng_template_url("main/") %>'
+    }
+  })
