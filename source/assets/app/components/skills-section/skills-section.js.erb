@@ -1,5 +1,7 @@
 angular.module('jakubniewczas')
-  .directive('skillsSection', ['$rootScope', '$http', '$translate', function($rootScope, $http, $translate) {
+  .directive('skillsSection',
+    ['$rootScope', '$http', '$translate', '$location',
+    function($rootScope, $http, $translate, $location) {
 
     return {
       scope: {
@@ -8,7 +10,7 @@ angular.module('jakubniewczas')
       },
       templateUrl: '<%= ng_template_url("skills-section/") %>',
 
-      controller: ['$rootScope', '$scope', '$http', '$location', function($rootScope, $scope, $http, $location) {
+      controller: ['$scope', function($scope) {
         function loadData() {
           $http.get('/api/v1/skills/'+ $translate.use() +'.json').then(function(response) {
             $scope.items = response.data;
