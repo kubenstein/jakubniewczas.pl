@@ -5,10 +5,15 @@
 }
 
 .skills-matrix {
-  margin: 50px 0 0 50px;
+  margin-top: 50px;
   .item {
     @extend .two-cols;
-    margin-bottom: 50px; 
+    padding: 25px 0 25px 50px;
+    cursor: pointer;
+    background: image-url('arrow.png') 97% 50% no-repeat;
+    &:hover {
+      background-color: $light_gray;
+    }
   }
 
   .skill-name {

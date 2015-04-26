@@ -6,10 +6,10 @@
     p.item-body
       | {{text}}
     .skills-matrix
-      .item ng-repeat='item in items'
+      .item ng-repeat='skill in items' ng-click='displaySkillDetails(skill)'
         .skill-name
-          | {{item.name}}:
+          | {{skill.name}}:
         .body
           .review-bar
-            .complete style="width: {{item.progress}}%"
-          | {{item.subtext}}
+            .complete style="width: {{skill.progress}}%"
+          | {{skill.subtext}}

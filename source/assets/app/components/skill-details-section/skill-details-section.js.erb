@@ -1,0 +1,33 @@
+angular.module('jakubniewczas')
+  .directive('skillDetailsSection',
+    ['$rootScope', '$http', '$translate', '$location', '$routeParams', '$filter',
+    function($rootScope, $http, $translate, $location, $routeParams, $filter) {
+
+    return {
+      scope: {},
+      templateUrl: '<%= ng_template_url("skill-details-section/") %>',
+
+      controller: ['$scope', function($scope) {
+        function loadData() {
+          $http.get('/api/v1/skills/'+ $translate.use() +'.json').then(function(response) {
+            item = $filter('filter')(response.data, {id: $routeParams['id']}, true)[0];
+            if(!item) $location.path('/');
+            $scope.skill = item;
+          });
+        }
+
+        function initialize() {
+          $rootScope.$on('$translateChangeSuccess', function() {
+            loadData();
+          });
+          loadData();
+        }
+        initialize();
+
+
+        $scope.goBack = function() {
+          $location.path('/');
+        }
+      }]
+    }
+  }])

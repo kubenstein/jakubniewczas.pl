@@ -1,0 +1,12 @@
+angular.module('jakubniewczas')
+  .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+    // $locationProvider.html5Mode(true);
+    $routeProvider
+      .when('/', {
+          templateUrl: '<%= ng_template_url("main/routable/index") %>',
+      })
+      .when('/skill-:id', {
+          templateUrl: '<%= ng_template_url("main/routable/skill") %>',
+      })
+      .otherwise({redirectTo: '/'});
+}]);

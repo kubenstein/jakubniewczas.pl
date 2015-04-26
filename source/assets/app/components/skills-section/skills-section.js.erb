@@ -7,19 +7,26 @@ angular.module('jakubniewczas')
         text: '@'
       },
       templateUrl: '<%= ng_template_url("skills-section/") %>',
-      link: function(scope, element, attrs) {
 
+      controller: ['$rootScope', '$scope', '$http', '$location', function($rootScope, $scope, $http, $location) {
         function loadData() {
           $http.get('/api/v1/skills/'+ $translate.use() +'.json').then(function(response) {
-            scope.items = response.data;
+            $scope.items = response.data;
           });
         }
-        
-        $rootScope.$on('$translateChangeSuccess', function() {
-          loadData();
-        });
-        loadData();
 
-      }
+        function initialize() {
+          $rootScope.$on('$translateChangeSuccess', function() {
+            loadData();
+          });
+          loadData();
+        }
+        initialize();
+
+        $scope.displaySkillDetails = function(skill) {
+          $location.path('/skill-'+ skill.id);
+        }
+
+      }]
     }
   }])
