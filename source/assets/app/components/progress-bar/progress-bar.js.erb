@@ -1,0 +1,9 @@
+angular.module('jakubniewczas')
+  .directive('progressBar', function() {
+    return {
+      scope: {
+        progress: '@',
+      },
+      template: '<div class="progress-bar"><div class="complete" style="width: {{progress}}%"></div></div>',
+    }
+  })

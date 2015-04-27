@@ -1,7 +1,8 @@
-a ng-click='goBack()'
-  | {{'BACK' | translate }}
-
-h1 
-  | {{skill.name}}
-h4 
-  | {{skill.subtext}}
+.skills-details-section.with-separator
+  .section-body
+    a.pointer ng-click='goBack()'
+      | {{'BACK' | translate }}
+    .item-body
+      h3
+        | {{skill.name}}
+      progress-bar progress="{{skill.progress}}"

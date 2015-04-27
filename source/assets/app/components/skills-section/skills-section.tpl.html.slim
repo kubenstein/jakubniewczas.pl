@@ -10,6 +10,5 @@
         .skill-name
           | {{skill.name}}:
         .body
-          .review-bar
-            .complete style="width: {{skill.progress}}%"
+          progress-bar progress="{{skill.progress}}"
           | {{skill.subtext}}

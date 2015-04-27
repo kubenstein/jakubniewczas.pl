@@ -2,6 +2,14 @@
 
 .skills-section {
   @extend .two-cols-section;
+
+  .item {
+    cursor: pointer;
+    background: image-url('arrow.png') 97% 50% no-repeat;
+    &:hover {
+      background-color: $light_gray;
+    }
+  }
 }
 
 .skills-matrix {
@@ -9,11 +17,6 @@
   .item {
     @extend .two-cols;
     padding: 25px 0 25px 50px;
-    cursor: pointer;
-    background: image-url('arrow.png') 97% 50% no-repeat;
-    &:hover {
-      background-color: $light_gray;
-    }
   }
 
   .skill-name {
@@ -24,19 +27,5 @@
   .body {
     @extend .col-two;
     color: $gray;
-  }
-
-  .review-bar {
-    @include border-radius(5px, 5px, 5px, 5px);
-    overflow: hidden;
-    width: 400px;
-    height: 25px;
-    background-color: $gray;
-    margin-bottom: 5px;
-    .complete {
-      display: block;
-      height: 100%;
-      background-color: $green;
-    }
   }
 }

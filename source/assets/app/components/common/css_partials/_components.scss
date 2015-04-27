@@ -8,6 +8,10 @@ html, body {
   @include clearfix();
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .odd-section {
   background: image-url('pattern.jpg') $brown;
 
