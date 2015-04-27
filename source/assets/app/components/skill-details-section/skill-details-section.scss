@@ -1,3 +1,23 @@
 .skills-details-section {
   @extend .two-cols-section;
+
+  .item-body {
+    margin-top: 30px;
+  }
+
+  .header {
+    text-align: center;
+  }
+
+  progress-bar {
+    display: inline-block;
+    height: 15px;
+    width: 240px;
+  }
+
+  .skill-name {
+    font-weight: normal;
+    margin-bottom: 10px;
+    font-size: 28px;
+  }
 }

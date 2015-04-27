@@ -3,6 +3,10 @@
     a.pointer ng-click='goBack()'
       | {{'BACK' | translate }}
     .item-body
-      h3
-        | {{skill.name}}
-      progress-bar progress="{{skill.progress}}"
+      .header
+        h3.skill-name
+          | {{skill.name}}
+        progress-bar progress="{{skill.progress}}"
+
+      p
+        | {{skill.description}}
