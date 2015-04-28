@@ -1,4 +1,7 @@
 .skills-details-section.with-separator
+  .section-title
+    span.title
+      | {{'SKILL_TITLE' | translate }}
   .section-body
     a.pointer ng-click='goBack()'
       | {{'BACK' | translate }}
@@ -10,3 +13,7 @@
 
       p
         | {{skill.description}}
+
+
+      .images
+        img.image ng-src="{{imageSrc}}" ng-repeat="imageSrc in skill.images"
