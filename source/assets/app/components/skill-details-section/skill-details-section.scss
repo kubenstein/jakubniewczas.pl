@@ -2,10 +2,6 @@
   @extend .two-cols-section;
   padding-bottom: 50px;
 
-  .item-body {
-    margin-top: 30px;
-  }
-
   .header {
     text-align: center;
   }
@@ -30,5 +26,12 @@
   .image {
     display: inline-block;
     margin: 0 5px;
+  }
+
+  .back {
+    cursor: pointer;
+    display: block;
+    width: 100px;
+    height: 30px;
   }
 }
