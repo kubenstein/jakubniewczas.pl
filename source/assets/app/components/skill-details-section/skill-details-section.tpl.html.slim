@@ -10,10 +10,24 @@
         h3.skill-name
           | {{skill.name}}
         progress-bar progress="{{skill.progress}}"
-
       p
         | {{skill.description}}
 
+      .projects
 
-      .images
-        img.image ng-src="{{imageSrc}}" ng-repeat="imageSrc in skill.images"
+        .project ng-repeat='project in skill.projects'
+          .clearfix
+            img.icon ng-src="{{project.icon}}"
+            h4.project-title
+              | {{project.title}}
+            a.project-link href="{{project.link}}" target='_blank' ng-show="(project.link)"
+              | {{project.link}}
+
+            span.project-link ng-show="(project.subtitle)"
+              | {{project.subtitle}}              
+
+          p.project-description
+            | {{project.description}}
+
+          .images
+            img.image ng-src="{{imageSrc}}" ng-repeat="imageSrc in project.images"

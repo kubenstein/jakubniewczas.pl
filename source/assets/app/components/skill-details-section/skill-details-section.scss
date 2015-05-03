@@ -1,3 +1,5 @@
+@import 'components/common/common';
+
 .skills-details-section {
   @extend .two-cols-section;
   padding-bottom: 50px;
@@ -33,5 +35,32 @@
     display: block;
     width: 100px;
     height: 30px;
+  }
+
+
+  .project {
+    margin-top: 50px;
+
+    .icon {
+      float: left;
+      margin-right: 10px;
+    }
+
+    .project-title {
+      font-size: 24px;
+      line-height: 20px;
+      font-weight: normal;
+    }
+
+    .project-link {
+      margin-top: 10px;
+      display: inline-block;
+      text-decoration: none;
+      color: $light_brown;
+    }
+
+    .project-description {
+      margin-top: 7px;
+    }
   }
 }
