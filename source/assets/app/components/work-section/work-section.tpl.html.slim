@@ -1,4 +1,4 @@
-.list-section
+.work-section
   .section-title
     span.title 
       | {{name}}
@@ -6,6 +6,8 @@
     .item ng-repeat='item in items'
       span.item-title
         | {{item.title}}
+      span.item-date 
+        | ({{item.date}})
       span.item-subtitle 
         | {{item.subtext}}
       p.item-body

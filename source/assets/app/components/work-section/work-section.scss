@@ -1,6 +1,6 @@
 @import 'components/common/common';
 
-.list-section {
+.work-section {
   @extend .two-cols-section;
 
   .item {
@@ -8,9 +8,16 @@
   }
 
   .item-title {
-    display: block;
+    display: inline-block;
     font-weight: bold;
     font-size: 20px;
+    margin-right: 10px;
+  }
+
+  .item-date {
+    font-size: 13px;
+    vertical-align: text-top;
+    color: $brown;
   }
 
   .item-subtitle {

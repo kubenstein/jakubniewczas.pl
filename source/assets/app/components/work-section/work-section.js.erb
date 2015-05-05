@@ -2,13 +2,14 @@ angular.module('jakubniewczas')
   .directive('workSection', ['$rootScope', '$http', '$translate', function($rootScope, $http, $translate) {
 
     return {
-      require: 'listSection',
-      link: function(scope, element, attrs, listSection) {
-
-
+      scope: {
+        name: '@',
+      },
+      templateUrl: '<%= ng_template_url("work-section/") %>',
+      controller: ['$scope', function($scope) {
         function loadData() {
           $http.get('/api/v1/works/'+ $translate.use() +'.json').then(function(response) {
-            listSection.setItems(response.data);
+            $scope.items = response.data;
           });
         }
         
@@ -17,6 +18,6 @@ angular.module('jakubniewczas')
         });
         loadData();
         
-      }
+      }]
     }
   }])
