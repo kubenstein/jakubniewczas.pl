@@ -1,0 +1,33 @@
+@import 'components/common/common';
+
+.work-section {
+  @extend .two-cols-section;
+
+  .item {
+    margin-bottom: 40px;
+  }
+
+  .item-title {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  .item-date {
+    font-size: 13px;
+    vertical-align: text-top;
+    color: $brown;
+  }
+
+  .item-subtitle {
+    display: block;
+    color: $gray;
+    font-size: 14px;
+    margin: 3px 0;
+  }
+
+  .item-body {
+    line-height: 22px;
+  }
+}

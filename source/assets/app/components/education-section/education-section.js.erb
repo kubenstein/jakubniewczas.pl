@@ -1,0 +1,23 @@
+angular.module('jakubniewczas')
+  .directive('educationSection', ['$rootScope', '$http', '$translate', function($rootScope, $http, $translate) {
+
+    return {
+      scope: {
+        name: '@',
+      },
+      templateUrl: '<%= ng_template_url("education-section/") %>',
+      controller: ['$scope', function($scope) {
+        function loadData() {
+          $http.get('/api/v1/educations/'+ $translate.use() +'.json').then(function(response) {
+            $scope.items = response.data;
+          });
+        }
+        
+        $rootScope.$on('$translateChangeSuccess', function() {
+          loadData();
+        });
+        loadData();
+        
+      }]
+    }
+  }])
