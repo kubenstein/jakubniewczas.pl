@@ -2,9 +2,7 @@ angular.module('jakubniewczas')
   .directive('workSection', ['$rootScope', '$http', '$translate', function($rootScope, $http, $translate) {
 
     return {
-      scope: {
-        name: '@',
-      },
+      scope: {},
       templateUrl: '<%= ng_template_url("work-section/") %>',
       controller: ['$scope', function($scope) {
         function loadData() {

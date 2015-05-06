@@ -4,10 +4,7 @@ angular.module('jakubniewczas')
     function($rootScope, $http, $translate, $location) {
 
     return {
-      scope: {
-        name: '@',
-        text: '@'
-      },
+      scope: {},
       templateUrl: '<%= ng_template_url("skills-section/") %>',
 
       controller: ['$scope', function($scope) {
