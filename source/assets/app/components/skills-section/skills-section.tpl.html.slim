@@ -1,10 +1,10 @@
 .skills-section.with-separator
   .section-title
     span.title
-      | {{name}}
+      | {{ 'SKILLS_TITLE' | translate }}
   .section-body
     p.item-body
-      | {{text}}
+      | {{ 'SKILLS' | translate }}
     .skills-matrix
       .item ng-repeat='skill in items' ng-click='displaySkillDetails(skill)'
         .skill-name
