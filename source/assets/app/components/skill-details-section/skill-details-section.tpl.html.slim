@@ -15,6 +15,9 @@
       p
         | {{skill.description}}
 
+      p.disclaimer ng-show="skill.disclaimer"
+        | {{skill.disclaimer}}
+
       .projects
 
         .project ng-repeat='project in skill.projects'
@@ -33,3 +36,8 @@
 
           .images
             img.image ng-src="{{imageSrc}}" ng-repeat="imageSrc in project.images"
+
+
+        .project-logo.clearfix
+          a.project-logo-title ng-repeat='project in skill.projects_logos' href="{{project.link}}" target="_blank"
+            | {{project.title}}  
