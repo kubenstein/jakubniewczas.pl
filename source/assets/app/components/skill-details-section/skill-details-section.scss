@@ -20,6 +20,13 @@
     font-size: 28px;
   }
 
+  .skill-subtext {
+    display: block;
+    font-size: 8pt;
+    color: $gray;
+    margin-bottom: 10px;
+  }
+
   .images {
     margin-top: 35px;
     text-align: center;
@@ -38,12 +45,8 @@
     height: 30px;
   }
 
-  .projects {
-    margin-top: -50px;
-  }
-
   .project {
-    margin-top: 100px;
+    margin: 50px 0;
 
     .icon {
       float: left;
