@@ -93,9 +93,34 @@
   {
     id: 'angular',
     name: 'Angular',
-    subtext: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    description: "angu Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    subtext: 'Restangular, i18n, Admin panels, Authentication, Fractal arch',
+    description: "After working with Angular team on some project, i instantly was hooked up. i started learning Angular on my own and successful crafted few pages. With my strong backend skills, motivation and fun i have soon ill be finally full stack developer down from servers up to frontend written in Angular!  ",
     progress: 40,
+    projects: [
+      {
+        title: 'My Homepage',
+        link: 'http://jakubniewczas.pl',
+        description: 'To sharp my Angular skills and fave also some fun i wrote this page in Angular. Im really proud of this page because it is use fractal file structure, splitting everything into independent components. Each component contain directive definition, template and css. all nicely separated. Even page use static data, all communication is taking place using json api. Well made Kuba!',
+        images: [
+          image_path('s3/jakubniewczas.jpg')
+        ]
+      },
+      {
+        title: 'Vatus.pl Admin panel',
+        description: 'Admin panel that allows to manage content and vagus.pl. It uses Restangular to communicate with backend. Authentication is done by sending auth-token in each request header. Image upload is done by serialising image and sending it as base64 encoded string. Clean intuitive interface, client loves it!',
+        images: [
+          image_path('s3/vatus_admin.jpg')
+        ]
+      },
+      {
+        title: 'Vatus.pl',
+        link: 'http://vatus.pl',
+        description: 'Vatus.pl is accountant company homepage. I decided to rewrite it to Angular for educational purposes. With functional tests already written it was pleasure to see that after migration to angular everything just work the same.',
+        images: [
+          image_path('s3/vatus.jpg')
+        ]
+      }
+    ]
   },          
 ].to_json
 %>
