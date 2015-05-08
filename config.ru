@@ -4,6 +4,8 @@ require 'rack/rewrite'
 
 use Rack::TryStatic, root: 'build', urls: %w[/], try: ['.html', 'index.html', '/index.html']
 use Rack::Rewrite do
-  r301 %r{(.*)}, '/'
+  rewrite %r{(.*)}, '/'
 end
+use Rack::TryStatic, root: 'build', urls: %w[/], try: ['.html', 'index.html', '/index.html']
+
 run ->(env) {}
