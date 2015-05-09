@@ -17,5 +17,4 @@ gem 'rails-assets-angular-route'
 
 gem 'puma'
 gem 'rake'
-gem 'rack-rewrite'
 gem 'rack-contrib'
