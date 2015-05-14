@@ -1,0 +1,10 @@
+
+angular.module('jakubniewczas')
+  .run(['$rootScope', '$location', '$window', function($rootScope, $location, $window) {
+
+    $rootScope.$on('$viewContentLoaded', function(e) {
+      if(!$window.ga) return;
+      $window.ga('send', 'pageview', { page: $location.path() });
+    });
+
+  }]);
