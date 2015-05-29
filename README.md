@@ -1,17 +1,13 @@
 # jakubniewczas.pl
 
-jakubniewczas.pl - My personal website
+My personal website, whitch is written as an Angular app. All data, so texts and translations are stored in as external jsons, making no difference between normal server and its static imitation. Whole asset pipeline is done in Middleman with a little bit of extra hacking.
 
-
-### Author:
-Jakub Niewczas
-
-### Installation and Development:
+## Installation and Development:
 * bundle
 * middleman server
 
-### Local Deployment:
+## Local Deployment:
 * middleman build
 
-### Heroku Deployment:
+## Heroku Deployment:
 * normal git push 
