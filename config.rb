@@ -16,8 +16,6 @@ end
 ## slim in assets
 ::Sprockets.register_engine('.slim', Slim::Template)
 
-## extensions
-activate :livereload, apply_js_live: false
 
 configure :build do
   activate :minify_css
@@ -25,4 +23,27 @@ configure :build do
   activate :minify_html
   activate :asset_hash, ignore: 'index.html', exts: (Middleman::Extensions::AssetHash.config[:exts] << '.html')
   activate :gzip
+end
+
+
+configure :development do
+  activate :livereload, apply_js_live: false
+
+  # redirect all 404 to index.html
+  # this is useful when livereload reloads Angular app with frontend routing
+  class ServeRoot
+    def initialize(app)
+      @app = app
+    end
+
+    def call(env)
+      status, headers, response = @app.call(env)
+      if status == 404
+        env['PATH_INFO'] = '/'
+        status, headers, response = @app.call(env)
+      end
+      [status, headers, response]
+    end
+  end
+  use ServeRoot
 end
