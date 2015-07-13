@@ -15,13 +15,10 @@ html, body {
 .odd-section {
   background-color: $brown;
 
-  $shadow: 8px;
-  -moz-box-shadow: inset 0 $shadow $shadow (-$shadow) $black,
-                   inset 0 (-$shadow) $shadow (-$shadow) $black;
-  -webkit-box-shadow: inset 0 $shadow $shadow (-$shadow) $black,
-                      inset 0 (-$shadow) $shadow (-$shadow) $black;
-  box-shadow: inset 0 $shadow $shadow (-$shadow) $black,
-              inset 0 (-$shadow) $shadow (-$shadow) $black;
+  $shadow-top: 8px;
+  -moz-box-shadow: inset 0 $shadow-top $shadow-top (-$shadow-top) $black;
+  -webkit-box-shadow: inset 0 $shadow-top $shadow-top (-$shadow-top);
+  box-shadow: inset 0 $shadow-top $shadow-top (-$shadow-top) $black;
 }
 
 .inner-wrapper {
