@@ -3,8 +3,11 @@
 .skills-section {
   @extend .two-cols-section;
 
+  .item-body {
+    padding-bottom: 40px;
+  }
+
   .fullstack-matrix {
-    margin-top: 30px;
     float: left;
     width: 450px;
     height: 500px;
@@ -20,11 +23,10 @@
     background-color: $green;
     background-image: image-url('layer_bg_border.png');
 
-    &:hover {
-    background-color: $blue;
+    &.active {
+      background-color: $blue;
     }
   }
-
 
   .frontend { float: left; }
   .ios { float: right; }
@@ -35,4 +37,27 @@
   .ios .icon { background-image: image-url('ios.png'); }
   .backend .icon { background-image: image-url('backend.png'); }
   .servers .icon { background-image: image-url('servers.png'); }
+
+  .fullstack-additional {
+    float: right;
+    width: 420px;
+    height: 500px;
+  }
+
+  .fullstack-info {
+    background-color: $light_gray;
+    padding: 5px 10px;
+  }
+
+  .fullstack-title {
+    font-size: 21px;
+    text-align: center;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .fullstack-body {
+    font-size: 14px;
+  }
+
 }
