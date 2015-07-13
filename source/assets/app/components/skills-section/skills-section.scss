@@ -3,29 +3,36 @@
 .skills-section {
   @extend .two-cols-section;
 
-  .item {
+  .fullstack-matrix {
+    margin-top: 30px;
+    float: left;
+    width: 450px;
+    height: 500px;
+  }
+
+  .layer, .icon {
+    width: 150px;
+    height: 130px;
+  }
+
+  .layer {
     cursor: pointer;
-    background: image-url('arrow.png') 97% 50% no-repeat;
+    background-color: $green;
+    background-image: image-url('layer_bg_border.png');
+
     &:hover {
-      background-color: $light_gray;
+    background-color: $blue;
     }
   }
-}
 
-.skills-matrix {
-  margin-top: 50px;
-  .item {
-    @extend .two-cols;
-    padding: 25px 0 25px 50px;
-  }
 
-  .skill-name {
-    @extend .col-one;
-    font-size: 20px;
-  }
+  .frontend { float: left; }
+  .ios { float: right; }
+  .backend { margin: 150px auto 0 auto; }
+  .servers { margin: 70px auto 0 auto; }
 
-  .body {
-    @extend .col-two;
-    color: $gray;
-  }
+  .frontend .icon { background-image: image-url('frontend.png'); }
+  .ios .icon { background-image: image-url('ios.png'); }
+  .backend .icon { background-image: image-url('backend.png'); }
+  .servers .icon { background-image: image-url('servers.png'); }
 }

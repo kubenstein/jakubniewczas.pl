@@ -5,10 +5,13 @@
   .section-body
     p.item-body
       | {{ 'SKILLS' | translate }}
-    .skills-matrix
-      .item ng-repeat='skill in items' ng-click='displaySkillDetails(skill)'
-        .skill-name
-          | {{skill.name}}:
-        .body
-          progress-bar progress="{{skill.progress}}"
-          | {{skill.subtext}}
+    .fullstack-matrix
+      .layer.frontend
+        .icon
+      .layer.ios
+        .icon
+      .layer.backend
+        .icon
+      .layer.servers
+        .icon
+
