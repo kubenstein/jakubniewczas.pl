@@ -16,8 +16,11 @@
 
   .skill-name {
     font-weight: normal;
-    margin-bottom: 10px;
     font-size: 28px;
+    display: inline-block;
+    padding: 0 10px 4px 10px;
+    margin-bottom: 13px;
+    border-bottom: 2px solid $green;
   }
 
   .skill-subtext {
@@ -28,13 +31,13 @@
   }
 
   .images {
-    margin-top: 35px;
-    text-align: center;
+    width: 447px;
+    float: right;
   }
 
   .image {
-    display: inline-block;
-    margin: 0 5px;
+    float: right;
+    margin: 0 0 5px 5px;
     border: 1px solid $gray;
   }
 
@@ -64,8 +67,17 @@
     color: $light_brown;
   }
 
+  .projects {
+    margin-top: -50px;
+  }
+
   .project {
-    margin: 50px 0;
+    margin-top: 100px;
+
+    .project-info {
+      float: left;
+      width: 447px;
+    }
 
     .icon {
       float: left;
@@ -75,13 +87,18 @@
     .project-title {
       font-size: 24px;
       line-height: 20px;
+      margin-bottom: 5px;
       font-weight: normal;
     }
 
     .project-link {
-      margin-top: 10px;
+      margin-top: 5px;
       display: inline-block;
       text-decoration: none;
+      color: $light_brown;
+    }
+
+    .project-subtitle {
       color: $light_brown;
     }
 
