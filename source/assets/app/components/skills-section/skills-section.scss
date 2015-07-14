@@ -87,7 +87,7 @@
 
   .fullstack-info, .fullstack-layers {
     background-color: $light_gray;
-    padding: 5px 10px;
+    padding: 10px;
     margin-bottom: 10px;
   }
 
@@ -106,6 +106,17 @@
     font-size: 18px;
     display: block;
     margin-bottom: 5px;
+  }
+
+  .fullstack-portfolio-button {
+    text-align: center;
+    width: 50%;
+    padding: 5px 20px;
+    background-color: $green;
+    color: $white;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 10px auto 0 auto;
   }
 
 }
