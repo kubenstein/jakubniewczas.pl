@@ -8,6 +8,7 @@
   }
 
   .fullstack-matrix {
+    position: relative;
     float: left;
     width: 450px;
     height: 500px;
@@ -38,15 +39,56 @@
   .backend .icon { background-image: image-url('backend.png'); }
   .servers .icon { background-image: image-url('servers.png'); }
 
+
+  .layer-connector {
+    width: 2px;
+    height: 50px;
+    background-color: $black;
+    position: absolute;
+  }
+
+  .connector-servers-backend {
+    top: 290px;
+    left: 224px;
+  }
+
+  .connector-backend-ios {
+    top: 107px;
+    left: 294px;
+    -ms-transform: rotate(30deg);
+    -webkit-transform: rotate(30deg);
+    transform: rotate(30deg);
+  }
+
+  .connector-backend-frontend {
+    top: 107px;
+    left: 154px;
+    -ms-transform: rotate(-30deg);
+    -webkit-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+  }
+
+
+  .connector-servers-backend.active-backend,
+  .connector-servers-backend.active-ios,
+  .connector-servers-backend.active-frontend,
+  .connector-backend-ios.active-ios,
+  .connector-backend-frontend.active-frontend {
+    background-color: $blue;
+  }
+
+
+
   .fullstack-additional {
     float: right;
     width: 420px;
     height: 500px;
   }
 
-  .fullstack-info {
+  .fullstack-info, .fullstack-layers {
     background-color: $light_gray;
     padding: 5px 10px;
+    margin-bottom: 10px;
   }
 
   .fullstack-title {
@@ -58,6 +100,12 @@
 
   .fullstack-body {
     font-size: 14px;
+  }
+
+  .fullstack-layer-title {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
   }
 
 }

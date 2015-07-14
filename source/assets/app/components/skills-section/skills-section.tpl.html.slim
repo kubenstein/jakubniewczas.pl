@@ -6,6 +6,9 @@
     p.item-body
       | {{ 'SKILLS' | translate }}
     .fullstack-matrix
+      .layer-connector.connector-servers-backend ng-class="'active-'+currentFullstackLayer"
+      .layer-connector.connector-backend-ios ng-class="'active-'+currentFullstackLayer"
+      .layer-connector.connector-backend-frontend ng-class="'active-'+currentFullstackLayer"
       .layer.frontend ng-click="currentFullstackLayer = 'frontend'" ng-class="{active: currentFullstackLayer == 'frontend'}"
         .icon
       .layer.ios ng-click="currentFullstackLayer = 'ios'" ng-class="{active: currentFullstackLayer == 'ios'}"
@@ -20,5 +23,31 @@
           | {{ 'FULLSTACK_TITLE' | translate }}
         p.fullstack-body
           | {{ 'FULLSTACK_TEXT' | translate }}
-      | {{currentFullstackLayer}}
+      .fullstack-layers
+        div ng-show="currentFullstackLayer == 'frontend'"
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_FRONTEND_TITLE' | translate }}:
+          p.fullstack-layer-body
+            | {{ 'FULLSTACK_FRONTEND_TEXT' | translate }}
+
+        div ng-show="currentFullstackLayer == 'ios'"
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_IOS_TITLE' | translate }}:
+          p.fullstack-layer-body
+            | {{ 'FULLSTACK_IOS_TEXT' | translate }}
+
+        div ng-show="currentFullstackLayer == 'backend'"
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_BACKEND_TITLE' | translate }}:
+          p.fullstack-layer-body
+            | {{ 'FULLSTACK_BACKEND_TEXT' | translate }}
+
+        div ng-show="currentFullstackLayer == 'servers'"
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_SERVERS_TITLE' | translate }}:
+          p.fullstack-layer-body
+            | {{ 'FULLSTACK_SERVERS_TEXT' | translate }}
+
+
+
 
