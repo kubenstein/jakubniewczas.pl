@@ -13,6 +13,10 @@ angular.module('jakubniewczas')
           $location.path('/skill-'+ skillName);
         }
 
+        $scope.setFullstackLayer = function(layer) {
+          $scope.currentFullstackLayer = ($scope.currentFullstackLayer === layer) ? null : layer;
+        }
+
       }]
     }
   }])
