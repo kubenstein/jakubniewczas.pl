@@ -1,10 +1,9 @@
 .skills-details-section.with-separator
   .section-title
-    span.title
-      | {{'SKILL_TITLE' | translate }}
+    span.back ng-click='goBack()'
+      | 
+      | < {{'BACK' | translate }}
   .section-body
-    a.back ng-click='goBack()'
-      | {{'BACK' | translate }}
     .item-body
       .header
         h3.skill-name
