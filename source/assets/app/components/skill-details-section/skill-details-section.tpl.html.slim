@@ -23,14 +23,13 @@
             img.icon ng-src="{{project.icon}}" ng-show="(project.icon)"
             h4.project-title
               | {{project.title}}
-            a.project-link href="{{project.link}}" target='_blank' ng-show="(project.link)"
+            a.clearfix.project-link href="{{project.link}}" target='_blank' ng-show="(project.link)"
               | {{project.link}}
 
-            span.project-subtitle ng-show="(project.subtitle)"
+            span.clearfix.project-subtitle ng-show="(project.subtitle)"
               | {{project.subtitle}}              
 
-            p.project-description
-              | {{project.description}}
+            p.project-description ng-bind-html="project.description | nl2br"
 
           .images.clearfix
             img.image ng-src="{{imageSrc}}" ng-repeat="imageSrc in project.images"
