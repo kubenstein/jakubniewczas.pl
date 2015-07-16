@@ -197,6 +197,37 @@
         ]
       }, 
     ]
-  },          
+  },
+  {
+    id: 'docker',
+    name: 'Docker',
+    subtext: 'VPS, docker, docker-machine, docker-swarm, DigitalOcean',
+    description: "Even I am a big fan of Heroku platform, recently, due to their pricing change, for personal and smaller freelance websites/api backends I setup working servers on my own. I use mostly Docker technology.",
+    projects: [
+      {
+        title: 'Serf-based Loadbalancing',
+        link: 'https://github.com/kubenstein/docker-serf-haproxy-loadbalancing',
+        description: 'Working example and backbone of my multi host setup.\n\nKey fetures:\n- OpenSourced\n- Dynamic servers discovery\n- Dynamic binding to HAProxy loadbalancer\n- Fault tolerance based on supervisored',
+        images: [
+          s3_url('dockerPlaceholder.jpg')
+        ]
+      },
+      {
+        title: 'Single Host Web App',
+        link: 'https://github.com/kubenstein/docker-webserver-vps-setup',
+        description: 'Working example and backbone of single host setup.\n\nKey fetures:\n- OpenSourced\n- Postgres db\n- S3 backups\n- Git push like app container rebuilding',
+        images: [
+          s3_url('dockerPlaceholder.jpg')
+        ]
+      },
+      {
+        title: 'Static Page Compilation',
+        description: 'One of my static pages is hosted on very basic shared php-like server.\n\nKey fetures:\n- Deploying process is done via Docker container',
+        images: [
+          s3_url('dockerPlaceholder.jpg')
+        ]
+      },
+    ]
+  },
 ].to_json
 %>
