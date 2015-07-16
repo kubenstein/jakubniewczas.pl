@@ -5,10 +5,79 @@
   .section-body
     p.item-body
       | {{ 'SKILLS' | translate }}
-    .skills-matrix
-      .item ng-repeat='skill in items' ng-click='displaySkillDetails(skill)'
-        .skill-name
-          | {{skill.name}}:
-        .body
-          progress-bar progress="{{skill.progress}}"
-          | {{skill.subtext}}
+    .fullstack-matrix
+      .layer-connector.connector-servers-backend ng-class="'active-'+currentFullstackLayer"
+      .layer-connector.connector-backend-ios ng-class="'active-'+currentFullstackLayer"
+      .layer-connector.connector-backend-frontend ng-class="'active-'+currentFullstackLayer"
+      .layer.frontend ng-click="setFullstackLayer('frontend')" ng-class="{active: currentFullstackLayer == 'frontend'}"
+        .icon
+      .layer.ios ng-click="setFullstackLayer('ios')" ng-class="{active: currentFullstackLayer == 'ios'}"
+        .icon
+      .layer.backend ng-click="setFullstackLayer('backend')" ng-class="{active: currentFullstackLayer == 'backend'}"
+        .icon
+      .layer.servers ng-click="setFullstackLayer('servers')" ng-class="{active: currentFullstackLayer == 'servers'}"
+        .icon
+    .fullstack-additional
+      .fullstack-info
+        span.fullstack-title
+          | {{ 'FULLSTACK_TITLE' | translate }}
+        p.fullstack-body
+          | {{ 'FULLSTACK_TEXT' | translate }}
+        img.technologies src=asset_url("/assets/images/technologies.png")
+
+      .fullstack-layers
+        div ng-hide="currentFullstackLayer"
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_GENERAL_TITLE' | translate }}:
+          p.fullstack-body
+            | {{ 'FULLSTACK_GENERAL_TEXT' | translate }}
+
+          .fullstack-portfolio-button ng-click="displaySkillDetails('frontend')"
+            | {{ 'PORTFOLIO_BUTTON_FRONTEND' | translate }} >
+          .fullstack-portfolio-button ng-click="displaySkillDetails('ios')"
+            | {{ 'PORTFOLIO_BUTTON_IOS' | translate }} >
+          .fullstack-portfolio-button ng-click="displaySkillDetails('ruby-on-rails')"
+            | {{ 'PORTFOLIO_BUTTON_BACKEND' | translate }} >
+          .fullstack-portfolio-button ng-click="displaySkillDetails('docker')"
+            | {{ 'PORTFOLIO_BUTTON_SERVERS' | translate }} >
+
+
+        div ng-show="currentFullstackLayer == 'frontend'"
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_FRONTEND_TITLE' | translate }}:
+          p.fullstack-body
+            | {{ 'FULLSTACK_FRONTEND_TEXT' | translate }}
+          .fullstack-portfolio-button ng-click="displaySkillDetails('frontend')"
+            | {{ 'PORTFOLIO_BUTTON_FRONTEND' | translate }} >
+
+
+
+        div ng-show="currentFullstackLayer == 'ios'"
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_IOS_TITLE' | translate }}:
+          p.fullstack-body
+            | {{ 'FULLSTACK_IOS_TEXT' | translate }}
+          .fullstack-portfolio-button ng-click="displaySkillDetails('ios')"
+            | {{ 'PORTFOLIO_BUTTON_IOS' | translate }} >
+
+
+        div ng-show="currentFullstackLayer == 'backend'"
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_BACKEND_TITLE' | translate }}:
+          p.fullstack-body
+            | {{ 'FULLSTACK_BACKEND_TEXT' | translate }}
+          .fullstack-portfolio-button ng-click="displaySkillDetails('ruby-on-rails')"
+            | {{ 'PORTFOLIO_BUTTON_BACKEND' | translate }} >
+
+
+        div ng-show="currentFullstackLayer == 'servers'"
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_SERVERS_TITLE' | translate }}:
+          p.fullstack-body
+            | {{ 'FULLSTACK_SERVERS_TEXT' | translate }}
+          .fullstack-portfolio-button ng-click="displaySkillDetails('docker')"
+            | {{ 'PORTFOLIO_BUTTON_SERVERS' | translate }} >
+
+
+
+

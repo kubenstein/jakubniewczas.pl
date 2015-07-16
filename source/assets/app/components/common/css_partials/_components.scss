@@ -13,21 +13,17 @@ html, body {
 }
 
 .odd-section {
-  background: image-url('pattern.jpg') $brown;
+  background-color: $brown;
 
-  $shadow: 8px;
-  -moz-box-shadow: inset 0 $shadow $shadow (-$shadow) $black,
-                   inset 0 (-$shadow) $shadow (-$shadow) $black;
-  -webkit-box-shadow: inset 0 $shadow $shadow (-$shadow) $black,
-                      inset 0 (-$shadow) $shadow (-$shadow) $black;
-  box-shadow: inset 0 $shadow $shadow (-$shadow) $black,
-              inset 0 (-$shadow) $shadow (-$shadow) $black;
+  $shadow-top: 8px;
+  -moz-box-shadow: inset 0 $shadow-top $shadow-top (-$shadow-top) $black;
+  -webkit-box-shadow: inset 0 $shadow-top $shadow-top (-$shadow-top);
+  box-shadow: inset 0 $shadow-top $shadow-top (-$shadow-top) $black;
 }
 
 .inner-wrapper {
   margin: 0 auto;
-  width: 100%;
-  max-width: 1024px;
+  width: 1024px;
 }
 
 .two-cols-section {

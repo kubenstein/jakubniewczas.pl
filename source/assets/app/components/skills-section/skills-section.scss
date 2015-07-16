@@ -3,29 +3,127 @@
 .skills-section {
   @extend .two-cols-section;
 
-  .item {
+  .item-body {
+    padding-bottom: 40px;
+  }
+
+  .fullstack-matrix {
+    position: relative;
+    float: left;
+    width: 450px;
+    height: 500px;
+  }
+
+  .layer, .icon {
+    width: 150px;
+    height: 130px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+
+  .layer {
     cursor: pointer;
-    background: image-url('arrow.png') 97% 50% no-repeat;
-    &:hover {
-      background-color: $light_gray;
+    background-color: $green;
+    background-image: image-url('layer_bg_border.png');
+
+    &.active {
+      background-color: $blue;
     }
   }
-}
 
-.skills-matrix {
-  margin-top: 50px;
-  .item {
-    @extend .two-cols;
-    padding: 25px 0 25px 50px;
+  .frontend { float: left; }
+  .ios { float: right; }
+  .backend { margin: 150px auto 0 auto; }
+  .servers { margin: 70px auto 0 auto; }
+
+  .frontend .icon { background-image: image-url('frontend.png'); }
+  .ios .icon { background-image: image-url('ios.png'); }
+  .backend .icon { background-image: image-url('backend.png'); }
+  .servers .icon { background-image: image-url('servers.png'); }
+
+
+  .layer-connector {
+    width: 2px;
+    height: 50px;
+    background-color: $black;
+    position: absolute;
   }
 
-  .skill-name {
-    @extend .col-one;
-    font-size: 20px;
+  .connector-servers-backend {
+    top: 290px;
+    left: 224px;
   }
 
-  .body {
-    @extend .col-two;
-    color: $gray;
+  .connector-backend-ios {
+    top: 107px;
+    left: 294px;
+    -ms-transform: rotate(30deg);
+    -webkit-transform: rotate(30deg);
+    transform: rotate(30deg);
   }
+
+  .connector-backend-frontend {
+    top: 107px;
+    left: 154px;
+    -ms-transform: rotate(-30deg);
+    -webkit-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+  }
+
+
+  .connector-servers-backend.active-backend,
+  .connector-servers-backend.active-ios,
+  .connector-servers-backend.active-frontend,
+  .connector-backend-ios.active-ios,
+  .connector-backend-frontend.active-frontend {
+    background-color: $blue;
+  }
+
+
+
+  .fullstack-additional {
+    float: right;
+    width: 420px;
+    height: 500px;
+  }
+
+  .fullstack-info, .fullstack-layers {
+    background-color: $light_gray;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .fullstack-info .technologies {
+    display: block;
+    margin: 15px auto 0 auto;
+  }
+
+  .fullstack-title {
+    font-size: 21px;
+    text-align: center;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .fullstack-body {
+    font-size: 14px;
+  }
+
+  .fullstack-layer-title {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .fullstack-portfolio-button {
+    text-align: center;
+    width: 50%;
+    padding: 5px 20px;
+    background-color: $green;
+    color: $white;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 10px auto;
+  }
+
 }

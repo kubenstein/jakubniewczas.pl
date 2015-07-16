@@ -156,3 +156,6 @@ DEPENDENCIES
   rake
   require_all
   slim
+
+BUNDLED WITH
+   1.10.3
