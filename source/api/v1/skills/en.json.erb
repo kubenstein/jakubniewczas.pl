@@ -4,30 +4,53 @@
     id: 'ruby-on-rails',
     name: 'Ruby on Rails',
     subtext: 'postgres, Heroku, rspec, s3, delayjobs, service objects',
-    description: "I’ve been a professional Ruby on Rails developer for more then 2.5 years. I worked on bigger projects as well as little indie ones. During my work at codequest company i quickly realized that 'The Rails way' doesn’t often scale well, so I’m more in the Service objects camp of the Rails scene. I’ve read a lot of technical articles, constantly looking for ways to sharpen my skills even more!",
+    description: "I’ve been a professional Ruby on Rails developer for more then 2.5 years. I worked on bigger projects as well as little indie ones. During my work at codequest company I quickly realised that 'The Rails way' doesn’t often scale well, so I do pay great attention to layer architecture properly.",
     disclaimer: "DISCLAIMER: I was a team member in those projects, HOWEVER all credits go to companies I worked for.",
-    projects_logos: [
-      {
-        title: 'Taptera Inc.',
-        link: 'http://www.taptera.com/'
-      },
+    projects: [
       {
         title: 'Selecthub',
-        link: 'https://selecthub.com/'
+        link: 'https://selecthub.com/',
+        subtitle: 'All rights go to codequest',
+        description: 'Due to very complicated domain rules and use cases, working on Selecthub required great discipline and knowledge in building software.\n\nKey features:\n- Handling massive codebase and complicated use cases\n- Authentication and permissions\n- Rich integration with frontend frameworks\n- Solving optimisation problems',
+        images: [
+          s3_url('selecthub.jpg')
+        ]
       },
       {
         title: 'Foap AB',
-        link: 'https://foap.com/'
+        link: 'https://foap.com/',
+        subtitle: 'All rights go to Foap',
+        description: 'I was part of a Foap Rails Api team. At that time foap.com was splitted into Angular Frontend and pure api Rails Backend.\n\nKey features:\n- Pure api Rails application\n- Authentication and permissions\n- Image uploading and processing',
+        images: [
+          s3_url('foap.jpg')
+        ]
       },
       {
-        title: 'BuddyBroker AG',
-        link: 'http://buddybroker.com/'
+        title: 'Taptera Inc.',
+        link: 'http://www.taptera.com/',
+        subtitle: 'All rights go to codequest',
+        description: 'I was a member of RoR admin panel team. Due to sophisticated data model and general project complexity, working on Taptera product required solving challenging tasks.\n\nKey features:\n- Handling sophisticated data model\n- Uploading and processing files in background\n- Authentication and permissions',
+        images: [
+          s3_url('taptera.jpg')
+        ]
       },
       {
-        title: 'CheckAction',
-        link: 'http://www.checkaction.com/'
+        title: 'BuddyBroker',
+        link: 'http://buddybroker.com/',
+        subtitle: 'All rights go to codequest',
+        description: 'Buddybroker was my favourite project I was working on during my work at codequest. I had opportunity to learn a lot and test my skill on this quite complex and for sure innovative application.\n\nKey features:\n- Authentication and permissions\n- Image uploading and processing\n- Integration with Linkedin and Xing\n- Integration with Buddybroker matching system\n- Building web crawlers\n- Rich integration with Frontend frameworks',
+        images: [
+          s3_url('buddybroker.jpg')
+        ]
       },
-    ]
+      {
+        title: 'Many others Rails apps',
+        description: 'Many others Rails apps and api backends that I was working at codequest and a few at App’n’Roll. Freelance project or just my own also very often require dynamic backends.\n\nKey features:\n- Authentication and permissions\n- Image uploading and processing\n- Integration with social media\n- Rich integration with Frontend frameworks\n- Utilisation of Sinatra framework for simple cases\n- Building own ruby gems\n- Splitting app into modules via Rails engines\n- Rspec and Cucumber testing\n- Building console Thor applications\n- Experimenting with alternative archs like Trailblazer or some of its components',
+        images: [
+          s3_url('jakubNiewczasRailsDeveloper.jpg')
+        ]
+      },
+    ],
   },
   {
     id: 'ios',

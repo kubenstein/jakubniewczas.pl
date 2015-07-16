@@ -32,9 +32,4 @@
             p.project-description ng-bind-html="project.description | nl2br"
 
           .images.clearfix
-            img.image ng-src="{{imageSrc}}" ng-repeat="imageSrc in project.images"
-
-
-        .project-logo.clearfix
-          a.project-logo-title ng-repeat='project in skill.projects_logos' href="{{project.link}}" target="_blank"
-            | {{project.title}}  
+            img.image ng-src="{{imageSrc}}" ng-repeat="imageSrc in project.images" 
