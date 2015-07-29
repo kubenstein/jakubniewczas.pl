@@ -1,21 +1,52 @@
 .two-cols {
+  $first-element-width: 180px;
   @extend .clearfix;
    &>.col-one {
     float: left;
-    width: 180px;
+    width: $first-element-width;
   }
    &>.col-two {
-    margin-left: 180px;
+    margin-left: $first-element-width;
   }
 }
 
 .two-cols-narrower {
+  $first-element-width: 120px;
   @extend .clearfix;
   &>.col-one {
     float: left;
-    width: 130px;
+    width: $first-element-width;
   }
   &>.col-two {
-    margin-left: 130px;
+    margin-left: $first-element-width;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .two-cols {
+     &>.col-one {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+     &>.col-two {
+      margin-left: 0;
+    }
+  }
+}
+
+
+@media screen and (max-width: 835px) {
+  .two-cols-narrower {
+    &>.col-one {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    &>.col-two {
+      margin-left: 0;
+    }
   }
 }

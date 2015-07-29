@@ -8,12 +8,6 @@
     text-align: center;
   }
 
-  progress-bar {
-    display: inline-block;
-    height: 15px;
-    width: 240px;
-  }
-
   .skill-name {
     font-weight: normal;
     font-size: 28px;
@@ -30,8 +24,14 @@
     margin-bottom: 10px;
   }
 
+  .project-info {
+    float: left;
+    width: 50%;
+    margin-bottom: 30px;
+  }
+
   .images {
-    width: 447px;
+    width: 47%;
     float: right;
   }
 
@@ -39,7 +39,23 @@
     float: right;
     margin: 0 0 5px 5px;
     border: 1px solid $gray;
+    max-width: 100%;
   }
+  
+  @media screen and (max-width: 690px) {
+    .project-info {
+      width: 100%;
+    }
+
+    .images {
+      float: left;
+      width: 100%;
+    }
+
+    .image {
+      float: left;
+    }
+  }  
 
   .back {
     cursor: pointer;
@@ -60,37 +76,32 @@
 
   .project {
     margin-top: 100px;
+  }
 
-    .project-info {
-      float: left;
-      width: 447px;
-    }
+  .icon {
+    float: left;
+    margin-right: 10px;
+  }
 
-    .icon {
-      float: left;
-      margin-right: 10px;
-    }
+  .project-title {
+    font-size: 24px;
+    line-height: 20px;
+    margin-bottom: 5px;
+    font-weight: normal;
+  }
 
-    .project-title {
-      font-size: 24px;
-      line-height: 20px;
-      margin-bottom: 5px;
-      font-weight: normal;
-    }
+  .project-link {
+    margin-top: 5px;
+    display: inline-block;
+    text-decoration: none;
+    color: $light_brown;
+  }
 
-    .project-link {
-      margin-top: 5px;
-      display: inline-block;
-      text-decoration: none;
-      color: $light_brown;
-    }
+  .project-subtitle {
+    color: $light_brown;
+  }
 
-    .project-subtitle {
-      color: $light_brown;
-    }
-
-    .project-description {
-      margin-top: 7px;
-    }
+  .project-description {
+    margin-top: 7px;
   }
 }

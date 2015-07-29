@@ -15,6 +15,12 @@
     margin-bottom: 9px;
   }
 
+  @media screen and (max-width: 690px) {
+    .header {
+      display: none;
+    }
+  }
+
   .social-section {
     margin-top: 22px;
   }

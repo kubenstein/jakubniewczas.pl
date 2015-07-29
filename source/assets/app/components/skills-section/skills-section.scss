@@ -10,8 +10,28 @@
   .fullstack-matrix {
     position: relative;
     float: left;
-    width: 450px;
+    width: 54%;
     height: 500px;
+  }
+
+  .fullstack-additional {
+    float: right;
+    width: 44%;
+    height: 500px;
+  }
+
+  @media screen and (max-width: 750px) {
+    .fullstack-additional {
+      float: none;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto; 
+      height: inherit;
+    }
+
+    .fullstack-matrix {
+      display: none;
+    }
   }
 
   .layer, .icon {
@@ -51,12 +71,12 @@
 
   .connector-servers-backend {
     top: 290px;
-    left: 224px;
+    left: 50%;
   }
 
   .connector-backend-ios {
     top: 107px;
-    left: 294px;
+    right: 34%;
     -ms-transform: rotate(30deg);
     -webkit-transform: rotate(30deg);
     transform: rotate(30deg);
@@ -64,12 +84,11 @@
 
   .connector-backend-frontend {
     top: 107px;
-    left: 154px;
+    left: 34%;
     -ms-transform: rotate(-30deg);
     -webkit-transform: rotate(-30deg);
     transform: rotate(-30deg);
   }
-
 
   .connector-servers-backend.active-backend,
   .connector-servers-backend.active-ios,
@@ -77,14 +96,6 @@
   .connector-backend-ios.active-ios,
   .connector-backend-frontend.active-frontend {
     background-color: $blue;
-  }
-
-
-
-  .fullstack-additional {
-    float: right;
-    width: 420px;
-    height: 500px;
   }
 
   .fullstack-info, .fullstack-layers {
@@ -117,7 +128,7 @@
 
   .fullstack-portfolio-button {
     text-align: center;
-    width: 50%;
+    width: 60%;
     padding: 5px 20px;
     background-color: $green;
     color: $white;

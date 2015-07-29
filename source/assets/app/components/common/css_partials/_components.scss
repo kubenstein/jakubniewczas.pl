@@ -22,8 +22,10 @@ html, body {
 }
 
 .inner-wrapper {
+  $padding: 30px;
   margin: 0 auto;
-  width: 1024px;
+  padding: 0 $padding; 
+  max-width: 1024px - ($padding*2);
 }
 
 .two-cols-section {
@@ -36,7 +38,8 @@ html, body {
     color: $brown;
     border-bottom: 2px solid $green;
   }
-  padding: 20px 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .with-separator {
