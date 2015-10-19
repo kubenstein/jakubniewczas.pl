@@ -8,6 +8,14 @@ ignore 'pages/*'
 ignore 'helpers/*'
 ignore 'assets/app/components/**/*.css'
 
+## deploy
+activate :deploy do |deploy|
+  deploy.method = :git
+  deploy.remote = 'git@github.com:kubenstein/kubenstein.github.io.git'
+  deploy.branch = 'master'
+  deploy.build_before = true
+end
+
 ## load helpers
 helpers do
   load_all 'source/helpers/'

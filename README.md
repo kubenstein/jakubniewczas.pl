@@ -9,5 +9,5 @@ My personal website, whitch is written as an Angular app. All data, so texts and
 ## Local Deployment:
 * middleman build
 
-## Heroku Deployment:
-* normal git push 
+## Github pages Deployment:
+* middleman deploy
