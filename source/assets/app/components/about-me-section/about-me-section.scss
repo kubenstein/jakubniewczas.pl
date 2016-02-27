@@ -1,6 +1,13 @@
 @import 'components/common/common';
 
 .about-me-section {
+  @keyframes social-icon-jiggle {
+    0%, 100%   { transform: rotate(0deg) }
+    25% { transform: rotate(20deg) }
+    75% { transform: rotate(-20deg) }
+  }
+
+
   @extend .odd-section;
   padding: 40px 0;
 
@@ -23,24 +30,13 @@
 
   .social-section {
     margin-top: 22px;
+    text-align: center;
   }
-}
 
-.avatar {
-  @include border-radius(75px,75px,75px,75px);  
-  -webkit-box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
-  -moz-box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
-  box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
-}
-
-.social-section {
-  text-align: center;
-
-  .item {
+  .social-item {
     color: $white;
-    text-decoration: none;
     font-size: 32px;
-    letter-spacing: 22px;
+    margin-right: 22px;
 
     // set fontello font
     font-family: "fontello";
@@ -53,5 +49,19 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     // -------
+
+    &:hover {
+      -webkit-animation: social-icon-jiggle 1s 1;
+      -moz-animation:    social-icon-jiggle 1s 1;
+      -o-animation:      social-icon-jiggle 1s 1;
+      animation:         social-icon-jiggle 1s 1;
+    }
+  }
+
+  .avatar {
+    @include border-radius(75px,75px,75px,75px);
+    -webkit-box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
+    box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
   }
 }
