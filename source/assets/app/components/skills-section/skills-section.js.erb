@@ -8,13 +8,32 @@ angular.module('jakubniewczas')
       templateUrl: '<%= ng_template_url("skills-section/") %>',
 
       controller: ['$scope', function($scope) {
-        
+
         $scope.displaySkillDetails = function(skillName) {
           $location.path('/skill-'+ skillName);
         }
 
+        $scope.skillClicked = function(layer) {
+          if($scope.currentFullstackLayer === layer) {
+            $scope.displaySkillDetails(
+              layer2skill(layer)
+            );
+          } else {
+            $scope.setFullstackLayer(layer);
+          }
+        }
+
         $scope.setFullstackLayer = function(layer) {
           $scope.currentFullstackLayer = ($scope.currentFullstackLayer === layer) ? null : layer;
+        }
+
+
+        //private
+
+        function layer2skill(layer) {
+          if(layer === 'servers') return 'docker';
+          if(layer === 'backend') return 'ruby-on-rails';
+          return layer;
         }
 
       }]

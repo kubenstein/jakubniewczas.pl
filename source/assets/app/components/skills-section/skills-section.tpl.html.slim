@@ -69,13 +69,13 @@
       .layer-connector.connector-servers-backend ng-class="'active-'+currentFullstackLayer"
       .layer-connector.connector-backend-ios ng-class="'active-'+currentFullstackLayer"
       .layer-connector.connector-backend-frontend ng-class="'active-'+currentFullstackLayer"
-      .layer.frontend ng-click="setFullstackLayer('frontend')" ng-class="{active: currentFullstackLayer == 'frontend'}"
+      .layer.frontend ng-click="skillClicked('frontend')" ng-class="{active: currentFullstackLayer == 'frontend'}"
         .icon
-      .layer.ios ng-click="setFullstackLayer('ios')" ng-class="{active: currentFullstackLayer == 'ios'}"
+      .layer.ios ng-click="skillClicked('ios')" ng-class="{active: currentFullstackLayer == 'ios'}"
         .icon
-      .layer.backend ng-click="setFullstackLayer('backend')" ng-class="{active: currentFullstackLayer == 'backend'}"
+      .layer.backend ng-click="skillClicked('backend')" ng-class="{active: currentFullstackLayer == 'backend'}"
         .icon
-      .layer.servers ng-click="setFullstackLayer('servers')" ng-class="{active: currentFullstackLayer == 'servers'}"
+      .layer.servers ng-click="skillClicked('servers')" ng-class="{active: currentFullstackLayer == 'servers'}"
         .icon
 
 
