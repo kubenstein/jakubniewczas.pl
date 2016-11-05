@@ -10,12 +10,11 @@ angular.module('jakubniewczas')
             $scope.items = response.data;
           });
         }
-        
+
         $rootScope.$on('$translateChangeSuccess', function() {
           loadData();
         });
         loadData();
-        
       }]
     }
   }])
