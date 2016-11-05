@@ -8,7 +8,7 @@
         p.text
           span.header
             | {{ 'ABOUT_ME_TITLE' | translate }}
-          | {{ 'ABOUT_ME' | translate }}
+          span ng-bind-html="'ABOUT_ME' | translate | nl2br"
         .social-section
           = link_to '&#xe802;', 'mailto:niewczas.jakub@gmail.com', class: 'social-item email'
           = link_to '&#xe801;', 'https://github.com/kubenstein', class: 'social-item github', target: '_blank'
