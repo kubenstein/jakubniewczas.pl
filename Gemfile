@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.3.1'
 
 gem 'middleman'
 gem 'middleman-minify-html'
@@ -11,11 +11,14 @@ gem 'slim'
 gem 'require_all'
 
 #
-# Future of rails-assets
+# Future of rails-assets is unknown
 # https://github.com/rails-assets/rails-assets/issues/291
-source 'https://rails-assets.org' do
-  gem 'rails-assets-angular'
-  gem 'rails-assets-angular-translate'
-  gem 'rails-assets-angular-translate-loader-static-files'
-  gem 'rails-assets-angular-route'
-end
+# Till migration to some alternative take place,
+# gems are dumped to vendor/ directory
+
+# source 'https://rails-assets.org' do
+  gem 'rails-assets-angular',           path: './vendor/rails-assets-angular-1.3.15'
+  gem 'rails-assets-angular-translate', path: './vendor/rails-assets-angular-translate-2.6.1'
+  gem 'rails-assets-angular-translate-loader-static-files', path: './vendor/rails-assets-angular-translate-loader-static-files-2.6.1'
+  gem 'rails-assets-angular-route',     path: './vendor/rails-assets-angular-route-1.3.15'
+# end

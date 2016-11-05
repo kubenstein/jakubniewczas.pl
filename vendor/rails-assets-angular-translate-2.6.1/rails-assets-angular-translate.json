@@ -1,0 +1,37 @@
+{
+  "name": "rails-assets-angular-translate",
+  "downloads": null,
+  "version": "2.6.1",
+  "version_downloads": null,
+  "platform": "ruby",
+  "authors": "rails-assets.org",
+  "info": "A translation module for AngularJS",
+  
+  "metadata": {
+
+  },
+  "sha": null,
+  "project_uri": "https://github.com/PascalPrecht/bower-angular-translate",
+  "gem_uri": null,
+  "homepage_uri": "https://github.com/PascalPrecht/bower-angular-translate",
+  "wiki_uri": null,
+  "documentation_uri": null,
+  "mailing_list_uri": null,
+  "source_code_uri": "https://github.com/PascalPrecht/bower-angular-translate",
+  "bug_tracker_uri": null,
+  "dependencies": {
+    "development": [
+    
+    
+    {
+      "name": "rails-assets-angular",
+      "requirements": ">= 1.2.26", "<= 1.4"
+    },
+    
+    
+    ],
+    "runtime": [
+
+    ]
+  }
+}
