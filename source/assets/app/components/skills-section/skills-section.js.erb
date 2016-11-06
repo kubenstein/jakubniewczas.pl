@@ -8,7 +8,6 @@ angular.module('jakubniewczas')
       templateUrl: '<%= ng_template_url("skills-section/") %>',
 
       controller: ['$scope', function($scope) {
-
         $scope.displaySkillDetails = function(skillName) {
           $location.path('/skill-'+ skillName);
         }

@@ -5,16 +5,20 @@ angular.module('jakubniewczas')
       scope: {},
       templateUrl: '<%= ng_template_url("work-section/") %>',
       controller: ['$scope', function($scope) {
+        function initialize() {
+          $rootScope.$on('$translateChangeSuccess', function() {
+            loadData();
+          });
+          loadData();
+        }
+
         function loadData() {
           $http.get('/api/v1/works/'+ $translate.use() +'.json').then(function(response) {
             $scope.items = response.data;
           });
         }
 
-        $rootScope.$on('$translateChangeSuccess', function() {
-          loadData();
-        });
-        loadData();
+        initialize();
       }]
     }
   }])

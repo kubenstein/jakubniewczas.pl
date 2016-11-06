@@ -8,6 +8,13 @@ angular.module('jakubniewczas')
       templateUrl: '<%= ng_template_url("skill-details-section/") %>',
 
       controller: ['$scope', function($scope) {
+        function initialize() {
+          $rootScope.$on('$translateChangeSuccess', function() {
+            loadData();
+          });
+          loadData();
+        }
+
         function loadData() {
           $http.get('/api/v1/skills/'+ $translate.use() +'.json').then(function(response) {
             item = $filter('filter')(response.data, {id: $routeParams['id']}, true)[0];
@@ -16,18 +23,11 @@ angular.module('jakubniewczas')
           });
         }
 
-        function initialize() {
-          $rootScope.$on('$translateChangeSuccess', function() {
-            loadData();
-          });
-          loadData();
-        }
-        initialize();
-
-
         $scope.goBack = function() {
           $location.path('/');
         }
+
+        initialize();
       }]
     }
   }])
