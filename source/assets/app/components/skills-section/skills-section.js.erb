@@ -12,8 +12,12 @@ angular.module('jakubniewczas')
           $location.path('/skill-'+ skillName);
         }
 
+        $scope.isCurrentLayer = function(layer) {
+          return $scope.currentFullstackLayer === layer;
+        }
+
         $scope.skillClicked = function(layer) {
-          if($scope.currentFullstackLayer === layer) {
+          if(clickedFirstTime(layer)) {
             $scope.displaySkillDetails(
               layer2skill(layer)
             );
@@ -23,14 +27,17 @@ angular.module('jakubniewczas')
         }
 
         $scope.setFullstackLayer = function(layer) {
-          $scope.currentFullstackLayer = ($scope.currentFullstackLayer === layer) ? null : layer;
+          $scope.currentFullstackLayer = ($scope.isCurrentLayer(layer)) ? null : layer;
         }
 
 
         //private
 
+        function clickedFirstTime(layer) {
+          return $scope.isCurrentLayer(layer);
+        }
+
         function layer2skill(layer) {
-          if(layer === 'servers') return 'docker';
           if(layer === 'backend') return 'ruby-on-rails';
           return layer;
         }

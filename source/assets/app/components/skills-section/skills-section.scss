@@ -78,12 +78,12 @@
   .frontend { float: left; }
   .ios { float: right; }
   .backend { margin: 150px auto 0 auto; }
-  .servers { margin: 70px auto 0 auto; }
+  .infrastructure { margin: 70px auto 0 auto; }
 
   .frontend .icon { background-image: image-url('frontend.png'); }
   .ios .icon { background-image: image-url('ios.png'); }
   .backend .icon { background-image: image-url('backend.png'); }
-  .servers .icon { background-image: image-url('servers.png'); }
+  .infrastructure .icon { background-image: image-url('infrastructure.png'); }
 
 
   .layer-connector {
@@ -94,7 +94,7 @@
     position: absolute;
   }
 
-  .connector-servers-backend {
+  .connector-infrastructure-backend {
     top: 290px;
     left: 50%;
   }
@@ -115,9 +115,9 @@
     transform: rotate(-30deg);
   }
 
-  .connector-servers-backend.active-backend,
-  .connector-servers-backend.active-ios,
-  .connector-servers-backend.active-frontend,
+  .connector-infrastructure-backend.active-backend,
+  .connector-infrastructure-backend.active-ios,
+  .connector-infrastructure-backend.active-frontend,
   .connector-backend-ios.active-ios,
   .connector-backend-frontend.active-frontend {
     background-color: $blue;

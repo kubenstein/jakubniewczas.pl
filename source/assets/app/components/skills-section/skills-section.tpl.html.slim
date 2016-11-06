@@ -26,11 +26,10 @@
             | {{ 'PORTFOLIO_BUTTON_IOS' | translate }} >
           .fullstack-portfolio-button ng-click="displaySkillDetails('frontend')"
             | {{ 'PORTFOLIO_BUTTON_FRONTEND' | translate }} >
-          .fullstack-portfolio-button ng-click="displaySkillDetails('docker')"
-            | {{ 'PORTFOLIO_BUTTON_SERVERS' | translate }} >
+          .fullstack-portfolio-button ng-click="displaySkillDetails('infrastructure')"
+            | {{ 'PORTFOLIO_BUTTON_INFRASTRUCTURE' | translate }} >
 
-
-        div ng-show="currentFullstackLayer == 'frontend'"
+        div ng-show="isCurrentLayer('frontend')"
           span.fullstack-layer-title
             | {{ 'FULLSTACK_FRONTEND_TITLE' | translate }}:
           p.fullstack-body
@@ -38,9 +37,7 @@
           .fullstack-portfolio-button ng-click="displaySkillDetails('frontend')"
             | {{ 'PORTFOLIO_BUTTON_FRONTEND' | translate }} >
 
-
-
-        div ng-show="currentFullstackLayer == 'ios'"
+        div ng-show="isCurrentLayer('ios')"
           span.fullstack-layer-title
             | {{ 'FULLSTACK_IOS_TITLE' | translate }}:
           p.fullstack-body
@@ -48,8 +45,7 @@
           .fullstack-portfolio-button ng-click="displaySkillDetails('ios')"
             | {{ 'PORTFOLIO_BUTTON_IOS' | translate }} >
 
-
-        div ng-show="currentFullstackLayer == 'backend'"
+        div ng-show="isCurrentLayer('backend')"
           span.fullstack-layer-title
             | {{ 'FULLSTACK_BACKEND_TITLE' | translate }}:
           p.fullstack-body
@@ -57,26 +53,23 @@
           .fullstack-portfolio-button ng-click="displaySkillDetails('ruby-on-rails')"
             | {{ 'PORTFOLIO_BUTTON_BACKEND' | translate }} >
 
-
-        div ng-show="currentFullstackLayer == 'servers'"
+        div ng-show="isCurrentLayer('infrastructure')"
           span.fullstack-layer-title
-            | {{ 'FULLSTACK_SERVERS_TITLE' | translate }}:
+            | {{ 'FULLSTACK_INFRASTRUCTURE_TITLE' | translate }}:
           p.fullstack-body
-            | {{ 'FULLSTACK_SERVERS_TEXT' | translate }}
-          .fullstack-portfolio-button ng-click="displaySkillDetails('docker')"
-            | {{ 'PORTFOLIO_BUTTON_SERVERS' | translate }} >
+            | {{ 'FULLSTACK_INFRASTRUCTURE_TEXT' | translate }}
+          .fullstack-portfolio-button ng-click="displaySkillDetails('infrastructure')"
+            | {{ 'PORTFOLIO_BUTTON_INFRASTRUCTURE' | translate }} >
+
     .fullstack-matrix
-      .layer-connector.connector-servers-backend ng-class="'active-'+currentFullstackLayer"
+      .layer-connector.connector-infrastructure-backend ng-class="'active-'+currentFullstackLayer"
       .layer-connector.connector-backend-ios ng-class="'active-'+currentFullstackLayer"
       .layer-connector.connector-backend-frontend ng-class="'active-'+currentFullstackLayer"
-      .layer.frontend ng-click="skillClicked('frontend')" ng-class="{active: currentFullstackLayer == 'frontend'}"
+      .layer.frontend ng-click="skillClicked('frontend')" ng-class="{active: isCurrentLayer('frontend')}"
         .icon
-      .layer.ios ng-click="skillClicked('ios')" ng-class="{active: currentFullstackLayer == 'ios'}"
+      .layer.ios ng-click="skillClicked('ios')" ng-class="{active: isCurrentLayer('ios')}"
         .icon
-      .layer.backend ng-click="skillClicked('backend')" ng-class="{active: currentFullstackLayer == 'backend'}"
+      .layer.backend ng-click="skillClicked('backend')" ng-class="{active: isCurrentLayer('backend')}"
         .icon
-      .layer.servers ng-click="skillClicked('servers')" ng-class="{active: currentFullstackLayer == 'servers'}"
+      .layer.infrastructure ng-click="skillClicked('infrastructure')" ng-class="{active: isCurrentLayer('infrastructure')}"
         .icon
-
-
-
