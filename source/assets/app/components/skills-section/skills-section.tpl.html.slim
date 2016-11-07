@@ -11,7 +11,13 @@
           | {{ 'FULLSTACK_TITLE' | translate }}
         p.fullstack-body
           | {{ 'FULLSTACK_TEXT' | translate }}
-        img.technologies src=asset_url("/assets/images/technologies.png")
+        .technologies
+          img.item src=asset_url("/assets/images/rails-logo.png")
+          img.item src=asset_url("/assets/images/apple-logo.png")
+          img.item src=asset_url("/assets/images/heroku-logo.png")
+          img.item src=asset_url("/assets/images/angularjs-logo.png")
+          img.item src=asset_url("/assets/images/docker-logo.png")
+          img.item src=asset_url("/assets/images/react-logo.png")
 
       .fullstack-layers
         div ng-hide="currentFullstackLayer"

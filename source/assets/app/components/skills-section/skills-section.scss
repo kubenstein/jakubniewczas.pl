@@ -132,6 +132,13 @@
   .fullstack-info .technologies {
     display: block;
     margin: 15px auto 0 auto;
+    text-align: center;
+    max-width: 270px;
+
+    .item {
+      display: inline-block;
+      margin: 0 5px;
+    }
   }
 
   .fullstack-title {
@@ -161,5 +168,4 @@
     cursor: pointer;
     margin: 10px auto;
   }
-
 }
