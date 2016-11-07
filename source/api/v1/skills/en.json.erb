@@ -264,42 +264,41 @@
     projects: [
       {
         title: 'Managing containers using Tutum',
-        link: 'https://github.com/nimbl3/our-team/wiki/How-To:-Setup-Tutum-auto-redeployment',
-        description: 'Setup and deploying app using Tutum makes whole process way easier. Thanks to Tutum simplicity, integration with CI servers makes Continuous Deployment pipeline clean and manageable.',
+        description: 'Setup and deploying app using Tutum makes process of managing containers way easier. Thanks to Tutum simplicity, integration with CI servers makes Continuous Deployment pipeline clean and manageable.',
         images: [
-          s3_url('dockerPlaceholder.jpg')
+          s3_url('tutum.jpg')
+        ]
+      },
+      {
+        title: 'Everyday Development Environment',
+        description: 'Managing external app dependencies during development can be sophisticated and problematic task. I use docker-machine and docker-compose to dockerize Postgres, Redis, ElasticSearch, Memcache etc.\n\nKey features:\n- Simplify setup and managing of external dependencies',
+        images: [
+          s3_url('everydayDockerDevelopment.jpg')
         ]
       },
       {
         title: 'Serf-based Loadbalancing',
         link: 'https://github.com/kubenstein/docker-serf-haproxy-loadbalancing',
-        description: 'Working example and backbone of my multi-host setup.\n\nKey features:\n- OpenSourced\n- Dynamic servers discovery\n- Dynamic binding to HAProxy loadbalancer\n- Fault tolerance based on supervisored',
+        description: 'Goal of this project was to create web servers environment with fully dynamic loadbalancing. Working example and backbone of my multi-host setup.\n\nKey features:\n- Dynamic servers discovery\n- Dynamic binding to HAProxy loadbalancer\n- Fault tolerance of nodes based on supervisored deamon',
         images: [
-          s3_url('dockerPlaceholder.jpg')
+          s3_url('dockerSerf.jpg')
         ]
       },
       {
         title: 'Single Host Web App',
         link: 'https://github.com/kubenstein/docker-webserver-vps-setup',
-        description: 'Working example and backbone of single-host setup.\n\nKey features:\n- OpenSourced\n- Postgres db\n- S3 backups\n- Git push like app container rebuilding',
+        description: 'Goal of this project was to create simple VPS server configuration for my Rails and Node.js apps. Working example and backbone of single-host setup can be found on Github.\n\nKey features:\n- Git push like app container rebuilding\n- Postgres db\n- S3 backups',
         images: [
           s3_url('dockerPlaceholder.jpg')
         ]
       },
       {
-        title: 'Static Page Compilation',
-        description: 'One of my static pages is hosted on very basic, shared, php-like server.\n\nKey features:\n- Deploying process is done via Docker container',
+        title: 'Automated Build and Deploy toolchain',
+        description: 'One of my static pages is hosted on very basic, non-ssh server. Deploying process is divided into two containers: builder and deployer.\n\nKey features:\n- Tools and steps of deployment process are containerized making deployment repeatable and reliable.',
         images: [
           s3_url('dockerPlaceholder.jpg')
         ]
-      },
-      {
-        title: 'Everyday Development Environment',
-        description: 'Managing external app dependencies during development process. We use docker-machine and docker-compose to dockerize Postgres, Redis, ElasticSearch, etc.',
-        images: [
-          s3_url('dockerPlaceholder.jpg')
-        ]
-      },
+      }
     ]
   },
 ].to_json
