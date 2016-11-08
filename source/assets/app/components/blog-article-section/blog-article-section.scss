@@ -1,0 +1,38 @@
+@import 'components/common/common';
+
+.blog-article-section {
+  .article {
+    padding: 30px 0;
+  }
+
+  .article-title {
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    color: $black;
+  }
+
+  .other-articles {
+    float: right;
+    padding: 15px;
+    margin: 0 0 15px 15px;
+    background-color: $light_gray;
+    max-width: 220px;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .other-article {
+    display: block;
+    color: $brown;
+    text-decoration: none;
+    margin: 3px 0;
+  }
+
+  .other-articles-title {
+    font-size: 16px;
+    color: $gray;
+  }
+}

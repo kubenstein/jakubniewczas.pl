@@ -46,7 +46,7 @@ configure :development do
 
     def call(env)
       status, headers, response = @app.call(env)
-      if status == 404
+      if status == 404 && !env['PATH_INFO'].include?('.json')
         env['PATH_INFO'] = '/'
         status, headers, response = @app.call(env)
       end

@@ -1,0 +1,13 @@
+.blog-article-section.inner-wrapper
+  .article
+    .other-articles
+      small.other-articles-title
+        | {{ 'OTHER_ARTICLES_TITLE' | translate }}
+      a.other-article ng-href="/#/blog/{{article.id}}" ng-repeat="article in otherArticles"
+        | {{article.title}}
+
+    h3.article-title
+      | {{article.title}}
+
+    p.article-content
+      | {{article.content}}

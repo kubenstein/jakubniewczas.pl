@@ -1,0 +1,37 @@
+angular.module('jakubniewczas')
+  .directive('blogArticleSection',
+    ['$http', '$location', '$routeParams', '$filter', function($http, $location, $routeParams, $filter) {
+      return {
+        scope: {},
+        templateUrl: '<%= ng_template_url("blog-article-section/") %>',
+
+        controller: ['$scope', function($scope) {
+          function initialize() {
+            loadArticleData();
+            loadOtherArticlesData();
+          }
+
+          function loadArticleData() {
+            $http.get('/api/v1/blog/articles/'+ $routeParams['id'] +'.json').success(function(response) {
+              $scope.article = response;
+            }).error(function() {
+              $location.path('/blog');
+            });
+          }
+
+          function loadOtherArticlesData() {
+            $http.get('/api/v1/blog/index.json').success(function(response) {
+              $scope.otherArticles = removeArticle(response, $routeParams['id']);
+            });
+          }
+
+          // private
+
+          function removeArticle(articles, articleId) {
+            return $filter('filter')(articles, {id: '!'+ articleId}, true);
+          }
+
+          initialize();
+        }]
+      }
+  }])

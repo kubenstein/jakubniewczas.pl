@@ -10,8 +10,8 @@ angular.module('jakubniewczas')
         }
 
         function loadData() {
-          $http.get('/api/v1/blog/index.json').then(function(response) {
-            $scope.articles = response.data;
+          $http.get('/api/v1/blog/index.json').success(function(response) {
+            $scope.articles = response;
           });
         }
 
