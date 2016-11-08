@@ -1,0 +1,21 @@
+angular.module('jakubniewczas')
+  .directive('blogSection', ['$http', function($http) {
+    return {
+      scope: {},
+      templateUrl: '<%= ng_template_url("blog-section/") %>',
+
+      controller: ['$scope', function($scope) {
+        function initialize() {
+          loadData();
+        }
+
+        function loadData() {
+          $http.get('/api/v1/blog/index.json').then(function(response) {
+            $scope.articles = response.data;
+          });
+        }
+
+        initialize();
+      }]
+    }
+  }])

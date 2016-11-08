@@ -1,0 +1,30 @@
+@import 'components/common/common';
+
+.blog-section {
+  .article {
+    padding: 30px 0;
+    border-top: 1px solid $light_gray;
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  .article-title {
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    color: $black;
+  }
+
+  .image {
+    float: left;
+    margin-right: 10px;
+
+    @media screen and (max-width: 425px) {
+      display: block;
+      float: none;
+      margin: 0 auto 10px;
+    }
+  }
+}

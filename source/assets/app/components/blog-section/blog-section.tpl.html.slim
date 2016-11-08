@@ -1,0 +1,11 @@
+.blog-section.inner-wrapper
+  .articles
+    .article.clearfix ng-repeat='article in articles'
+      a ng-href="#/blog/{{article.id}}"
+        img.image ng-src="{{article.image}}" ng-show="(article.image)"
+
+      a.article-title ng-href="#/blog/{{article.id}}"
+        | {{article.title}}
+
+      p.article-preview
+        | {{article.preview}}
