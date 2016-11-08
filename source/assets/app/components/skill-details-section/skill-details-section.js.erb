@@ -17,7 +17,7 @@ angular.module('jakubniewczas')
 
         function loadData() {
           $http.get('/api/v1/skills/'+ $translate.use() +'.json').then(function(response) {
-            item = $filter('filter')(response.data, {id: $routeParams['id']}, true)[0];
+            item = selectSkill(response.data, $routeParams['id']);
             if(!item) $location.path('/');
             $scope.skill = item;
           });
@@ -25,6 +25,12 @@ angular.module('jakubniewczas')
 
         $scope.goBack = function() {
           $location.path('/');
+        }
+
+        // private
+
+        function selectSkill(skills, skillId) {
+          return $filter('filter')(skills, {id: skillId}, true)[0];
         }
 
         initialize();
