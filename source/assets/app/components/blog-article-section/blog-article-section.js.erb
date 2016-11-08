@@ -7,28 +7,46 @@ angular.module('jakubniewczas')
 
         controller: ['$scope', function($scope) {
           function initialize() {
+            $scope.article = {
+              title: null,
+              content: null
+            }
             loadArticleData();
             loadOtherArticlesData();
           }
 
           function loadArticleData() {
-            $http.get('/api/v1/blog/articles/'+ $routeParams['id'] +'.json').success(function(response) {
-              $scope.article = response;
-            }).error(function() {
-              $location.path('/blog');
-            });
+            loadArticleContent();
+            loadArticleTitle();
           }
 
           function loadOtherArticlesData() {
             $http.get('/api/v1/blog/index.json').success(function(response) {
-              $scope.otherArticles = removeArticle(response, $routeParams['id']);
+              $scope.otherArticles = removeArticleFromList(response, $routeParams['id']);
             });
           }
 
           // private
 
-          function removeArticle(articles, articleId) {
+          function loadArticleContent() {
+            $http.get('/api/v1/blog/articles/'+ $routeParams['id'] +'.md.article').success(function(response) {
+              $scope.article.content = response;
+            });
+          }
+
+          function loadArticleTitle() {
+            $http.get('/api/v1/blog/index.json').success(function(response) {
+              currentArticleData = selectArticleFromList(response, $routeParams['id']);
+              $scope.article.title = currentArticleData.title;
+            });
+          }
+
+          function removeArticleFromList(articles, articleId) {
             return $filter('filter')(articles, {id: '!'+ articleId}, true);
+          }
+
+          function selectArticleFromList(articles, articleId) {
+            return $filter('filter')(articles, {id: articleId}, true)[0];
           }
 
           initialize();
