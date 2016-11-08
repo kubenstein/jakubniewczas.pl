@@ -1,11 +1,11 @@
-def jsons_files_list(sitemap)
+def jsons_files_list_to_cache(sitemap)
   files_to_cache(sitemap)
-    .select { |ftc| ftc.json? }
+    .select { |cachable_file| cachable_file.json? && !cachable_file.excluded? }
 end
 
-def templates_files_list(sitemap)
+def templates_files_list_to_cache(sitemap)
   files_to_cache(sitemap)
-    .select { |ftc| ftc.template? }
+    .select { |cachable_file| cachable_file.template? }
 end
 
 
@@ -14,10 +14,10 @@ end
 def files_to_cache(sitemap)
   sitemap
     .resources
-    .map { |r| FileForCache.new(r) }
+    .map { |r| CachableFile.new(r) }
 end
 
-class FileForCache
+class CachableFile
   def initialize(resource)
     @resource = resource
   end
@@ -28,6 +28,10 @@ class FileForCache
 
   def template?
     path.include?('.tpl.html')
+  end
+
+  def excluded?
+    path.include?('blog/')
   end
 
   def path

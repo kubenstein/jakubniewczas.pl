@@ -5,11 +5,11 @@
 angular.module('jakubniewczas').run(['$http', '$cacheFactory', '$templateCache', function($httpProvider, $cacheFactory, $templateCache) {
   $httpProvider.defaults.cache = true;
   httpCache = $cacheFactory.get('$http');
-  <% jsons_files_list(sitemap).each do |json_file| %>
+  <% jsons_files_list_to_cache(sitemap).each do |json_file| %>
     httpCache.put("/<%= json_file.path %>", "<%= json_file.body %>");
   <% end %>
 
-  <% templates_files_list(sitemap).each do |tpl_file| %>
+  <% templates_files_list_to_cache(sitemap).each do |tpl_file| %>
     $templateCache.put("/<%= tpl_file.path %>", "<%= tpl_file.body %>");
   <% end %>
 }]);
