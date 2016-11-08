@@ -21,4 +21,7 @@ gem 'require_all'
   gem 'rails-assets-angular-translate', path: './vendor/rails-assets-angular-translate-2.6.1'
   gem 'rails-assets-angular-translate-loader-static-files', path: './vendor/rails-assets-angular-translate-loader-static-files-2.6.1'
   gem 'rails-assets-angular-route',     path: './vendor/rails-assets-angular-route-1.3.15'
+  gem 'rails-assets-angular-markdown-directive', path: './vendor/rails-assets-angular-markdown-directive-0.3.1'
+  gem 'rails-assets-angular-sanitize',  path: './vendor/rails-assets-angular-sanitize-1.3.15'
+  gem 'rails-assets-showdown',          path: './vendor/rails-assets-showdown-0.3.4'
 # end
