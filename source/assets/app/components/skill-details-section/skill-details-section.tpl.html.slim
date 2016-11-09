@@ -1,20 +1,17 @@
 .skills-details-section.with-separator
   .section-title
     span.back ng-click='goBack()'
-      | 
+      |
       | < {{'BACK' | translate }}
   .section-body
     .item-body
       .header
         h3.skill-name
           | {{skill.name}}
-        span.skill-subtext 
+        span.skill-subtext
           | {{skill.subtext}}
       p
         | {{skill.description}}
-
-      p.disclaimer ng-show="skill.disclaimer"
-        | {{skill.disclaimer}}
 
       .projects
 
@@ -27,9 +24,9 @@
               | {{project.link}}
 
             span.clearfix.project-subtitle ng-show="(project.subtitle)"
-              | {{project.subtitle}}              
+              | {{project.subtitle}}
 
             p.project-description ng-bind-html="project.description | nl2br"
 
           .images.clearfix
-            img.image ng-src="{{imageSrc}}" ng-repeat="imageSrc in project.images" 
+            img.image ng-src="{{imageSrc}}" ng-repeat="imageSrc in project.images"
