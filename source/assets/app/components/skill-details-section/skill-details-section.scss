@@ -41,7 +41,7 @@
     border: 1px solid $gray;
     max-width: 100%;
   }
-  
+
   @media screen and (max-width: 690px) {
     .project-info {
       width: 100%;
@@ -55,7 +55,7 @@
     .image {
       float: left;
     }
-  }  
+  }
 
   .back {
     cursor: pointer;
@@ -99,6 +99,8 @@
 
   .project-subtitle {
     color: $light_brown;
+    display: block;
+    margin-top: 5px;
   }
 
   .project-description {
