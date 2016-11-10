@@ -3,14 +3,14 @@
   {
     id: 'ruby-on-rails',
     name: 'Ruby on Rails',
-    subtext: 'Rspec, Background Jobs, OOP, Payments, OAuth, Permissions, File Storing/Proccessing, Full Text Search, PDF generation, Social Media Integration, Hanami, dry-rb, Gem building',
+    subtext: 'Rspec, Sidekiq, OOP, Payments, OAuth, Permissions, DDD, File Storing/Proccessing, Full Text Search, PDF generation, Social Media Integration, Hanami, dry-rb, Gem building',
     description: "I’ve been a professional Ruby on Rails developer for about 4 years now. Experience with working on many Rails projects, allows me to deeply understand strengths and weakneses of each aspects of the Framework.",
     projects: [
       {
         title: 'Selecthub',
         link: 'https://selecthub.com/',
         subtitle: 'All rights go to codequest',
-        description: 'Due to very complicated domain rules and use cases, working on Selecthub required skills, discipline and knowledge in building modular and well desgned software applications.\n\nKey features:\n- Handling massive codebase and complicated use cases\n- Authentication and permissions\n- Rich integration with frontend frameworks\n- Solving optimisation problems',
+        description: 'Due to very complicated domain rules and use cases, working on Selecthub required <b>skills, discipline and knowledge</b> in building modular and well desgned software applications.\n\nKey features:\n- Handling massive codebase and complicated use cases\n- Authentication and permissions\n- Rich integration with frontend frameworks\n- Solving optimisation problems',
         images: [
           s3_url('selecthub.jpg')
         ]
@@ -18,10 +18,18 @@
       {
         title: 'Foap AB',
         link: 'https://foap.com/',
-        subtitle: 'All rights go to Foap',
+        subtitle: 'All rights go to App\'n\'Roll',
         description: 'I was part of a Foap Rails Api team. At that time foap.com migration to Angular started. The App was splitted into Angular Frontend and pure api Rails Backend.\n\nKey features:\n- Pure api Rails application\n- Authentication and permissions\n- Image uploading and processing',
         images: [
           s3_url('foap.jpg')
+        ]
+      },
+      {
+        title: 'Massive E-Commerce Portal',
+        subtitle: 'Due to NDA project details are confidential',
+        description: 'Working on complex Ecommerce applications changes the way how you code. With sophisticated data model, huge codebase and future maintainability as a requirement, <b>design, coding and testing</b> practices are very important. We followed all of them.\n\nKey features:\n- Handling sophisticated data model and business rules\n- Significant amount of logic as a background tasks\n- Solving performance issues\n- Search functionality backed by ElasticSearch\n- Authentication and permissions',
+        images: [
+          s3_url('ecommerce-nda.jpg')
         ]
       },
       {
@@ -40,6 +48,38 @@
         description: 'Buddybroker was my favourite project I was working on during my work at codequest. I had opportunity to build and see strengths and weaknesses of my decisions. I learnt how important is to design app architecture well.\n\nKey features:\n- Authentication and permissions\n- Image uploading and processing\n- Integration with LinkedIn and Xing\n- Integration with Buddybroker matching system\n- Building web crawlers\n- Rich integration with Frontend frameworks',
         images: [
           s3_url('buddybroker.jpg')
+        ]
+      },
+      {
+        title: 'Aleksandra Kuls Website',
+        link: 'http://aleksandrakuls.com/',
+        description: 'With unique design of full separation Domain logic from presentation layer, this simple website contains advanced DDD philosophy and techniques. With strong OOP desires I TDDed whole process of creation website. \n\nKey features:\n- Full separation Domain logic for presentation layer \n- TDDed all way long\n- Integration with Middleman Static Page\n- PhantomJS feature specs',
+        images: [
+          s3_url('aleksandrakuls-ddd.jpg')
+        ]
+      },
+      {
+        title: 'DrinkWaterApp Api',
+        icon: s3_url('hanami-badge.jpg'),
+        description: 'Important feature of iOS DrinkWaterApp was making donations. After donating user can add his name to donors list. Adding and displaying donors is the responsibility of API server. Since functionality is really tiny I used Hanami as a backend framework.\n\nKey features: \n- Written in Hanami',
+        images: [
+          s3_url('drinkwaterapp-api.jpg')
+        ]
+      },
+      {
+        title: 'Vatus.pl',
+        link: 'http://vatus.pl',
+        description: 'Fast, clean and quick Rails project for an Accounting Company. With whole frontend, for both main page and admin panel is written in Angular. Rails part is narrowed to providing RESTful API.\n\nKey features: \n- Api only Rails App\n- Bundling frontend dependencies via rails-assets.org',
+        images: [
+          s3_url('vatus.jpg')
+        ]
+      },
+      {
+        title: 'Wakemydyno!',
+        link: 'http://wakemydyno.com',
+        description: 'Wakemydyno! is little yet very useful Rails app that bypass some limitations of Heroku platform. It main responsibility is to run periodical background jobs. See friendly twitter <a target=\'blank\' href=\'https://twitter.com/wakemydyno/status/596356103224619009\'>conversation with Heroku employee</a>.\n\nKey features:\n- Service Objects Layering Architecture \n- Smart use of Threads as a alternative to multi dyno heroku setup',
+        images: [
+          s3_url('wakemydyno.jpg')
         ]
       },
       {
