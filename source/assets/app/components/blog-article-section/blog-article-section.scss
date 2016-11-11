@@ -10,6 +10,8 @@
     font-size: 36px;
     text-decoration: none;
     color: $black;
+    padding-bottom: 8px;
+    display: inline-block;
   }
 
   .other-articles {
@@ -26,6 +28,33 @@
 
   .article-content {
     line-height: 1.618;
+    text-align: justify;
+    font-size: 20px;
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+      border: 1px solid $black;
+      max-width: 100%;
+    }
+
+    pre {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      overflow: auto;
+      text-align: left;
+      background-color: $light_gray;
+      white-space: pre;
+    }
+
+    a {
+      color: $green;
+    }
   }
 
   .other-article {

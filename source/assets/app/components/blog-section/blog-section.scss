@@ -15,6 +15,8 @@
     font-size: 36px;
     text-decoration: none;
     color: $black;
+    padding-bottom: 8px;
+    display: inline-block;
   }
 
   .article-content {
@@ -31,6 +33,7 @@
   }
 
   .image {
+    border: 1px solid $black;
     float: left;
     margin-right: 10px;
 

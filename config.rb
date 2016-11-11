@@ -29,7 +29,9 @@ configure :build do
   activate :minify_css
   activate :minify_javascript
   activate :minify_html
-  activate :asset_hash, ignore: 'index.html', exts: (Middleman::Extensions::AssetHash.config[:exts] << '.html')
+  activate :asset_hash,
+           ignore: ['index.html', '.*/s3/blog/.*'],
+           exts: (Middleman::Extensions::AssetHash.config[:exts] << '.html')
   activate :gzip
 end
 
