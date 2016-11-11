@@ -1,7 +1,19 @@
 angular.module('jakubniewczas')
   .directive('aboutMeSection', function() {
     return {
-      scope: {},
-      templateUrl: '<%= ng_template_url("about-me-section/") %>'
+      scope: {
+        compact: '='
+      },
+      template: '<ng-include src="getTemplateUrl()" />',
+
+      controller: ['$scope', function($scope) {
+        $scope.getTemplateUrl = function() {
+          if($scope.compact) {
+            return '<%= ng_template_url("about-me-section/compact-about-me-section") %>';
+          } else {
+            return '<%= ng_template_url("about-me-section/") %>';
+          }
+        }
+      }]
     }
   })

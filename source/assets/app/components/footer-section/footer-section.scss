@@ -1,0 +1,14 @@
+@import 'components/common/common';
+
+.footer-section {
+  padding: 20px 0;
+  font-size: 10px;
+  text-align: center;
+  color: $gray;
+  background-color: $brown;
+
+  &.compact {
+    padding: 10px 0;
+    background-color: white;
+  }
+}

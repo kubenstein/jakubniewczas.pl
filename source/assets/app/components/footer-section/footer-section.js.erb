@@ -1,0 +1,9 @@
+angular.module('jakubniewczas')
+  .directive('footerSection', function() {
+    return {
+      scope: {
+        compact: '='
+      },
+      templateUrl: '<%= ng_template_url("footer-section/") %>'
+    }
+  })

@@ -1,15 +1,14 @@
-.about-me-section
+.about-me-section.compact
   .inner-wrapper
     .two-cols
       .col-one
-        a ng-href="/#/"
+        a ng-href="/#/blog"
           = image_tag 'me.jpg', class: 'avatar'
       .col-two
         p.text
-          span.header
-            | {{ 'ABOUT_ME_TITLE' | translate }}
-          | {{ 'ABOUT_ME' | translate }}
+          | Jakub Niewczas Blog
         .social-section
+          = link_to '&#xe803;', '#/', class: 'social-item www'
           = link_to '&#xe802;', 'mailto:niewczas.jakub@gmail.com', class: 'social-item email'
           = link_to '&#xe801;', 'https://github.com/kubenstein', class: 'social-item github', target: '_blank'
           = link_to '&#xe800;', 'https://twitter.com/j_niewczas', class: 'social-item twitter', target: '_blank'

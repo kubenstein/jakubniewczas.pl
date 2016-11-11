@@ -7,9 +7,33 @@
     75% { transform: rotate(-20deg) }
   }
 
-
   @extend .odd-section;
   padding: 40px 0;
+
+  &.compact {
+    padding: 10px 0;
+    background-color: $white;
+    border-bottom: 1px solid $gray;
+
+    .avatar {
+      width: 40px;
+    }
+
+    .text {
+      color: $brown;
+      text-align: center;
+    }
+
+    .social-section {
+      margin-top: 5px;
+    }
+
+    .social-item {
+      color: $brown;
+      font-size: 20px;
+    }
+  }
+
 
   .text {
     color: $white;
@@ -36,7 +60,7 @@
   .social-item {
     color: $white;
     font-size: 32px;
-    margin-right: 22px;
+    margin-left: 22px;
 
     // set fontello font
     font-family: "fontello";
@@ -49,6 +73,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     // -------
+
+    &:first-child {
+      margin-left: 0;
+    }
 
     &:hover {
       -webkit-animation: social-icon-jiggle 1s 1;
