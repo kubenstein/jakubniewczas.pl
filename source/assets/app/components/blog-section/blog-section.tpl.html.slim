@@ -7,5 +7,9 @@
       a.article-title ng-href="#/blog/{{article.id}}"
         | {{article.title}}
 
-      p.article-preview
+      p.article-content
         | {{article.preview}}
+
+      a.more ng-href="#/blog/{{article.id}}"
+        | {{ 'CONTINUE_READING' | translate }}
+

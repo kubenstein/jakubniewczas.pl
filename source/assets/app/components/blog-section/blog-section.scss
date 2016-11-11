@@ -12,9 +12,22 @@
 
   .article-title {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 36px;
     text-decoration: none;
     color: $black;
+  }
+
+  .article-content {
+    line-height: 1.618;
+    font-size: 13pt;
+    color: $black;
+  }
+
+  .more {
+    float: right;
+    text-decoration: none;
+    font-weight: bold;
+    color: $red;
   }
 
   .image {
