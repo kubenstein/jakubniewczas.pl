@@ -1,5 +1,6 @@
 angular.module('jakubniewczas', [
   'pascalprecht.translate',
   'ngRoute',
-  'btford.markdown'
+  'btford.markdown',
+  'angularUtils.directives.dirDisqus'
 ]);

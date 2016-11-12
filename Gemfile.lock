@@ -36,6 +36,11 @@ PATH
       rails-assets-angular-translate (~> 2.6.1)
 
 PATH
+  remote: ./vendor/rails-assets-angular-utils-disqus-1.0.0
+  specs:
+    rails-assets-angular-utils-disqus (1.0.0)
+
+PATH
   remote: ./vendor/rails-assets-showdown-0.3.4
   specs:
     rails-assets-showdown (0.3.4)
@@ -191,6 +196,7 @@ DEPENDENCIES
   rails-assets-angular-sanitize!
   rails-assets-angular-translate!
   rails-assets-angular-translate-loader-static-files!
+  rails-assets-angular-utils-disqus!
   rails-assets-showdown!
   require_all
   slim

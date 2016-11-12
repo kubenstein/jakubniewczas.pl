@@ -1,0 +1,16 @@
+angular.module('jakubniewczas')
+  .directive('commentsSection',
+    ['$http', '$location', '$routeParams', function($http, $location, $routeParams) {
+    return {
+      scope: {},
+      templateUrl: '<%= ng_template_url("comments-section/") %>',
+
+      controller: ['$scope', function($scope) {
+        $scope.disqusConfig = {
+          disqus_shortname: 'jakubniewczas',
+          disqus_identifier: $routeParams['id'],
+          disqus_url: $location.url()
+        };
+      }]
+    }
+  }])

@@ -24,4 +24,5 @@ gem 'require_all'
   gem 'rails-assets-angular-markdown-directive', path: './vendor/rails-assets-angular-markdown-directive-0.3.1'
   gem 'rails-assets-angular-sanitize',  path: './vendor/rails-assets-angular-sanitize-1.3.15'
   gem 'rails-assets-showdown',          path: './vendor/rails-assets-showdown-0.3.4'
+  gem 'rails-assets-angular-utils-disqus', path: './vendor/rails-assets-angular-utils-disqus-1.0.0'
 # end

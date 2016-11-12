@@ -1,0 +1,32 @@
+{
+  "name": "rails-assets-angular-utils-disqus",
+  "downloads": null,
+  "version": "1.0.0",
+  "version_downloads": null,
+  "platform": "ruby",
+  "authors": "rails-assets.org",
+  "info": "A directive to add a Disqus comments widget to an AngularJS app.",
+  
+  "licenses": "MIT",
+  
+  "metadata": {
+
+  },
+  "sha": null,
+  "project_uri": "https://github.com/michaelbromley/angularUtils/tree/master/src/directives/disqus",
+  "gem_uri": null,
+  "homepage_uri": "https://github.com/michaelbromley/angularUtils/tree/master/src/directives/disqus",
+  "wiki_uri": null,
+  "documentation_uri": null,
+  "mailing_list_uri": null,
+  "source_code_uri": "https://github.com/michaelbromley/angularUtils/tree/master/src/directives/disqus",
+  "bug_tracker_uri": null,
+  "dependencies": {
+    "development": [
+    
+    ],
+    "runtime": [
+
+    ]
+  }
+}

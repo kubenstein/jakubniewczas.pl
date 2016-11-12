@@ -7,6 +7,7 @@
 //= require angular-route
 //= require angular-markdown-directive
 //= require angular-sanitize
+//= require angular-utils-disqus
 //= require showdown
 //= require app
 //= require_tree ./
