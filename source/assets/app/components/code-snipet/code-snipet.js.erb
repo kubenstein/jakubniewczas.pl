@@ -1,0 +1,9 @@
+angular.module('jakubniewczas')
+  .directive('codeSnipet', function() {
+    return {
+      scope: {
+        content: '='
+      },
+      templateUrl: '<%= ng_template_url("code-snipet/") %>'
+    }
+  })
