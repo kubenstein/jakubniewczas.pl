@@ -1,5 +1,5 @@
 angular.module('jakubniewczas')
-  .directive('codeSnipet', function() {
+  .directive('codeSnipet', ['$timeout', function($timeout) {
     return {
       scope: {
         content: '='
@@ -7,10 +7,12 @@ angular.module('jakubniewczas')
       templateUrl: '<%= ng_template_url("code-snipet/") %>',
       link: function(scope, element, attrs) {
         element.ready(function() {
-          angular.forEach(element.find('pre'), function(codeSnipet) {
-            window.hljs.highlightBlock(codeSnipet);
-          });
+          $timeout(function() {
+            angular.forEach(element.find('pre'), function(codeSnipet) {
+              window.hljs.highlightBlock(codeSnipet);
+            });
+          }, 1000);
         });
       }
     }
-  })
+  }])
