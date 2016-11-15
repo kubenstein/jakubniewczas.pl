@@ -1,12 +1,18 @@
-@import 'components/common/common';
+/*
 
-//
-// default style:
-// https://github.com/isagalaev/highlight.js/blob/master/src/styles/default.css
+Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
+
+*/
+
 .hljs {
   display: block;
   overflow-x: auto;
+  padding: 0.5em;
+  background: #F0F0F0;
 }
+
+
+/* Base color: saturation 0; */
 
 .hljs,
 .hljs-subst {
@@ -25,6 +31,9 @@
 .hljs-name {
   font-weight: bold;
 }
+
+
+/* User color: hue: 0 */
 
 .hljs-type,
 .hljs-string,
@@ -53,6 +62,9 @@
   color: #BC6060;
 }
 
+
+/* Language color: hue: 90; */
+
 .hljs-literal {
   color: #78A960;
 }
@@ -64,6 +76,9 @@
   color: #397300;
 }
 
+
+/* Meta color: hue: 200 */
+
 .hljs-meta {
   color: #1f7199;
 }
@@ -71,6 +86,9 @@
 .hljs-meta-string {
   color: #4d99bf;
 }
+
+
+/* Misc effects */
 
 .hljs-emphasis {
   font-style: italic;

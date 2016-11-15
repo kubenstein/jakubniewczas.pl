@@ -4,6 +4,13 @@ angular.module('jakubniewczas')
       scope: {
         content: '='
       },
-      templateUrl: '<%= ng_template_url("code-snipet/") %>'
+      templateUrl: '<%= ng_template_url("code-snipet/") %>',
+      link: function(scope, element, attrs) {
+        element.ready(function() {
+          angular.forEach(element.find('pre'), function(codeSnipet) {
+            window.hljs.highlightBlock(codeSnipet);
+          });
+        });
+      }
     }
   })

@@ -9,5 +9,6 @@
 //= require angular-sanitize
 //= require angular-utils-disqus
 //= require showdown
+//= require highlightjs
 //= require app
 //= require_tree ./

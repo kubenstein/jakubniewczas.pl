@@ -41,6 +41,11 @@ PATH
     rails-assets-angular-utils-disqus (1.0.0)
 
 PATH
+  remote: ./vendor/rails-assets-highlightjs-9.8.0
+  specs:
+    rails-assets-highlightjs (9.8.0)
+
+PATH
   remote: ./vendor/rails-assets-showdown-0.3.4
   specs:
     rails-assets-showdown (0.3.4)
@@ -197,6 +202,7 @@ DEPENDENCIES
   rails-assets-angular-translate!
   rails-assets-angular-translate-loader-static-files!
   rails-assets-angular-utils-disqus!
+  rails-assets-highlightjs!
   rails-assets-showdown!
   require_all
   slim
