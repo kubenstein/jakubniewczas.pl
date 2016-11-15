@@ -2,9 +2,15 @@
 
 .about-me-section {
   @keyframes social-icon-jiggle {
-    0%, 100%   { transform: rotate(0deg) }
+    0%, 100% { transform: rotate(0deg) }
     25% { transform: rotate(20deg) }
     75% { transform: rotate(-20deg) }
+  }
+
+  @-webkit-keyframes social-icon-jiggle {
+    0%, 100% { -webkit-transform: rotate(0deg) }
+    25% { -webkit-transform: rotate(20deg) }
+    75% { -webkit-transform: rotate(-20deg) }
   }
 
   @extend .odd-section;
