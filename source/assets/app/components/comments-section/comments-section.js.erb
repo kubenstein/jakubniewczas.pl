@@ -9,7 +9,7 @@ angular.module('jakubniewczas')
         $scope.disqusConfig = {
           disqus_shortname: 'jakubniewczas',
           disqus_identifier: $routeParams['id'],
-          disqus_url: $location.url()
+          disqus_url: 'http://jakubniewczas.pl/' + $location.url()
         };
       }]
     }
