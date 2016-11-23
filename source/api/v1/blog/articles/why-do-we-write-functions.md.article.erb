@@ -1,0 +1,77 @@
+In any application, functions or methods are considered the smallest code units. Nearly like a mathematical function, eventually all programming efforts boil down to provide some output from particular input. It can be a click on an icon in a windowed application, triggering some action in a video game or, as in web development, sending a request. In web development, because of stateless nature of http protocol, the input-output relation is even more emphasised.
+
+From this perspective any system is, in fact, just a one, big function. User wants to buy things online, thats the function of Ebay or Amazon etc. User wants to browse products, thats the function of product page on those portals. User wants to finally purchase what he has in his shopping cart, thats the function of buy button.
+
+As a programmers, we know how complex systems can be. Knowing all those usecases, all integrations and supporting code, saying that system is just some function is quite a simplification. Important thing is each function represents some level of abstraction. It groups things that we can talk about without being distracted.
+
+Each function focuses on important details from its level and keep rest just <i>fairy understandable</i>.
+
+Those details are reviled because, in context of the function, those matter. In fact, if details are from different abstraction level usually person who reads a function considered them, often unconsciously, as a code noise.
+
+### What is important for details parts?
+Details part should focus on things that really matter. Usually `if`s or other control flow are those things. Those are essence of the function.
+
+### What is important for <i>fairy understandable</i> parts?
+Those should be fairy understandable! Those should tell what the function will do without telling too much unimportant details. Usually telling anything about particular implementation is already too much.
+As a function reader, Im fully aware where I am and what is going to happen next. Do I really know what does it mean to `charge_user(user, amount)`? yes and no, fairy enough.
+
+Good naming is the key and all programmers know that very well. For sure also know how hard can be to came up with a meaningful so, descriptive and not too detailed, name. Sometimes name is already used, sometimes semantically, name is the same as name of some other other function. Sometimes the best name we can think of is `doSomethingIfNeeded`.
+Problem with names that have `and` or `if` is that, from reader perspective, we are forced to think about some details that should be hidden. From writer perspective its a hint that system in that area may required little redesign since function doesn’t represent, in fact, any higher concept.
+
+### Bash script example
+Recently I had to write a few bash scripts. Text manipulation in Bash or piping things from command to command usually makes code quite messy. I like to start with a `main` function and write step by step what will be executed.
+
+```bash
+function main() {
+  check_for_necessary_variables
+  build_custom_images
+  setup_db_volume_container
+  setup_db_container
+  setup_db_backup_container
+  setup_git_receiver_storage
+  setup_git_receiver
+}
+
+#...
+
+#go!
+main
+```
+
+Above example is taken from one of my project, see [here](https://github.com/kubenstein/docker-webserver-vps-setup/blob/master/bootstrap.zip/setup-containers-configuration/configurate.sh).
+
+```
+configure.sh -> main -> setup_git_receiver_storage -> docker command
+```
+
+Each level tells enough to understand what will happen. Lets take a look at `setup_git_receiver_storage` function. We know we are dealing with some containers, we see that a container may exist or not and that we then, run docker command. All is fairy understandable.
+
+
+```bash
+function setup_git_receiver_storage() {
+  if container_exists "git-receiver-storage"; then
+    return; 
+  fi
+
+  docker run -d --name git-receiver-storage \
+                git-receiver-image /bin/true
+}
+```
+
+### Ruby specs example
+Other example which I like to show is a spec code from one of my project. Especially in test codebase, functions have to tell clear story. Usually we look at a test when that test fails. Often the test is not related with a feature we are currently working on. Readability of a test code is crucial to understand what we just broke.
+
+I like to write specs nearly as it would be a Cucumber file. Building high level DSL lets you understand what feature and what part of code we are dealing with. Then we dive into sub functions to look for more and more details. 
+
+```ruby
+it 'includes branches diff' do
+  pull_request = create_pull_request
+
+  when_user_goes_to_pull_details_page(pull_request)
+  he_will_see_pull_request_diff(pull_request)
+end
+```
+
+Test like this is short and descriptive. It shows sequence of events and expectations. By passing variable, relation between steps is clear. 
+
+Programmers with some experience usually already have developed most of those guides and heuristics. I also intuitively feel when code is readable or when something is still out of place. I was glad to learn about the reason. It is all about mixing abstraction levels. Understanding and classifying code inside functions based on that criteria is another solid tool in my craftsmanship toolbox.
