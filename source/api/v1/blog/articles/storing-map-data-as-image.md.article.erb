@@ -1,0 +1,51 @@
+During developing of [Plant Calculator Project](https://plant-calculator.herokuapp.com/) quite unusual, thus interesting challenge arised. Main goal of the project was to provide list of plants filtered by very specific cryteria. Additionally, based of configuration of those cryteria, system should calculate duration and kind of watering over the year that is required for effective growing of a plant.
+
+![PlantCaluculator Jakub Niewczas](<%= s3_url('blog/storing-map-data-as-image/plant-calculator-animation.gif') %>)
+
+Plant Calculator is a tool and its main purpose is to solve or provide data in easy and useful way. With database of plants already prepared by client (some transformation was still needed) the only missing part was to correlate a special zone geo-position information with a set of filters as a clickable map. Unlucky distribution of those zones was provided to me as images.
+
+My initial thought was to transform pixels to database point representation and based on this apply proper SQL filtering. Even after removing points that make no sense, like seas areas, amount of data was enormous.
+
+I realised that for purposes of clickable UI, an image may be the best representation of map data. Each pixel color represent proper zone.
+
+After sharping image edges and force very narrow set of colors I was able to use images as first-class data stores.
+In application clicking on the map triggers `mapClick` function
+
+```javascript
+$scope.mapClick = function(event) {
+  $scope.mapCoordinates = getCoordinatesFromEvent(event);
+};
+
+function getCoordinatesFromEvent(event) {
+  var x = (event.offsetX === undefined) ? event.layerX : event.offsetX;
+  var y = (event.offsetY === undefined) ? event.layerY : event.offsetY;
+  return {x: x, y: y};
+}
+```
+
+that passes map coordinates to image color resolving service.
+
+```javascript
+function getZoneData(coordinates, resolver) {
+  var dataImage = $element.find('img')[0];
+  var canvas = $element.find('canvas')[0];
+
+  if(canvas.width !== dataImage.width) {
+    canvas.width = dataImage.width;
+    canvas.height = dataImage.height;
+    canvas.getContext('2d').drawImage(dataImage, 0, 0, dataImage.width, dataImage.height);
+  }
+
+  // reading colors from image
+  var color = canvas.getContext('2d').getImageData(coordinates.x, coordinates.y, 1, 1).data;
+  var hex = rgbToHex(color[0], color[1], color[2]);
+  return resolver.resolveFromColor(hex);
+}
+```
+
+Hex value is later on passes to another service that knows the business meaning of each color for a particular map.
+
+Having business value, preparing proper filtering was an easy task.
+
+One may ask is frontend a proper place of storing database? If you look at those maps as a some more advanced form of HTML `<select>` element, all is, indeed, in a proper place.
+
