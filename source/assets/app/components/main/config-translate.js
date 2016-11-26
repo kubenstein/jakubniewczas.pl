@@ -1,9 +1,7 @@
 angular.module('jakubniewczas')
-  .config(['$translateProvider', function($translateProvider) {
-    $translateProvider.useLoaderCache(true);
-    $translateProvider.preferredLanguage('en');
-    $translateProvider.useStaticFilesLoader({
-      prefix: '/api/v1/i18n/locale-',
-      suffix: '.json'
-    });
-}]);
+  .config(['$sceDelegateProvider', function($sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist([
+      'self',
+      'https://player.vimeo.com/**'
+    ]);
+  }]);

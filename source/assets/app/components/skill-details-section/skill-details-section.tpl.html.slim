@@ -28,5 +28,6 @@
 
             p.project-description ng-bind-html="project.description | nl2br"
 
-          .images.clearfix
-            img.image ng-src="{{imageSrc}}" ng-repeat="imageSrc in project.images"
+          .preview.clearfix
+            iframe.video ng-repeat="video in project.videos" ng-src="{{video.url}}" ng-class="{landscape: (video.orientation == 'landscape'), portrait: (video.orientation == 'portrait')}" frameborder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen")
+            img.image ng-repeat="imageSrc in project.images" ng-src="{{imageSrc}}"

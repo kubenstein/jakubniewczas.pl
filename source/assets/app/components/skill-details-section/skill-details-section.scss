@@ -30,29 +30,39 @@
     margin-bottom: 30px;
   }
 
-  .images {
+  .preview {
     width: 47%;
     float: right;
   }
 
-  .image {
+  .image, .video {
     float: right;
     margin: 0 0 5px 5px;
     border: 1px solid $gray;
     max-width: 100%;
   }
 
+  .landscape {
+    width: 362px;
+    height: 215px;
+  }
+
+  .portrait {
+    width: 177px;
+    height: 310px;
+  }  
+
   @media screen and (max-width: 690px) {
     .project-info {
       width: 100%;
     }
 
-    .images {
+    .preview {
       float: left;
       width: 100%;
     }
 
-    .image {
+    .image, .video {
       float: left;
     }
   }
