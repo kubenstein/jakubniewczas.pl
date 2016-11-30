@@ -34,6 +34,15 @@
       margin-bottom: 20px;
     }
 
+    ul {
+      margin-bottom: 20px;
+
+      li {
+        list-style-type: disc;
+        list-style-position: inside;
+      }
+    }
+
     img {
       display: block;
       margin: 0 auto;
