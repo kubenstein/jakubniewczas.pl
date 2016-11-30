@@ -60,7 +60,11 @@
     display: block;
     color: $brown;
     text-decoration: none;
-    margin: 3px 0;
+    margin: 8px 0;
+
+    &:hover {
+      color: $green;
+    }
   }
 
   .other-articles-title {
