@@ -1,12 +1,12 @@
-During developing [WakeMyDyno.com](http://wakemydyno.com) I faced very interesting challenge; how to run background worker for free? It was about 4 years ago and not paying for things was more like a game. That time Heroku was running 24/7 with proper pinging on free tier but adding a separate dyno for background tasks was something that you had to pay anyway. Many tools popped up helping reducing costs by for example autoscale workers number depending on amount of work.
+During developing [WakeMyDyno.com](http://wakemydyno.com) I faced a very interesting challenge; how to run background worker for free? It was about 4 years ago and not paying for things was more like a game. That time Heroku was running 24/7 with proper pinging on free tier but adding a separate dyno for background tasks was something that you had to pay anyway. Many tools popped up helping reducing costs by for example autoscale workers number depending on amount of work.
 
-Since my app was very little, with not big memory consumption and not much traffic, I developed a very simple trick to run code on same, web, dyno. I used `spawn` ruby method.
+Since my app was very little, with not big memory consumption and not much traffic, I developed a very simple trick to run a background code on a same, web, dyno. I used `spawn` ruby method.
 
 ```ruby
 spawn('bundle exec rake url_checking');
 ```
 
-Later on, when I moved from Thin to Unicorn I just used instance variable caching to spawn only one background worker.
+Later on, when I moved from Thin to Unicorn I just used an instance variable caching to spawn only one background worker.
 
 config `unicorn.rb` file looks like:
 
@@ -29,4 +29,4 @@ end
 
 #...
 ```
-These days Heroku has completely different pricing policy and things like this doesn’t work. <i>["sorry little guy; you had a good run"](https://twitter.com/wakemydyno/status/596356103224619009)</i>. Besides hackish/scriptkiddiesh nature of the solution, I still find it very interesting. For example, when you pay per Docker Container, like in [Hyper.sh](https://hyper.sh), you can run everything just from one container. Implementation can be done via supervisord daemon or directly in ruby codebase.
+These days Heroku has completely different pricing policy, <i>["sorry little guy; you had a good run"](https://twitter.com/wakemydyno/status/596356103224619009)</i>, but you can still save a few extra hours. Besides hackish/scriptkiddiesh nature of the solution, I still find it very interesting. For example, when you pay per Docker Container, like in [Hyper.sh](https://hyper.sh), you can run everything just from one container. Implementation can be done via supervisord daemon or directly in a ruby codebase.

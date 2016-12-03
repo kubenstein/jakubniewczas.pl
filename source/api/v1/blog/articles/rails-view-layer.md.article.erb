@@ -1,10 +1,10 @@
-In an typical MVC Rails app, V instead of View stands for just template file. No matter if an app is a really small or quite complex, views will always have some logic. Even small apps struggle where to put code for, for example, marking menu option as active or what to do with logged in/visitor separation. Other examples are all kind of formatting data. Sometimes its date format, sometimes error message.
+In a typical MVC Rails app, V instead of View stands for a just template file. No matter if an app is a really small or quite complex, views will always have some logic. Even small apps struggle where to put code for, for example, marking menu option active or what to do with logged in/visitor separation. Other examples are all kind of formatting data.
 
-Typical solutions are, to wrap logic as a helper or keep logic in a controller or a model. Having presentation logic in a model feels so unnatural that, lucky, I don’t see this choice very often. Controllers are more common place because we are already encouraged, by the framework, to make some presentation decision, like picking html/json/xml formatting, there.
+Typical solutions are, to wrap logic as a helper, keep logic in a controller or a model. Having a presentation logic in a model feels so unnatural that, lucky, I don’t see this choice very often (except maybe `to_json`). Controllers are more common place because we are already encouraged, by the framework, to make some presentation decision, like picking html/json/xml formatting, there.
 
-Convenient solution would be to have a separate layer to deal with all kinds of presentation logic. [Hanami](http://hanamirb.org/guides/views/overview/) and [Trailblazer](http://trailblazer.to/gems/cells/) do this by having dedicated ruby class. By doing this, there is finally a place to store all logic. With normal classes we can inherit or delegate or mix some functionality module. Normal ruby OOP rules apply.
+Convenient solution would be to have a separate layer to deal with all kinds of presentation logic. [Hanami](http://hanamirb.org/guides/views/overview/) and [Trailblazer](http://trailblazer.to/gems/cells/) do this by having dedicated ruby class. With normal classes we can inherit or delegate or mix some functionality module. Normal ruby OOP rules apply.
 
-I wanted to try this approach (at that time I knew only about Cells from Trailblazer). Goal was to create simple yet functional POC. For the simplicity purposes I pass `renderable` to each ViewModel instance and explicitly call render on it.
+I wanted to try this approach (at that time I knew only about Cells gem from Trailblazer). Goal was to create a simple yet functional POC. For the simplicity purposes I pass `renderable` to each ViewModel instance and explicitly call render on it. `Renderable` in this context is just `self` from current controller.
 
 ```ruby
 class ArticlesController < ApplicationController
@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
 end
 ```
 
-with simple DSL I can see what params are required for a View to work:
+With a simple DSL I can see what params are required for a ViewModel to work:
 
 ```ruby
 class Article::Index::View < ViewModel::Base
@@ -24,7 +24,7 @@ class Article::Index::View < ViewModel::Base
 end
 ```
 
-Being able to call methods from ViewModel as an alternative to global helpers, I solved by passing to template a reference to self.
+To be able to call methods from ViewModel as an alternative to global helpers, I solved by passing to a template a reference to self (renamed to "`_`").
 
 ```ruby
 class Report::Show::View < ViewModel::Base
@@ -39,9 +39,9 @@ h1 = _.formatted_user_header(user)
 
 ```
 
-Cells gem does this way more elegant but it is also way more complex gem.
+Cells gem does this way more elegant but it is also way more complex tool.
 
 I incorporated view layer in several of my projects and overall I’m happy with the results.
 
-My solution is avaliable as a ruby gem. See [ViewModel](https://github.com/kubenstein/ViewModel) source code and more detailed readme on Github.
+My solution is avaliable as a ruby gem. See ViewModel [source code](https://github.com/kubenstein/ViewModel) and detailed readme on Github.
 
