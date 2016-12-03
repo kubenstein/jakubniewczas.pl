@@ -12,7 +12,7 @@ Those details are reviled because, in context of the function, those matter. In 
 Details part should focus on things that really matter. Usually `if`s or other control flow are those things. Those are essence of the function.
 
 ### What is important for <i>fairy understandable</i> parts?
-Those should be fairy understandable! Those should tell what the function will do without telling too much unimportant details. Usually telling anything about particular implementation is already too much.
+Those should be fairy understandable! Those should tell what the function will do without telling too much unimportant details. Usually telling anything about particular implementation is already too much. We hide details in a separate function or we can [delegate execution to a different object](/#/blog/what-kind-of-code-I-want-to-see-in-controllers).
 As a function reader, Im fully aware where I am and what is going to happen next. Do I really know what does it mean to `charge_user(user, amount)`? yes and no, fairy enough.
 
 Good naming is the key and all programmers know that very well. For sure also know how hard can be to came up with a meaningful so, descriptive and not too detailed, name. Sometimes name is already used, sometimes semantically, name is the same as name of some other other function. Sometimes the best name we can think of is `doSomethingIfNeeded`.

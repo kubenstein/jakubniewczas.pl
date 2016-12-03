@@ -39,7 +39,7 @@ else 
 end
 ```
 
-We traded problems, we removed creation logic from a Http Handler but we lost access to both the entity and the creation process result. How to pass both then? We can return a tuple with result and an entity, [Trailblazer does this](http://trailblazer.to/gems/operation/1.1/#run), but I don’t like tuples solution becasue, for example, item order in that tuple matters and you just have to know what is what. What I prefer is to go for <b>OOP techniques</b> and delegate to proper method back, based on a result:
+We traded problems, we removed creation logic from a Http Handler but we lost access to both the entity and the creation process result. How to pass both then? We can return a tuple with result and an entity, [Trailblazer does this](http://trailblazer.to/gems/operation/1.1/#run), but I don’t like tuples solution becasue, for example, item order in that tuple matters and you just have to know what is what. What I prefer is to go for <b>OOP techniques</b> and [delegate to proper method](/#/blog/observers-as-objects-communication-channel) back, based on a result:
 
 ```
 def create   

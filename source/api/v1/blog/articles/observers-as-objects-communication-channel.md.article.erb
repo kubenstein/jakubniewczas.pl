@@ -1,6 +1,6 @@
 Observer Pattern is extremely handy way to implement communication channel between objects. Thanks to its simplicity and flexibility it allows to have a full control over a communication contract. It solves, in an easy way, problem of returning multiple values from a function and naturally and gently forces us to follow *Tell Don’t Ask* principle. It emphasises importance of messages and can be nearly transparently replaced with more advances async message queues approaches. 
 
-I developed a convention how to build and use objects in that way. I like to separate objects by their Command or Query nature. 
+I [developed a convention](/#/blog/what-kind-of-code-I-want-to-see-in-controllers) how to build and use objects in that way. I like to separate objects by their Command or Query nature. 
 
 ### Query
 If a object is a Query, I force passing at least one observer via constructor. By having this requirement in constructor, user of a class will be reminded that purpose of this class is to return something. Additionally you can add more observers but this is done separate method.
@@ -56,7 +56,7 @@ CreatePullRequestCommand.new(params: params[:pull_request]) 
 
 ### Implementation 
 
-Ruby provides Observer functionality in the language standard library, however I found it not very useful. Mostly because it can callback only to one function. Additionally implementing Observers from scratch is extremely easy. I called it `Notifiable` because thats the true purpose, to notify not to being observed. I think this subtle difference also fits well to *Tell Don’t Ask* principle.
+Ruby provides Observer functionality in the language standard library, however I found its API problematic. Mostly because it can callback only to one function. Additionally implementing Observers from scratch is extremely easy. I called it `Notifiable` because thats the true purpose, to notify not to being observed. I think this subtle difference also fits well to *Tell Don’t Ask* principle.
 
 ```ruby
 module Notifiable 
