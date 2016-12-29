@@ -1,0 +1,75 @@
+While developing one of my React projects, I realised that over time, I introduced quite a few external dependency services. Starting with `webpack-dev-server`, I ended up adding also an express-based backend server, a mongoDB server and a general JS linter. First, I prefer to have all of them in a one place just not to have to open 4 terminal windows. Second, in case of a linter, it is more convenient to have it in an accessible place so you can monitor and quickly fix all JS warnings.
+
+Recently I came across [Blessed-Contrib](https://github.com/yaronn/blessed-contrib) npm package. After being amazed by their demos, I decided to give it a try. This powerful tool has an extremely simple API which allows to build rich console interfaces in, in my case, less than 50 lines of code.
+
+![Development Console Jakub Niewczas](<%= s3_url('blog/node-development-console/development-console.gif') %>)
+
+### Implementation
+The console script is responsible for capturing outputs from several commands and presenting them in a grid-based console interface. To keep things nicely separated and simple, each command is encapsulated in a different `npm run` task.
+
+Whole script:
+
+```
+const blessed = require('blessed');
+const Grid = require('blessed-contrib').grid;
+const Log = require('blessed-contrib').log;
+const spawn = require('child_process').spawn;
+
+const screen = blessed.screen();
+const screenGrid = new Grid({ rows: 4, cols: 2, screen: screen });
+
+const linterWindow = screenGrid.set(0, 0, 2, 2, Log, {
+  fg: 'blue',
+  label: ' Linter ',
+});
+
+const backendWindow = screenGrid.set(2, 0, 2, 1, Log, {
+  fg: 'green',
+  label: ' Backend Server ',
+});
+
+const frontendWindow = screenGrid.set(2, 1, 1, 1, Log, {
+  fg: 'cyan',
+  label: ' Webpack Dev Server ',
+});
+
+const dbWindow = screenGrid.set(3, 1, 1, 1, Log, {
+  fg: 'magenta',
+  label: ' MongoDB Server ',
+});
+
+screen.render();
+
+writeToWindow(frontendWindow, 'npm', ['run', 'dev:frontend']);
+writeToWindow(backendWindow, 'npm', ['run', 'dev:backend']);
+writeToWindow(linterWindow, 'npm', ['run', 'dev:linter:ci']);
+writeToWindow(dbWindow, 'npm', ['run', 'dev:db']);
+
+// private
+
+function writeToWindow(window, cmd, cmdArgs) {
+  const proc = spawn(cmd, cmdArgs);
+  proc.stdout.on('data', (data) => { writeStreamDataToWindow(window, data); });
+  proc.stderr.on('data', (data) => { writeStreamDataToWindow(window, data); });
+}
+
+function writeStreamDataToWindow(window, data) {
+  const lines = data.toString().split('\n');
+
+  for (let i = 0; i < lines.length; i += 1) {
+    window.log(lines[i]);
+  }
+}
+```
+
+The only tricky part is to realised that node data-stream from a `spawn` command returns blobs of data. It is required to stringify it and split in lines, before displaying each line. See `writeStreamDataToWindow()` function.
+
+###Limitations
+
+I still keep improving the tool. One limitation which prevents it to be truly perfect is an ability to scroll both vertically and horizontally inside each window. I saw examples of windows that implement scrolling, so it should be possible.
+
+###Other Usecases
+
+Besides a development environment, I use the same tooling to build a testing env. To run e2e tests, I have to spawn a similar services configuration. The only difference is, instead of a linter, I run a test runner in a main window.
+
+The project which uses those solutions can be found on my [Github](https://github.com/kubenstein/aleksandrakuls.com-admin).
