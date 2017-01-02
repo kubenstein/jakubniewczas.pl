@@ -7,6 +7,15 @@
     padding-bottom: 40px;
   }
 
+  .link {
+    text-decoration: underline;
+    color: $green;
+  }
+
+  .justified {
+    text-align: justify;
+  }
+
   .fullstack-matrix {
     position: relative;
     float: left;
@@ -151,6 +160,14 @@
 
   .fullstack-body {
     font-size: 14px;
+  }
+
+  .additional-link {
+    display: block;
+    margin: 10px 0;
+    font-size: 14px;
+    color: $brown;
+    text-align: center;
   }
 
   .fullstack-layer-title {
