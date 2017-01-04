@@ -1,0 +1,64 @@
+As you start working with React-Redux, you will eventually start wondering how to return actions from action-creators asynchronously. Usually we want to return more than a one action as a part of some progress notification system. Here is where Redux-Thunk comes in and solves the problem. In short, thanks to the redux-thunk middleware, you have an access to the `dispatch` method in your action creators. It is done by following a special convention how to construct an action-creator. Basically instead of an action we have to return a function. That function will accept `dispatch` as an argument and that is how we can use dispatch inside action-creators. See an example of dispatching one or many actions synchronously or inside of some callback.
+
+```javascript
+function actionCreator() {
+  return dispatch => {
+    dispatch(actionA());
+
+    setTimeout(() => {
+      dispatch(actionB());
+    }, 2000);
+  };
+}
+
+```
+
+Higher-order functions are common in JS, so what’s wrong with this? Nothing, there is nothing wrong with it from a language perspective. However there is a little issue I have with a semantic part of the solution. Lets take a look at an example from one of my project.
+
+I had to add a `concert`. Adding a concert required a call to a backend and only when it is saved there, I can consider the concert as added.
+
+```javascript
+function addConcert(concert) {
+  return dispatch => {
+    validate(concert)
+    .then(validConcert => sendRequest(validConcert))
+    .then((addedConcert) => {
+      dispatch(ConcertsEvents.added(addedConcert));
+    });
+  };
+}
+
+```
+
+and the usage:
+
+```javascript
+this.props.dispatch(addConcert(concert));
+```
+
+Problem I have is very subtle, `dispatch` doesn’t dispatch anything. It will be eventually used for dispatching but when I read the code invocation I expect it to actually do something. What values dispatch accepts in this example? We expect some event, best guess would be `concertAdded`, `concertToAdd` or something similar but there is nothing like this there.
+
+That semantic issue started to worry me. Problem with readability is way grater than benefits of a syntax sugar.
+
+On the other hand:
+
+```javascript
+addConcert(concert, this.props.dispatch);
+```
+
+reads very well. “To add a concert I need to call `addConcert` method, with a concert object and some dependency”. Events that will be invoked in a whole process are just a details here, since main intention and business case is to add a concert. It required rewriting the method, but in fact to a simpler version.
+
+```javascript
+function addConcert(concert, dispatch) {
+  return validate(concert)
+    .then(validConcert => sendRequest(validConcert))
+    .then((addedConcert) => {
+      dispatch(ConcertsEvents.added(addedConcert));
+      return addedConcert;
+    });
+}
+```
+
+Additionally we have now also a full control over a returning value. I can return, for example, a promise that on a component level I can handle according to a component purpose. In that particular case - do a redirection. I’m strongly against doing a redirection inside an action-creator: “I want to add a concert, why do I even see any redirection logic there?”. Maybe there will be other path of adding a concert that will require other action on success? Maybe, maybe not, for sure the SRP suffers with a redirection inside an action-creator.
+
+So to sum things up, Redux Thunk is a nice tool, but in my opinion a boilerplate code reduction comes with too great loss in a code readability and flexibility.
