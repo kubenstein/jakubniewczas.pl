@@ -13,7 +13,7 @@ angular.module('jakubniewczas')
         }
 
         function loadData() {
-          $http.get('/api/v1/educations/'+ $translate.use() +'.json').then(function(response) {
+          $http.get('/api/v1/education/'+ $translate.use() +'.json').then(function(response) {
             $scope.items = response.data;
           });
         }
