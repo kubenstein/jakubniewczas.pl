@@ -1,5 +1,5 @@
 doctype html
-html ng-app='jakubniewczas'
+html
   head
     title Jakub Niewczas
     meta charset="utf-8"
@@ -10,7 +10,7 @@ html ng-app='jakubniewczas'
     = stylesheet_link_tag 'application'
   = partial 'ga'
 
-body
+body ng-app='jakubniewczas'
   main
 
 = javascript_include_tag 'application'
