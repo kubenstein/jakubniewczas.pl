@@ -34,10 +34,18 @@
       margin-bottom: 20px;
     }
 
+    li p {
+      display: inline-block;
+      padding-left: 20px;
+      margin-top: -30px;
+    }
+
     ul {
       margin-bottom: 20px;
 
       li {
+        margin-left: 10px;
+        margin-bottom: 20px;
         list-style-type: disc;
         list-style-position: inside;
       }
