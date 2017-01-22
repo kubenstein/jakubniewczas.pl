@@ -1,5 +1,9 @@
 The idea of redecentralising git repositories again popped in my mind some time ago. It is nothing new and many people mention how actually funny this situation is. Especially during Github temporary unavailability... The reasons why companies use a centralised repository model can be narrowed to a synchronisation problem. No matter if we talk about a synchronisation between developer-to-developer or computer-to-computer (all kind of CIs and deployments hooks) it is much more easy to use a client-server model. With a single master node, a server, we can build other services around it easily, but, as every dependency, problems with it will cause problems with our infrastructure or workflows as well.
 
+### The Usecase
+The initial use case, one of many as I think now, is when Github happens to “unicorn”. Each developer can pull Starbucket from npm, start it and continue to work.
+I intentionally keep amount of dependencies low to make installation fast and simple. I was considering using `nodegit` to do all git related work, as I did [here](/#/blog/static-middleman-page-dynamic-react-admin-panel-and-heroku-redeployments), but installing it takes really long.
+
 ### First attempt
 In my first design sketch, a system operated on a network with a star topology. Each node ran a local git server and broadcasted events related with code updates to the network. Other nodes pulled from the broadcasting node.
 
@@ -58,6 +62,21 @@ onPromoteToMaster () {
 Important to notice here is that the node gateway reconfigures itself to point to git server on the same node.
 
 Having a gateway server switching from one node to another (in some cases to itself) makes a master node and a slave node behaving nearly identical. Reducing differences between nodes roles greatly simplifies the system as a whole.
+
+### Note on testing
+I went through 3 phases of testing Starbucket. At first, when I was experimenting with a main idea, the code was still in a dirty, hackathon-ish shape. All was in a one file, changing very frequently. At that stage I had two console windows opened and just manually test and debug the code. When the core idea was proofed, I started to extract and clean the code. I wrote only integration tests, skipping units tests at all, because I knew that details of implementation may change. Thanks to making tests automatic, I caught a few additional cases that manual testing missed. Mostly raceconditikns on stopping - restarting the service. At that stage I was confident that Starbucket works as it should. I still wanted to see though, how it behaves in a real multi-computers environment.
+
+To spawn a whole fleet of computers I used [hyper.sh](https://hyper.sh/). It is extremely convenient docker hosting service. Creating a node and installing Starbucket on it can be done really easily:
+
+```bash
+hyper run -it node:alpine sh
+apk --update add git
+npm i -g starbucket
+starbucket
+```
+
+The test was similar to opening several console windows. I had a proof that each instance, in a true multi-node setup, does work as expected.
+
 
 
 Starbucket source code is available on my [Github](https://github.com/kubenstein/starbucket).
