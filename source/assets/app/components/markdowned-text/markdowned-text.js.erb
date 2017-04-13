@@ -1,10 +1,10 @@
 angular.module('jakubniewczas')
-  .directive('codeSnipet', ['$timeout', function($timeout) {
+  .directive('markdownedText', ['$timeout', function($timeout) {
     return {
       scope: {
         content: '='
       },
-      templateUrl: '<%= ng_template_url("code-snipet/") %>',
+      templateUrl: '<%= ng_template_url("markdowned-text/") %>',
       link: function(scope, element, attrs) {
         element.ready(function() {
           $timeout(function() {
