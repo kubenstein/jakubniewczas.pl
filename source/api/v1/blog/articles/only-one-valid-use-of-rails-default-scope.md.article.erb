@@ -8,9 +8,9 @@ Implicitness that is expected is a convention. Problems begin when lack of expli
 My favourite example is related with default scope. Instead of explicit ask for, for example, only active articles we assume that narrowing is default in general. Other maybe less obvious example is using all kind of soft-delete scoping. It is assumed that we want soft-deleted items to be filtered out. But data is just data, accessed from a console it may be perfectly valid scenario to apply on not apply any kind of filtering. We soft-delete because we think, we may actually need to access deleted data under some circumstances. Otherwise we would just <i>hard</i> delete everything.
 
 We have trouble to unscope AR collection in some use cases because its cumbersome to remove a particular scope from AR::Relation object. Its not easy but thats just implementation detail, can be wrapped by some method for cleaner interface. The biggest problem is we are often not aware that some scoping is added. We expect things to work differently and then after short or long debugging, we see SQL query and we finally understand.
-My rule used to be never, ever use default scope. Using default scope always turned into problem. 
+My rule used to be never, ever use default scope. Using default scope always turned into problem.
 
-###Valid use case
+### Valid use case
 Recently, in one project I was working on, we introduced default scope in the way that I find very useful.
 
 Shopping Cart example:
