@@ -69,7 +69,9 @@ UploadFileFromLocalDirectoryUsecase.new(
 My solution is a ~40LoC class, that acts as a factory for dynamically created ruby modules. The Factory requires a `resolver`, that can be anything that responds to a `resolve(dependency_name)` method. A ruby module, that is later `include'd`, is returned from a `[]` method. The module adds getters for all dependencies and an initializer that handles custom dependencies passed during object creation. Because of this additional initializer we have to call `super`, but thats perfectly understandable.
 
 ### The implementation
-I will probably release my solution in a form of a ruby gem, but for now its just a standalone class:
+I will probably release my solution in a form of a ruby gem, but for now its just a standalone class.
+
+You can check the whole working example on this [gist](https://gist.github.com/kubenstein/8eedfdda7db288e3ad598e70e8d11f8a).
 
 ```ruby
 class AutoInject
