@@ -77,7 +77,26 @@ starbucket
 
 The test was similar to opening several console windows. I had a proof that each instance, in a true multi-node setup, does work as expected.
 
+### Session example
 
+```bash
+$ starbucket
+
+
+|
+| Starting Starbucket...
+| Configure your git remote as (we assume the repo name is "awesome-project"):
+|   git remote add starbucket http://localhost:7070/awesome-project
+|
+
+
+[2017-01-15T14:12:23.187Z]  git - git server started at http://localhost:7000
+[2017-01-15T14:12:23.670Z]  net - new node discovered: 172.20.10.4
+[2017-01-15T14:12:23.671Z]  net - other node is a MASTER: 172.20.10.4
+[2017-01-15T14:12:23.672Z] prxy - starting proxy server, entry address: http://localhost:7070 (pointing at: http://172.20.10.4:9999)
+[2017-01-15T14:17:44.405Z]  net - update available for: awesome-project
+[2017-01-15T14:17:44.500Z]  git - mirroring http://172.20.10.4:9999/awesome-project -> .tmp/repos/awesome-project.git/
+```
 
 Starbucket source code is available on my [Github](https://github.com/kubenstein/starbucket).
 
