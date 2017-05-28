@@ -2,8 +2,8 @@
   .article
     .other-articles
       small.other-articles-title
-        | {{ 'OTHER_ARTICLES_TITLE' | translate }}
-      a.other-article ng-href="/#/blog/{{article.id}}" ng-repeat="article in otherArticles"
+        | {{ 'WORTH_CHECKING_ARTICLES_TITLE' | translate }}
+      a.other-article ng-href="/#/blog/{{article.id}}" ng-repeat="article in worthCheckingArticles"
         | {{article.title}}
 
     h3.article-title

@@ -22,7 +22,9 @@ angular.module('jakubniewczas')
 
           function loadOtherArticlesData() {
             $http.get('/api/v1/blog/index.json').success(function(response) {
-              $scope.otherArticles = removeArticleFromList(response, $routeParams['id']);
+              $scope.worthCheckingArticles = removeArticleFromList(response, $routeParams['id'])
+                                             .sort(function() { return 0.5 - Math.random(); } )
+                                             .slice(0, 7);
             });
           }
 
