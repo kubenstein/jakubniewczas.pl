@@ -1,4 +1,9 @@
-The idea of redecentralising git repositories again popped in my mind some time ago. It is nothing new and many people mention how actually funny this situation is. Especially during Github temporary unavailability... The reasons why companies use a centralised repository model can be narrowed to a synchronisation problem. No matter if we talk about a synchronisation between developer-to-developer or computer-to-computer (all kind of CIs and deployments hooks) it is much more easy to use a client-server model. With a single master node, a server, we can build other services around it easily, but, as every dependency, problems with it will cause problems with our infrastructure or workflows as well.
+The idea of redecentralising git repositories again popped in my mind some time ago. It is nothing new and many people mention how actually funny this situation is.
+
+![Git tagline ](<%= s3_url('blog/starbucket-reintroduce-distributed-aspect-of-git/git-tagline.jpg') %>)
+<i>GIT tagline (https://git-scm.com/)</i>
+
+Especially during Github temporary unavailability... The reasons why companies use a centralised repository model can be narrowed to a synchronisation problem. No matter if we talk about a synchronisation between developer-to-developer or computer-to-computer (all kind of CIs and deployments hooks) it is much more easy to use a client-server model. With a single master node, a server, we can build other services around it easily, but, as every dependency, problems with it will cause problems with our infrastructure or workflows as well.
 
 ### The Usecase
 The initial use case, one of many as I think now, is when Github happens to “unicorn”. Each developer can pull Starbucket from npm, start it and continue to work.
