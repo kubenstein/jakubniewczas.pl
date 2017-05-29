@@ -1,0 +1,139 @@
+Releasing an npm module can be a bit tricky because, as in case of every library or utility tool, you can't predict how people are going to use it. Compared to fully functional application, where you are aware of, and then program most of usecases. Libraries don't have that luxury.
+
+I like to build tools that do relatively one thing. Relatively means solving one problem a user has. Under the hood it may require to pull other, more sophisticated tools but from a usecase perspective it is just one problem-solving unit.
+
+Small tools nearly always work as a part of a bigger pipeline. Thats why, when I design a tool, I also focus on allowing the tool to be easily pluggable.
+
+Take a look at [Starbucket, a tool I built](#/blog/starbucket-reintroduce-distributed-aspect-of-git) to solve a  problem with centralised git workflow.
+
+The Starbucket npm module file structure is listed below:
+
+```
+.
+├── ...
+├── bin
+│   └── starbucket (3)
+├── dist
+│   └── starbucket.js (2)
+├── package.json (4)
+└── src
+    ├── src
+    │   └── ... (1)
+    └── webpack.config.js
+```
+
+#### The lib source code (1)
+The place where all the code sits. It is optimised for development. As I noticed, it is a standard to include also original sources into npm package.
+
+#### The lib distribution version (2)
+I introduced distribution version of the lib to extend a range of supported node versions. I use webpack to compile the code to vanilla js to be sure, the lib can be used on nearly any node version. Starbucket uses lots of strict backend resources, so by definition can’t be run in a browser, but in other project I successfully [use exactly same code](#/blog/current-state-in-event-sourcing) across front and backend.
+
+I prevent webpack from minifing the dist code because, I myself, also occasionally dive into code of some other library for debugging purposes. Additionally, on a backend, minification is actually not needed.
+
+Here is webpack config I use:
+
+```
+const fs = require('fs')
+
+const srcDir = __dirname
+const rootDir = `${srcDir}/../`
+
+const nodeModules = {}
+fs.readdirSync('node_modules')
+  .filter((x) => { return ['.bin'].indexOf(x) === -1 })
+  .forEach((mod) => { nodeModules[mod] = `commonjs ${mod}` })
+
+module.exports = {
+  entry: `${srcDir}/lib/starbucket.js`,
+  target: 'node',
+  output: {
+    path: `${rootDir}/dist/`,
+    publicPath: '/',
+    filename: 'starbucket.js',
+    library: 'starbucket',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
+  },
+
+  module: {
+    rules: [
+      {
+        test: /(\.js)$/,
+        use: [{
+          loader: 'babel-loader',
+          query: {
+            presets: ['stage-0', 'es2015']
+          }
+        }]
+      }
+    ]
+  },
+
+  resolve: {
+    modules: [
+      srcDir,
+      rootDir
+    ]
+  },
+
+  externals: nodeModules
+}
+
+```
+
+There are two important tricks here.
+
+`fs.readdirSync('node_modules')` part prevents bundling other npm modules internals in. The trick is taken from [this blogpost](http://jlongster.com/Backend-Apps-with-Webpack--Part-I).
+
+Another thing is enabling webpack library mode:
+
+```
+output: {
+  // ...
+  library: 'starbucket',
+  libraryTarget: 'umd',
+  umdNamedDefine: true
+}
+```
+
+Those settings instruct webpack to add special code at the beginning of bundled file that allows Starbucket lib to be required by external scripts.
+
+#### The executable client (3)
+
+The executable client, a script in a `bin/` folder, represents the main usecase. It is a usecase, I as a developer, predict to be the a primary way of using my tool. Tools usually have such a usecase, libs rather not.
+
+In Starbucket the client configures and starts Starbucket server. It is not only a runner but also a form of documentation. It shows what params I can pass, what are a default settings, and generally it shows how to use the tool.
+
+```
+//...
+var gatewayServerPort     = process.env.GATEWAY_PORT    || 7070
+var gitServerPort         = process.env.GIT_SERVER_PORT || 7000
+var localReposStoragePath = process.env.STORAGE_PATH    || '.tmp/repos'
+
+//...
+
+new Starbucket({
+  gatewayServerPort: gatewayServerPort,
+  gitServerPort: gitServerPort,
+  localReposStoragePath: localReposStoragePath
+}).start()
+```
+
+#### package.json (3)
+
+In package.json manifest there are two important entries to set.
+```
+  "bin": {
+    "starbucket": "./bin/starbucket"
+  },
+  "main": "./dist/starbucket.js",
+```
+
+If you install the package globally, the command line program is available under `starbucket` name.
+
+`main` key instructs what actually should be included when a node script `require('starbucket')`.
+
+### Boilerplate
+During development of an npm module or a ruby gem, I noticed that the code responsible for packing the solution is quite complex and challenging. I recommend to set those things very soon and have fully functional building and releasing process ready from day one. In fact, building releasing piepeline is called having a "walking skeleton" and sometimes a special 'zero' iteration is dedicated for such a setup.
+
+Starbucket code can be found on [Github](https://github.com/kubenstein/starbucket).
