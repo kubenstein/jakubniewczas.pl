@@ -15,22 +15,22 @@ In my first design sketch, a system operated on a network with a star topology. 
 <i>A communication schema. Broadcasting an update event from a node:</i>
 ![Starbucket Star Topology](<%= s3_url('blog/starbucket-reintroduce-distributed-aspect-of-git/star-topology.gif') %>)
 
-I used [Serf](https://www.serf.io) for a service discovery and bunch of scripts to execute git commands and glue all together.
+I used `Serf` for a service discovery and bunch of scripts to execute git commands and glue all together.
 
 The project was shutdown when I was trying to ‘hide’ Serf dependency by dockerizing the code. I faced some problems with accessing host network from a docker container.
 
 ### Final Architecture
-To avoid as much dependencies as possible I decided to use NodeJS ecosystem. By picking only one language I narrowed dependencies to node-based dependencies only. I picked NodeJS becasue I found packages that solve most of low level infrastructure problems. Additionally I can use npm as a distribution channel.
+To avoid as much dependencies as possible I decided to use NodeJS ecosystem. By picking only one language I narrowed dependencies to node-based dependencies only. I picked NodeJS becasue I found packages that solve most of low level infrastructure problems. Additionally I can use npm as a distribution channel. You can read about how do I prepare a lib for release [here](/#/blog/starbucket-reintroduce-distributed-aspect-of-git).
 
 The Package that is responsible for a service discovery and basic events broadcasting also provides a mechanism to elect (and reelect) a master node. Having this already provided I changed the system design to a master-slaves model, where the master role can be transferred dynamically to any other node.
 
 There are 3 main components on each node:
 
-  - Network Discovery - discovers nodes in a network and setups simple event-based communication. Done using [node-discover](https://github.com/wankdanker/node-discover) package.
+  - Network Discovery - discovers nodes in a network and setups simple event-based communication. Done using `node-discover` package.
 
-  - Git server - a local git server. If a node is a master, it will inform the Network about any new changes, so other nodes can pull from this server. If a node is a slave, it will fetch to this server from currently chosen master server, based on Network events. Done using [node-git-server](https://github.com/gabrielcsapo/node-git-server) package.
+  - Git server - a local git server. If a node is a master, it will inform the Network about any new changes, so other nodes can pull from this server. If a node is a slave, it will fetch to this server from currently chosen master server, based on Network events. Done using `node-git-server` package.
 
-  - Proxy server - proxy server will proxy all traffic from localhost to currently chosen master. If a node is a master, proxy will proxy traffic back to the same machine. Proxy will reconfigure itself automatically when a new master is announced. Done using [http-proxy](https://github.com/nodejitsu/node-http-proxy) package.
+  - Proxy server - proxy server will proxy all traffic from localhost to currently chosen master. If a node is a master, proxy will proxy traffic back to the same machine. Proxy will reconfigure itself automatically when a new master is announced. Done using `http-proxy` package.
 
 <i>A communication schema. Proxying all traffic to a master node for future distribution:</i>
 ![Starbucket Master-Slaves Topology](<%= s3_url('blog/starbucket-reintroduce-distributed-aspect-of-git/master-slaves-topology.gif') %>)
