@@ -12,20 +12,21 @@ The Starbucket npm module file structure is listed below:
 .
 ├── ...
 ├── bin
-│   └── starbucket (3)
+│   └── starbucket (4)
 ├── dist
-│   └── starbucket.js (2)
-├── package.json (4)
+│   └── starbucket.js (3)
+├── package.json (5)
 └── src
-    ├── src
+    ├── lib
     │   └── ... (1)
+    ├── lib.js (2)
     └── webpack.config.js
 ```
 
 #### The lib source code (1)
-The place where all the code sits. It is optimised for development. As I noticed, it is a standard to include also original sources into npm package.
+The place where all the source code sits. As I noticed, it is a standard to include also original sources into npm package.
 
-#### The lib distribution version (2)
+#### The lib distribution version (2/3)
 I introduced distribution version of the lib to extend a range of supported node versions. I use webpack to compile the code to vanilla js to be sure, the lib can be used on nearly any node version. Starbucket uses lots of strict backend resources, so by definition can’t be run in a browser, but in other project I successfully [use exactly same code](#/blog/current-state-in-event-sourcing) across front and backend.
 
 I prevent webpack from minifing the dist code because, I myself, also occasionally dive into code of some other library for debugging purposes. Additionally, on a backend, minification is actually not needed.
@@ -44,7 +45,7 @@ fs.readdirSync('node_modules')
   .forEach((mod) => { nodeModules[mod] = `commonjs ${mod}` })
 
 module.exports = {
-  entry: `${srcDir}/lib/starbucket.js`,
+  entry: `${srcDir}/lib.js`,
   target: 'node',
   output: {
     path: `${rootDir}/dist/`,
@@ -98,13 +99,22 @@ output: {
 
 Those settings instruct webpack to add special code at the beginning of bundled file that allows Starbucket lib to be required by external scripts.
 
-#### The executable client (3)
-
-The executable client, a script in a `bin/` folder, represents the main usecase. It is a usecase, I as a developer, predict to be the a primary way of using my tool. Tools usually have such a usecase, libs rather not.
-
-In Starbucket the client configures and starts Starbucket server. It is not only a runner but also a form of documentation. It shows what params I can pass, what are a default settings, and generally it shows how to use the tool.
+It is worth mention, that entry point for a webpack bundling process is special export module definition file  - `lib.js`. It allows to require each component individually:
+```
+exports.Starbucket = require('./lib/starbucket.js')
+exports.GitServer = require('./lib/git-server.js')
+exports.ProxyServer = require('./lib/proxy-server.js')
 
 ```
+
+#### The executable client (4)
+
+The executable client, a script in a `bin/` folder, represents the main usecase. It is a usecase, I as a developer, predict to be the primary way of using my tool. Tools usually have such a usecase, libs rather not.
+
+In Starbucket the client configures and starts Starbucket server. It is not only a runner but also a form of documentation. It shows what params I can pass, what are default settings, and generally it explains how to use the tool.
+
+```
+var Starbucket = require('../dist/starbucket.js').Starbucket
 //...
 var gatewayServerPort     = process.env.GATEWAY_PORT    || 7070
 var gitServerPort         = process.env.GIT_SERVER_PORT || 7000
@@ -119,7 +129,7 @@ new Starbucket({
 }).start()
 ```
 
-#### package.json (3)
+#### package.json (5)
 
 In package.json manifest there are two important entries to set.
 ```
