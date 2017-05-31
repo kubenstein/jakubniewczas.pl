@@ -20,7 +20,7 @@ I used `Serf` for a service discovery and bunch of scripts to execute git comman
 The project was shutdown when I was trying to ‘hide’ Serf dependency by dockerizing the code. I faced some problems with accessing host network from a docker container.
 
 ### Final Architecture
-To avoid as much dependencies as possible I decided to use NodeJS ecosystem. By picking only one language I narrowed dependencies to node-based dependencies only. I picked NodeJS becasue I found packages that solve most of low level infrastructure problems. Additionally I can use npm as a distribution channel. You can read about how do I prepare a lib for release [here](/#/blog/starbucket-reintroduce-distributed-aspect-of-git).
+To avoid as much dependencies as possible I decided to use NodeJS ecosystem. By picking only one language I narrowed dependencies to node-based dependencies only. I picked NodeJS becasue I found packages that solve most of low level infrastructure problems. Additionally I can use npm as a distribution channel. You can read about how do I prepare a lib for a release [here](/#/blog/starbucket-reintroduce-distributed-aspect-of-git).
 
 The Package that is responsible for a service discovery and basic events broadcasting also provides a mechanism to elect (and reelect) a master node. Having this already provided I changed the system design to a master-slaves model, where the master role can be transferred dynamically to any other node.
 
