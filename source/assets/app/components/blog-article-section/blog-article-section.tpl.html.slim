@@ -1,7 +1,7 @@
 .blog-article-section.inner-wrapper
   .article
     .other-articles
-      small.other-articles-title
+      a.other-articles-title(ng-href="/#/blog/")
         | {{ 'WORTH_CHECKING_ARTICLES_TITLE' | translate }}
       a.other-article ng-href="/#/blog/{{article.id}}" ng-repeat="article in worthCheckingArticles"
         | {{article.title}}
