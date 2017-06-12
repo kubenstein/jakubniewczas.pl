@@ -3,8 +3,8 @@ angular.module('jakubniewczas')
     $routeProvider
       .when('/',          { templateUrl: '<%= ng_template_url("main/routable/index") %>' })
       .when('/skill-:id', { templateUrl: '<%= ng_template_url("main/routable/skill") %>' })
-      .when('/skills-above-technologies',
-                          { templateUrl: '<%= ng_template_url("main/routable/skills-above-technologies") %>' })
+      .when('/skills-beyond-technologies',
+                          { templateUrl: '<%= ng_template_url("main/routable/skills-beyond-technologies") %>' })
       .when('/blog',      { templateUrl: '<%= ng_template_url("main/routable/blog") %>' })
       .when('/blog/:id',  { templateUrl: '<%= ng_template_url("main/routable/blog-article") %>' })
       .otherwise({redirectTo: '/'});
