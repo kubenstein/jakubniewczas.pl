@@ -1,0 +1,94 @@
+Features specs are specs in which a whole feature is considered a testing unit. Each programmer may understand what is "a feature" a bit different but for me features specs are usually related with end-to-end testing - testing a system by simulating user actions and behaviour against that system UI.
+I noticed that the key to have readable and maintainable specs is to pay a great attention not to mix code abstraction levels. I wrote a [separate blog post](#/blog/why-do-we-write-functions) about this, feel free to check it also.
+
+### Structure
+I follow `given, when, then` structuring but I often skip writing those words explicitly. Especially `given` word, as well as, a whole its part can be omitted. From a client/spec reader perspective some parts are implicitly obvious, for example that there is a user and that user is already logged in. Or that we have to visit main page first. I try to move those steps out of a spec block, leaving only the esense of what is being tested.
+Adding user creation or logging step will just decrease spec readability.
+
+`Then` word also can be skipped in most cases because most cases have only one final assertion. However sometimes if we want to emphasise testing a change in a system, adding `then` may improve readability.
+
+```
+it('allows to change user nickname', () => {
+  when.openingSideMenu();
+  and.settingNickname('Jakub');
+  userCanSeeNickname('Jakub');
+});
+```
+
+I encapsulate every single action in a well named corresponding step helper. Clicking tests often have to operate on a website DOM level which from spec perspective is completely not important and noise. That's why I encapsulate every step. Sometimes steps can be reusable, often though, it is 1-1 relation.
+
+I use params to build a relation between `when` and `then` steps. This way I can clearly see the connection, highlighting why do we expect some value or action to happen.
+
+
+![Spec structure, Jakub Niewczas](<%= s3_url('blog/maintainable-feature-specs/spec-structure.jpg') %>)
+<i>Spec structure</i>
+
+### Scaling
+At the beginning I put all steps in a single file. After a while patterns will emerge naturally. Usually steps are grouped by type: `given`, `when`, `then` or by system area like `login page`, `settings page` etc. If it becomes too clumsy and unreadable I split steps into smaller files. File structure is not that important as a responsibility/abstraction layering and I keep it loosely organised. True structure will emerge naturally.
+
+
+Before, I used to add `given, when, then` words as prefixes to spec steps helpers method names, so `whenVisitingMainPage()`, but recently I found an interesting approach/trick to make things even more readable.
+
+In JS, but I think in ruby would be also easy to implement, my steps definition file looks like:
+
+```
+const expect = require('chai').expect;
+
+module.exports = function steps() {
+  this.when = this.and = this.then = this.following = this.again = when = then = this;
+
+  when.visitingMainPage = function () {
+    browser.url('/');
+  };
+
+  when.loggingIn = function (email, password) {
+    browser.setValue('input[name=email]', email);
+    browser.setValue('input[name=password]', password);
+    browser.$('.btn').click();
+  };
+
+  when.openingSideMenu = function () {
+    const sidemenuTrigger = browser.$('.side-menu-trigger');
+    sidemenuTrigger.click();
+  };
+
+  //...
+
+  then.userCanSeeColumn = function (title) {
+    const columnNames = browser.getValue('input.column-title');
+    expect(columnNames).to.include(title);
+  };
+};
+```
+
+The magic happens at a first line:
+```
+this.when = this.and = this.then = this.following = this.again = when = then = this;
+```
+
+With this line I can prefix method inside and outside of steps module. Inside, I can clearly separate actions and assertions: `when.openingSideMenu` vs  `then.userCanSeeColumn`. Outside I can do the same to emphasise spec actions flow.
+
+I added a few more words like `and`, `again` and `following`. Wit those syntax sugar I can built more readable chains like `when.again.openingCardDetails(...)`.
+
+```
+it('allows to change a description', () => {
+  when.openingCardDetails('cardTitle');
+  and.changingCardDescription('new description');
+  and.reloading();
+  and.again.openingCardDetails('cardTitle');
+  userCanSeeDescription('new description');
+});
+```
+
+With such a carefully crafted js module (juggling js scopes, `function() {}` vs `() => {}`) all I need to make those steps available in my test suite, is:
+
+```
+require('./support/steps.js')();
+
+describe('Specs', () => {
+  // steps are accessible here with spec scope injected,
+  // i.e. browser object is available there
+});
+```
+
+The code is taken from one of my project that will soon be available on Github.
