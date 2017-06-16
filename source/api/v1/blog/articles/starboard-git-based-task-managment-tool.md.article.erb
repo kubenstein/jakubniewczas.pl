@@ -1,0 +1,46 @@
+“Keep all aspects of a project in one place together! A card-based management tool that stores its data in a git repo.”
+
+Whenever I work as a freelancer or craft my own projects I can’t imagine not having a task manager. Organise, prioritise and separate tasks from each other bring order, rise predictability and makes me more confident about a project and the process in general. Status of every required feature or submitted bug can be quickly described and tracked. Accessing comments and attached files is especially important.
+
+Even long after project is finished, usually after year or more later, there are some maintaining requirement tasks to implement. It happened to me too many times that Trello/Pivotal was already closed, dropbox unshared and a missing important file was lost. What if I can archive those files in a same, simple way as I archive source code...
+
+
+[![Starboard Screenshot, Jakub Niewczas](<%= s3_url('blog/starboard-git-based-task-managment-tool/starboard-screenshot.jpg') %>)](https://vimeo.com/221797050)
+<i>Starboard Screenshot. Click the image to see a demo video.</i>
+
+
+That’s how Starboard was born, to keep EVERYTHING in a same place! I choose that place to be a git repo.
+
+I decided to use git because it is well established way of sharing/archiving source code - the main, but not the only part of a project. It provides consistency, security, distributed aspect and wildly available hosting solutions. Having permission to access project source code usually also means you should have access to task manager and related files.
+
+After prototyping phase I decided to go with EventSourcing approach because git in its core is also event sourced - we keep deltas and recreate current state every time we do a `git checkout branch`.
+
+I started using Starboard to manage itself even when there was no layout, no drag and drop, configs, labels and comments. Being a maintainer and a user at same times greatly improved motivation and quality. It was also nice to see project evolution and to enjoy features that became available after `npm run dev:localRelease`.
+
+### Technical aspects
+The shortest idea explanation is: task manager stores it’s state as series of events that are stored as git comment messages.
+
+Event Sourcing and frontend/backend communication is covered by my previous [blogpost](#/blog/current-state-in-event-sourcing).
+
+Events are synced by git rebasing existing events on top on a remote list. After rebasing, events delta is applied (excluding rebased events). Because of that Event Handlers have to be prepared that something may not make any sense (handling such situations is still under development), for example, updating a card after the card was removed. Alternatively I could rebase remote events on top on local, or change git history in any other way, but it would require force push which I wanted to avoid. I was considering force push inspired by blockchains mechanic but I still prefer not to modify public repo.
+
+![Events application, Jakub Niewczas](<%= s3_url('blog/starboard-git-based-task-managment-tool/events-application.gif') %>)
+<i>Events application in case of remote changes being pulled.</i>
+
+
+### Production Readiness
+I use Starboard for quite a while already but mostly in a single user mode. Storage in my case is usually Dropbox but I successfully ran Starboard with Bitbucket setupas well. Collaborative mode works pretty well also however there are still a few glitches here and there that I have already on my development list.
+
+Feel free to submit suggestions or PRs. All feedback welcome.
+
+### The goal
+
+The long term goal is to build whole `star*` ecosystem of tools that use git under the hood. This will allow to fully utilise distributed aspect of git, which true power we don’t understand yet.
+
+The ecosystem already has another tool, a glueing layer, its called `Starbucket` please read the [corresponding blogpost](#/blog/starbucket-reintroduce-distributed-aspect-of-git). I believe Starboard on top of Starbucket can be really powerful combination making companies less depended on 3rd party services.
+
+```
+npm install -g starboard
+```
+
+Project source code is available on my [Github](https://github.com/kubenstein/starboard).

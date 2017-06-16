@@ -1,4 +1,4 @@
-Recently, I have been intensively working on a project which, due to its domain and technical nature, is designed around event sourcing architecture. Keeping only state deltas in a database has many advantages but eventually in the end an app still needs to know its current state.
+Recently, I have been intensively working on [Starboard project](#/blog/starboard-git-based-task-managment-tool) which, due to its domain and technical nature, is designed around event sourcing architecture. Keeping only state deltas in a database has many advantages but eventually in the end an app still needs to know its current state.
 
 I introduced the `CurrentState` class that is a read-only projection of the app state. It is calculated by traversing through all existing events and applying each change one by one.
 
@@ -97,4 +97,4 @@ In such case:
 ### ES Observations
 With `Repository -> CurrentState -> EventStorage` the app doesn't even know that its DB is calculated on the fly. Repositories, as they should, are data gateways and what is beyond them is just not the app concern.
 
-The full code will be available on Github after the project release.
+The full source code is available on my [Github](https://github.com/kubenstein/starboard).
