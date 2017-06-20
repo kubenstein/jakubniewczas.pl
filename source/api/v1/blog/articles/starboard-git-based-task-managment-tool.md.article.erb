@@ -22,7 +22,7 @@ The shortest idea explanation is: task manager stores it’s state as series of 
 
 Event Sourcing and frontend/backend communication is covered by my previous [blogpost](#/blog/current-state-in-event-sourcing).
 
-Events are synced by git rebasing existing events on top on a remote list. After rebasing, events delta is applied (excluding rebased events). Because of that Event Handlers have to be prepared that something may not make any sense (handling such situations is still under development), for example, updating a card after the card was removed. Alternatively I could rebase remote events on top on local, or change git history in any other way, but it would require force push which I wanted to avoid. I was considering force push inspired by blockchains mechanic but I still prefer not to modify public repo.
+Events are synced by git rebasing existing events on top on a remote list. After rebasing, events delta is applied (excluding rebased events). Because of that Event Handlers have to be prepared that something may not make any sense, for example, updating a card after the card was removed. Alternatively I could rebase remote events on top on local, or change git history in any other way, but it would require force push which I wanted to avoid. I was considering force push inspired by blockchains mechanic but I still prefer not to modify public repo.
 
 ![Events application, Jakub Niewczas](<%= s3_url('blog/starboard-git-based-task-managment-tool/events-application.gif') %>)
 <i>Events application in case of remote changes being pulled.</i>
