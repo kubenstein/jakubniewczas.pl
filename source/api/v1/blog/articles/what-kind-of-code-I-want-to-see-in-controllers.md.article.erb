@@ -1,5 +1,5 @@
 I like to keep logic related with a purpose of a class in that class. One may say that the logic will define the purpose of a class. It sounds very similar, indeed, and in fact difference in thinking about logic and its place only depends on if we create a new class or have to deal with a class that exists already.
-We create new classes because we can’t find any good place that the logic fits. It's desirable way of <i>growing</i>  software according to OOP practices. We add new stuff and plug it to existing codebase. Usually there are no need to significantly change in any other class.
+We create new classes because we can’t find any good place that the logic fits. It's desirable way of <i>growing</i>  software according to OOP practices. We add new stuff and plug it to existing codebase. Usually there are no need to significantly change any other class.
 
 However frameworks create some classes for us because those classes are crucial components from a framework perspective. In web development classes related with handling web requests are those components. Receiving request and sending response back. Having those classes already provided, combined with some community driven guidelines, result with choices that we would normally see as not very fortunate.
 
@@ -42,7 +42,7 @@ end
 We traded problems, we removed creation logic from a Http Handler but we lost access to both, the entity and the creation process result. How to pass both then? We can return a tuple with result and an entity, [Trailblazer does this](http://trailblazer.to/gems/operation/1.1/#run), but I don’t like tuples solution becasue, items order in that tuple matters and you just have to know what is what. What I prefer is to go for <b>OOP techniques</b> and [delegate to proper method](/#/blog/observers-as-objects-communication-channel) back, based on a result:
 
 ```
-def create   
+def create 
   Ticket.create_pending_for_user(result_handler: self,
                                  user: current_user,
                                  permitted_attributes) 
@@ -67,7 +67,7 @@ We have to set a contract between a factory and a `result_handler`, and we do it
 Final practical touch would be to extract factory to a separate class instead keeping it as an AR class method:
 
 ```
-def create  
+def create 
   InitialTicketCreator.call(result_handler: self,
                             user: current_user,
                             permitted_attributes) 

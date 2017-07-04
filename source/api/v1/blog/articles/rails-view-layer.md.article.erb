@@ -1,8 +1,8 @@
 In a typical MVC Rails app, V instead of View stands for a just template file. No matter if an app is a really small or quite complex, views will always have some logic. Even small apps struggle where to put code for, for example, marking menu option active or what to do with logged in/visitor separation. Other examples are all kind of formatting data.
 
-Typical solutions are, to wrap logic as a helper, keep logic in a controller or a model. Having a presentation logic in a model feels so unnatural that, lucky, I don’t see this choice very often (except maybe `to_json`). Controllers are more common place because we are already encouraged, by the framework, to make some presentation decision, like picking html/json/xml formatting, there.
+Typical solutions are, to wrap logic as a helper and keep logic in a controller or a model. Having a presentation logic in a model feels so unnatural that, lucky, I don’t see this choice very often (except maybe `to_json`). Controllers are more common place because we are already encouraged, by the framework, to make some presentation decision, like picking html/json/xml formatting, there.
 
-Convenient solution would be to have a separate layer to deal with all kinds of presentation logic. [Hanami](http://hanamirb.org/guides/views/overview/) and [Trailblazer](http://trailblazer.to/gems/cells/) do this by having dedicated ruby class. With normal classes we can inherit or delegate or mix some functionality module. Normal ruby OOP rules apply.
+Convenient solution would be to have a separate layer to deal with all kinds of presentation logic. [Hanami](http://hanamirb.org/guides/views/overview/) and [Trailblazer](http://trailblazer.to/gems/cells/) do this by having dedicated ruby class. With normal classes we can inherit, delegate or mix some functionality module. Normal ruby OOP rules apply.
 
 I wanted to try this approach (at that time I knew only about Cells gem from Trailblazer). Goal was to create a simple yet functional POC. For the simplicity purposes I pass `renderable` to each ViewModel instance and explicitly call render on it. `Renderable` in this context is just `self` from current controller.
 

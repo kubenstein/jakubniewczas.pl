@@ -20,7 +20,7 @@ I used `Serf` for a service discovery and bunch of scripts to execute git comman
 The project was shutdown when I was trying to ‘hide’ Serf dependency by dockerizing the code. I faced some problems with accessing host network from a docker container.
 
 ### Final Architecture
-To avoid as much dependencies as possible I decided to use NodeJS ecosystem. By picking only one language I narrowed dependencies to node-based dependencies only. I picked NodeJS becasue I found packages that solve most of low level infrastructure problems. Additionally I can use npm as a distribution channel. You can read about how do I prepare a lib for a release [here](/#/blog/starbucket-reintroduce-distributed-aspect-of-git).
+To avoid as much dependencies as possible I decided to use NodeJS ecosystem. By picking only one language I narrowed dependencies to node-based dependencies only. I picked NodeJS becasue I found packages that solve most of low level infrastructure problems. Additionally I can use npm as a distribution channel. You can read about how do I prepare a lib for a release [here](/#/blog/blog/releasing-npm-module).
 
 The Package that is responsible for a service discovery and basic events broadcasting also provides a mechanism to elect (and reelect) a master node. Having this already provided I changed the system design to a master-slaves model, where the master role can be transferred dynamically to any other node.
 
@@ -69,7 +69,7 @@ Important to notice here is that the node gateway reconfigures itself to point t
 Having a gateway server switching from one node to another (in some cases to itself) makes a master node and a slave node behaving nearly identical. Reducing differences between nodes roles greatly simplifies the system as a whole.
 
 ### Note on testing
-I went through 3 phases of testing Starbucket. At first, when I was experimenting with a main idea, the code was still in a dirty, hackathon-ish shape. All was in a one file, changing very frequently. At that stage I had two console windows opened and just manually test and debug the code. When the core idea was proofed, I started to extract and clean the code. I wrote only integration tests, skipping units tests at all, because I knew that details of implementation may change. Thanks to making tests automatic, I caught a few additional cases that manual testing missed. Mostly raceconditikns on stopping - restarting the service. At that stage I was confident that Starbucket works as it should. I still wanted to see though, how it behaves in a real multi-computers environment.
+I went through 3 phases of testing Starbucket. At first, when I was experimenting with a main idea, the code was still in a dirty, hackathon-ish shape. All was in a one file, changing very frequently. At that stage I had two console windows opened and just manually test and debug the code. When the core idea was proofed, I started to extract and clean the code. I wrote only integration tests, skipping units tests at all, because I knew that details of implementation may change. Thanks to making tests automatic, I caught a few additional cases that manual testing missed. Mostly raceconditions on stopping/restarting the service. At that stage I was confident that Starbucket works as it should. I still wanted to see though, how it behaves in a real multi-computers environment.
 
 To spawn a whole fleet of computers I used [hyper.sh](https://hyper.sh/). It is extremely convenient docker hosting service. Creating a node and installing Starbucket on it can be done really easily:
 

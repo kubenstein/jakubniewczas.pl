@@ -15,9 +15,9 @@ it('allows to change user nickname', () => {
 });
 ```
 
-I encapsulate every single action in a well named corresponding step helper. Clicking tests often have to operate on a website DOM level which from spec perspective is completely not important and noise. That's why I encapsulate every step. Sometimes steps can be reusable, often though, it is 1-1 relation.
+I encapsulate every single action in a well named corresponding step helper. Clicking tests often have to operate on a website DOM level which from spec perspective is completely not important and noisy. Sometimes steps can be reusable, often though, it is just 1-1 relation.
 
-I use params to build a relation between `when` and `then` steps. This way I can clearly see the connection, highlighting why do we expect some value or action to happen.
+I use steps params to build a relation between `when` and `then` steps. This way I can clearly see the connection, highlighting why do we expect some value or action to happen.
 
 
 ![Spec structure, Jakub Niewczas](<%= s3_url('blog/maintainable-feature-specs/spec-structure.jpg') %>)
@@ -68,7 +68,7 @@ this.when = this.and = this.then = this.following = this.again = when = then = t
 
 With this line I can prefix method inside and outside of steps module. Inside, I can clearly separate actions and assertions: `when.openingSideMenu` vs  `then.userCanSeeColumn`. Outside I can do the same to emphasise spec actions flow.
 
-I added a few more words like `and`, `again` and `following`. Wit those syntax sugar I can built more readable chains like `when.again.openingCardDetails(...)`.
+I added a few more words like `and`, `again` and `following`. With such syntax sugar I can built more readable chains like `when.again.openingCardDetails(...)`.
 
 ```
 it('allows to change a description', () => {

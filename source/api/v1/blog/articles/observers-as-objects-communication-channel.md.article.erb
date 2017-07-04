@@ -1,6 +1,6 @@
-Observer Pattern is an extremely handy way to implement communication channel between two or more objects. Thanks to its simplicity, it allows to have a full control over a communication contract. It solves, in an easy way, problem of returning multiple values from a function and naturally and gently forces us to follow *Tell Don’t Ask* principle. It emphasises importance of messages and can be nearly transparently replaced with more advances async message queues approaches. 
+Observer Pattern is an extremely handy way to implement communication channel between two or more objects. Thanks to its simplicity, it allows to have a full control over a communication contract. It solves, in an easy way, problem of returning multiple values from a function and naturally and gently forces us to follow *Tell Don’t Ask* principle. It emphasises importance of messages and can be nearly transparently replaced with more advances async message queues approaches.
 
-I [developed a convention](/#/blog/what-kind-of-code-I-want-to-see-in-controllers) how to build and use objects in that way. I like to separate objects by their Command or Query nature. 
+I'm [experimenting with a convention](/#/blog/what-kind-of-code-I-want-to-see-in-controllers) how to build and use objects in that way. I like to separate objects by their Command or Query nature.
 
 ### Query
 If an object is a Query, I force passing at least one observer via constructor. By having this requirement, user of a class will be reminded that purpose of the class is to return some data. Additionally you can add more observers if needed but this is done by a separate method call.
@@ -22,7 +22,7 @@ class SomeClass 
  end 
 ```
 
-The question that popped in our heads is: ok but how do I know what callbacks a particular class expects? The answer is very trivial, Since we expect collbacks invocations, it is not that hard to scan code of a class. In my case it's `notify(:callback_name, params)` method. It would be really handy to have interfaces that force us to fulfil contracts but after following, for a while, I realised that discovering a class contract is not a problem.
+The question that pops in my heads is: ok but how do I know what callbacks a particular class will fire? The answer is very trivial, since we expect collbacks invocations, it is not that hard to scan code of a class. In my case it's `notify(:callback_name, params)` method. It would be really handy to have interfaces that force us to fulfil contracts but after following, for a while, I realised that discovering a class contract is not a problem.
 
 ```ruby
 class PullRequestValidator 
@@ -44,7 +44,7 @@ class PullRequestValidator 
   #...
  end
 
-``` 
+```
 
 ### Command
 If an object is a Command, receiving any result is not obligatory. However it is often handy to be notified about status of execution. In that case I configure observers as a separate `add_observer()` method call.
@@ -54,9 +54,9 @@ CreatePullRequestCommand.new(params: params[:pull_request]) 
                         .call
 ```
 
-### Implementation 
+### Implementation
 
-Ruby provides `Observable` functionality in the language standard library, however I found its API problematic and not hard to work with. Mostly because it can callback only to one function. Additionally implementing Observers from scratch is extremely easy. I called it `Notifiable` because thats the true purpose, to notify not to being observed. I think this subtle difference also fits well in *Tell Don’t Ask* principle.
+Ruby provides `Observable` functionality in the language standard library, however I found its API problematic and  hard to work with. Mostly because it can callback only to one function. Additionally implementing Observers from scratch is extremely easy. I called it `Notifiable` because thats the true purpose, to notify not to being observed. I think this subtle difference also fits well in *Tell Don’t Ask* principle.
 
 ```ruby
 module Notifiable 
@@ -73,4 +73,3 @@ module Notifiable 
  end
 ```
 
- 

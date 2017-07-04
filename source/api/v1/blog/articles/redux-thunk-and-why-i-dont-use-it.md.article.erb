@@ -59,6 +59,6 @@ function addConcert(concert, dispatch) {
 }
 ```
 
-Additionally we have now also a full control over a returning value. I can return, for example, a promise that on a component level I can handle according to a component purpose. In that particular case - do a redirection. I’m strongly against doing a redirection inside an action-creator: “I want to add a concert, why do I even see any redirection logic there?”. Maybe there will be other path of adding a concert that will require other action on success? Maybe, maybe not, for sure the SRP suffers with a redirection inside an action-creator.
+Additionally we have now also a full control over a returning value. I can return, for example, a promise that on a component level I can handle according to a component purpose. In that particular case - do a redirection from a component when `addConcert()` promise gets resolved. I’m strongly against doing a redirection inside an action-creator: “I want to add a concert, why do I even see any redirection logic there?”. Maybe there will be other path of adding a concert that will require other action on success? Maybe, maybe not, for sure the SRP suffers with a redirection inside an action-creator.
 
 So to sum things up, Redux Thunk is a nice tool, but in my opinion a boilerplate code reduction comes with too great loss in a code readability and flexibility.

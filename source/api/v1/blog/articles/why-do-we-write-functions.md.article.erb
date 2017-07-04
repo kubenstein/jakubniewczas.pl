@@ -13,7 +13,7 @@ Details part should focus on things that really matter. Usually `if`s or other c
 
 ### What is important for <i>fairy understandable</i> parts?
 Those should be fairy understandable! Those should tell what the function will do without telling too much unimportant details. Usually telling anything about a particular implementation is already too much. We hide details in a separate function or we can [delegate execution to a different object](/#/blog/what-kind-of-code-I-want-to-see-in-controllers).
-As a function reader, I'm fully aware where I am and what is going to happen next. Do I really know what does it mean to `charge_user(user, amount)`? yes and no, fairy enough.
+As a function reader, I should be fully aware where I am and what is going to happen next. Do I really know what does it mean to `charge_user(user, amount)`? yes and no, fairy enough.
 
 Good naming is the key and all programmers know that very well. For sure also know how hard can be to came up with a meaningful so, descriptive and not too detailed, name. Sometimes name is already used, sometimes semantically name is the same as name of some other function. Sometimes the best name we can think of is `doSomethingIfNeeded`.
 Problem with names that have `and` or `if` is that, from reader perspective, we are forced to think about some details that should be hidden. From writer perspective it's a hint that system in that area may required little redesign becasue the function doesn’t represent any higher level concept.
@@ -50,7 +50,7 @@ Each level tells enough to understand what will happen. Lets take a look at `set
 ```bash
 function setup_git_receiver_storage() {
   if container_exists "git-receiver-storage"; then
-    return; 
+    return;
   fi
 
   docker run -d --name git-receiver-storage \
@@ -61,7 +61,7 @@ function setup_git_receiver_storage() {
 ### Ruby specs example
 Other example which I like to show is a rspec code from one of my project. Especially in a test codebase, functions have to tell a clear story. Usually we look at a test when that test fails. Often the test is not related with a feature we are currently working on. Readability of the test is crucial to understand what we just broke.
 
-I like to write specs nearly as it would be a Cucumber file. Building high level DSL lets me understand what feature and what part of code we are dealing with. Then we dive into sub functions to look for more and more details. 
+I like to write specs nearly as it would be a Cucumber file. Building high level DSL lets me understand what feature and what part of code we are dealing with. Then we dive into sub functions to look for more and more details.
 
 ```ruby
 it 'includes branches diff' do
@@ -72,6 +72,6 @@ it 'includes branches diff' do
 end
 ```
 
-Test like this is short and descriptive. It shows sequence of events and expectations. By passing variable, relation between steps is clear. 
+Test like this is short and descriptive. It shows sequence of events and expectations. By passing variable, relation between steps is clear.
 
 Programmers with some experience usually already have developed most of those guides and heuristics. I also intuitively feel when code is readable or when something is still out of place. I was glad to learn about the reason. It is all about mixing abstraction levels. Understanding and classifying code inside functions based on that criteria is another solid tool in my craftsmanship toolbox.

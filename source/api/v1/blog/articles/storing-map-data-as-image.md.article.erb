@@ -1,8 +1,8 @@
-During developing of [Plant Calculator Project](https://plant-calculator.herokuapp.com/) quite unusual, thus interesting challenge arised. Main goal of the project was to provide a list of plants filtered by very specific cryteria. Additionally, based on configuration of those cryteria, system should calculate duration and kind of watering over the year that is required for effective growing of a plant.
+During developing of [Plant Calculator Project](https://plant-calculator.herokuapp.com/), quite unusual, thus interesting challenge arised. Main goal of the project was to provide a list of plants filtered by very specific cryteria. Additionally, based on configuration of those cryteria, system should calculate duration and kind of watering over the year that is required for effective growing of a plant.
 
 ![PlantCaluculator Jakub Niewczas](<%= s3_url('blog/storing-map-data-as-image/plant-calculator-animation.gif') %>)
 
-Plant Calculator is a tool and its main purpose is to solve or provide data in easy and useful way. With database of plants already prepared by a client (some transformation was still needed) the only missing part was to correlate a special zone geo-position information with a set of filters as a clickable map. Unlucky distribution of those zones was provided to me as images.
+Plant Calculator is a tool and its main purpose is to solve or provide data in easy and useful way. With database of plants already prepared by a client (some transformation was still needed) the only missing part was to correlate a special geo-position information with a set of filters as a clickable map. Unlucky distribution of those zones was provided to me as images.
 
 My initial thought was to transform pixels to database point representation and based on this apply proper SQL filtering. Even after removing points that make no sense, like seas areas, amount of data was enormous.
 

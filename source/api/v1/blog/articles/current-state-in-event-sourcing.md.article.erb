@@ -77,6 +77,7 @@ export default class ColumnRemoved {
 `EventStorages` are mechanisms that provide a list of events. Additionally, `EventStorages` have to notify about new events when those appear. `CurrentState` is a single source of truth and has only one event storage, however, in my app, frontend uses WebSockets as an eventStorage, so in fact, on frontend side, its not a storage <i>per se</i> but rather a proxy or just a backend client. On the other hand, a backend uses same `CurrentState` class but this time with a “normal” event storage.
 
 ![Client-Server events flow, Jakub Niewczas](<%= s3_url('blog/current-state-in-event-sourcing/client-server-events-flow.jpg') %>)
+<i>Events propagation path between frontend and backend components.</i>
 
 I also built simple `memory-event-storage.js` which I used to use at the begining of the project when there was no backend yet at all. Now I can use it for testing both frontend and backend or `CurrentState` class itself in separation.
 

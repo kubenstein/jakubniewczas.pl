@@ -1,7 +1,8 @@
-I was a member of a team that were developing quite a big and complex E-commerce web application. Besides normal Rails duties I was also assigned to lead the whole styling process. Our designer did a great job, intuitive and not aggressive project, user-friendly interface but still full of those little and sweet details. To handle that amount of css requirements I proposed, and later kept pushing, to follow one simple rule - *Everything is a component*.
+I was a member of a team that were developing quite a big and complex E-commerce web application. Besides normal Rails duties I was also assigned to lead the whole styling process. Our designer did a great job, intuitive and not aggressive design, user-friendly interface but still full of those little and sweet details. To handle that amount of css requirements I proposed, and later kept pushing, to follow one simple rule - *Everything is a component*.
 
 ### Everything is a Component
-I learned that way of thinking about building and styling components while working on Angular apps. No matter if its JS, CSS or, in fact, every generic programming task its the same, just named differently. In CSS, because of visual aspect it is easier to call things components, in JS we can call them modules or in OO languages - classes. Building everything as a component it a manifestation of SRP desires. A mix of SRP and pushing for a composition as much as possible. A Component is a group of other Components. General heuristics was to build small components out of primates. Then build wrapper components that layout those smaller ones, and so on. Each wrapper [represents different level of abstraction](/#/blog/why-do-we-write-functions). For example, buttons are grouped in a form of panel. The Panel, a text header and breadcrumbs make a page header. Components in Components. You can split things into separate components or keep as a one but add modifiers classes. Adding modifiers is good when you think things, with little alteration  but still represent a same concept. 
+I learned that way of thinking about building and styling components while working on Angular apps. No matter if its JS, CSS or, in fact, every generic programming task its the same, just named differently. In CSS, because of visual aspect it is easier to call things components, in JS we can call them modules or in OO languages - classes. Building everything as a component it a manifestation of SRP desires. A mix of SRP and pushing for a composition as much as possible. A Component is a group of other Components. General heuristics was to build small components out of primitives. Then build wrapper components that layout those. Each wrapper [represents different level of abstraction](/#/blog/why-do-we-write-functions). For example, buttons are grouped in a form of panel. The Panel, a text header and breadcrumbs make a page header. Components in Components.
+If things represent a same concept you can add modifier flag to a component, but if diffrences are more significant I would split code into two separate components.
 
 ### Styleguides
 I introduced css living styleguides to a project to be able to test my components. We had quite a lot components, both primitive ones, like texts or inputs, and composed, like panels, menus, forms and whole page layouts.
@@ -28,7 +29,7 @@ Example of `_controls.md`:
 ~~~
 <div class="checkbox">
     <input id="c1" type="checkbox">
-    <label for="c1"></label> 
+    <label for="c1"></label>
 </div>
 ~~~
 
@@ -71,4 +72,4 @@ styleguide-scss: |
   #...
 ```
 
-I highly recommend incorporating styleguides in bigger styling codebases. It helps maintaining existing components, it helps creating new ones. It gives hints when component is too much coupled with other components or an application itself.
+I highly recommend incorporating styleguides in bigger styling codebases. It helps maintaining existing components, it helps creating new ones. It gives hints when components are too much coupled with other components or with the application itself.
