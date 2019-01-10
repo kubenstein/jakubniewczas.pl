@@ -3,6 +3,11 @@
 .blog-article-section {
   .article {
     padding: 30px 0;
+
+    @media screen and (max-width: 768px) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
   }
 
   .article-title {
@@ -16,12 +21,12 @@
   .other-articles {
     float: right;
     padding: 15px;
-    margin: 0 0 15px 15px;
+    margin-top: 60px;
     background-color: $light_gray;
-    max-width: 220px;
 
-    @media screen and (max-width: 768px) {
-      display: none;
+    @media screen and (min-width: 769px) {
+      margin: 0 0 15px 15px;
+      max-width: 220px;
     }
   }
 
@@ -78,12 +83,12 @@
 
   .other-article {
     display: block;
-    color: $main;
+    color: $orange;
     text-decoration: none;
     margin: 8px 0;
 
     &:hover {
-      color: $orange;
+      color: $main;
     }
   }
 

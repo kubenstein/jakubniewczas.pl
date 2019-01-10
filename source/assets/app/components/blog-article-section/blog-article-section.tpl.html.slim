@@ -5,10 +5,10 @@
         | {{ 'WORTH_CHECKING_ARTICLES_TITLE' | translate }}
       a.other-article ng-href="/#/blog/{{article.id}}" ng-repeat="article in worthCheckingArticles"
         | {{article.title}}
+    div
+      h3.article-title
+        | {{article.title}}
 
-    h3.article-title
-      | {{article.title}}
+      markdowned-text.article-content content="article.content"
 
-    markdowned-text.article-content content="article.content"
-
-    comments-section
+  comments-section
