@@ -6,11 +6,11 @@ angular.module('jakubniewczas').run(['$http', '$cacheFactory', '$templateCache',
   $httpProvider.defaults.cache = true;
   httpCache = $cacheFactory.get('$http');
   <% jsons_files_list_to_cache(sitemap).each do |json_file| %>
-    httpCache.put("/<%= json_file.path %>", "<%= json_file.body %>");
+    httpCache.put("/<%= json_file.path %>", "<%= json_file.body.strip %>");
   <% end %>
 
   <% templates_files_list_to_cache(sitemap).each do |tpl_file| %>
-    $templateCache.put("/<%= tpl_file.path %>", "<%= tpl_file.body %>");
+    $templateCache.put("/<%= tpl_file.path %>", "<%= tpl_file.body.strip %>");
   <% end %>
 }]);
 </script>
