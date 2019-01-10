@@ -4,6 +4,9 @@ angular.module('jakubniewczas')
       scope: {
         compact: '='
       },
-      templateUrl: '<%= ng_template_url("footer-section/") %>'
+      templateUrl: '<%= ng_template_url("footer-section/") %>',
+      controller: ['$scope', function($scope) {
+        $scope.currentYear = new Date();
+      }]
     }
   })
