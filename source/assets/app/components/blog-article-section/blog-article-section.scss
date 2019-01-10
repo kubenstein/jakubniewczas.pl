@@ -67,7 +67,7 @@
     }
 
     a {
-      color: $green;
+      color: $orange;
     }
 
     em {
@@ -78,12 +78,12 @@
 
   .other-article {
     display: block;
-    color: $brown;
+    color: $main;
     text-decoration: none;
     margin: 8px 0;
 
     &:hover {
-      color: $green;
+      color: $orange;
     }
   }
 

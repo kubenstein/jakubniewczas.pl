@@ -14,7 +14,7 @@
     display: inline-block;
     padding: 0 10px 4px 10px;
     margin-bottom: 13px;
-    border-bottom: 2px solid $green;
+    border-bottom: 2px solid $orange;
   }
 
   .skill-subtext {
@@ -97,11 +97,11 @@
     margin-top: 5px;
     display: inline-block;
     text-decoration: none;
-    color: $light_brown;
+    color: $main;
   }
 
   .project-subtitle {
-    color: $light_brown;
+    color: $main;
     display: block;
     margin-top: 5px;
   }
@@ -110,7 +110,7 @@
     margin-top: 7px;
 
     a {
-      color: $light_brown;
+      color: $main;
     }
   }
 }

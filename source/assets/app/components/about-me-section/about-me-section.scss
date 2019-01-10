@@ -26,7 +26,7 @@
     }
 
     .text {
-      color: $brown;
+      color: $main;
       text-align: center;
     }
 
@@ -35,7 +35,7 @@
     }
 
     .social-item {
-      color: $brown;
+      color: $main;
       font-size: 20px;
     }
   }
@@ -93,9 +93,7 @@
   }
 
   .avatar {
-    @include border-radius(75px,75px,75px,75px);
-    -webkit-box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
-    -moz-box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
-    box-shadow: 7px 2px 26px -4px rgba(0,0,0,0.75);
+    @include border-radius(75px, 75px, 75px, 75px);
+    @include box-shadow(0px, 0px, 9px, 0px, rgba(0, 0, 0, 0.55));
   }
 }

@@ -9,7 +9,7 @@
 
   .link {
     text-decoration: underline;
-    color: $green;
+    color: $orange;
   }
 
   .justified {
@@ -54,12 +54,12 @@
   .layer {
     cursor: pointer;
     position: relative;
-    background-color: $green;
+    background-color: $orange;
     width: 150px;
     height: 130px;
 
     &.active {
-      background-color: $blue;
+      background-color: $light_orange;
     }
 
     //
@@ -130,7 +130,7 @@
   .connector-infrastructure-backend.active-frontend,
   .connector-backend-ios.active-ios,
   .connector-backend-frontend.active-frontend {
-    background-color: $blue;
+    background-color: $light_orange;
   }
 
   .fullstack-info, .fullstack-layers {
@@ -166,7 +166,7 @@
     display: block;
     margin: 10px 0;
     font-size: 14px;
-    color: $brown;
+    color: $main;
     text-align: center;
   }
 
@@ -180,7 +180,7 @@
     text-align: center;
     width: 60%;
     padding: 5px 20px;
-    background-color: $green;
+    background-color: $orange;
     color: $white;
     font-size: 18px;
     cursor: pointer;

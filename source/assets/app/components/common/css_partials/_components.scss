@@ -13,7 +13,7 @@ html, body {
 }
 
 .odd-section {
-  background-color: $brown;
+  background-color: $main;
 
   $shadow-top: 8px;
   -moz-box-shadow: inset 0 $shadow-top $shadow-top (-$shadow-top) $black;
@@ -24,7 +24,7 @@ html, body {
 .inner-wrapper {
   $padding: 30px;
   margin: 0 auto;
-  padding: 0 $padding; 
+  padding: 0 $padding;
   max-width: 1024px - ($padding*2);
 }
 
@@ -35,8 +35,7 @@ html, body {
   .section-body { @extend .col-two; }
   .title {
     font-size: 23px;
-    color: $brown;
-    border-bottom: 2px solid $green;
+    border-bottom: 2px solid $orange;
   }
   padding-top: 20px;
   padding-bottom: 20px;
