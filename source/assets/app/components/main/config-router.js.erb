@@ -1,11 +1,11 @@
 angular.module('jakubniewczas')
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
-      .when('/',          { templateUrl: '<%= ng_template_url("main/routable/index") %>' })
-      .when('/skill-:id', { templateUrl: '<%= ng_template_url("main/routable/skill") %>' })
+      .when('/',          { templateUrl: '<%= ng_template_url("main/routes/index") %>' })
+      .when('/skill-:id', { templateUrl: '<%= ng_template_url("main/routes/skill") %>' })
       .when('/skills-beyond-technologies',
-                          { templateUrl: '<%= ng_template_url("main/routable/skills-beyond-technologies") %>' })
-      .when('/blog',      { templateUrl: '<%= ng_template_url("main/routable/blog") %>' })
-      .when('/blog/:id',  { templateUrl: '<%= ng_template_url("main/routable/blog-article") %>' })
+                          { templateUrl: '<%= ng_template_url("main/routes/skills-beyond-technologies") %>' })
+      .when('/blog',      { templateUrl: '<%= ng_template_url("main/routes/blog") %>' })
+      .when('/blog/:id',  { templateUrl: '<%= ng_template_url("main/routes/blog-article") %>' })
       .otherwise({redirectTo: '/'});
 }]);
