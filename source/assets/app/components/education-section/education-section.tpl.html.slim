@@ -4,9 +4,8 @@
       | {{ 'EDUCATION_TITLE' | translate }}
   .section-body
     .item ng-repeat='item in items'
-      span.item-title
-        | {{item.title}}
       span.item-date 
+      span.item-title ng-bind-html="item.title"
         | ({{item.date}})
       span.item-subtitle 
         | {{item.subtext}}

@@ -30,4 +30,30 @@
   .item-body {
     line-height: 22px;
   }
+
+  .pj-fancy-animation {
+    @keyframes shine {
+      to {
+        background-position: 100% center;
+      }
+    }
+
+    background-image: radial-gradient(
+      circle closest-side,
+      #f00 150%,
+      #ddd 150%,
+      #ddd 400%,
+      #000 600%
+    );
+    background-size: 300% auto;
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+
+    &:hover {
+       animation: shine 4s linear;
+    }
+  }
 }
