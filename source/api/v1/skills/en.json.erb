@@ -3,7 +3,7 @@
   {
     id: 'ruby-on-rails',
     name: 'Ruby on Rails',
-    subtext: 'Rspec, Sidekiq, OOP, Payments, OAuth, Permissions, DDD, File Storing/Proccessing, New Relic, Full Text Search, PDF generation, Social Media Integration, Hanami, dry-rb, Gem building',
+    subtext: 'Rspec, Sidekiq, OOP, Payments, OAuth, Permissions, DDD, File Proccessing, New Relic, Full Text Search, PDF generation, Social Media Integration, dry-rb, rubocop, Gem building',
     description: "I’ve been a professional Ruby on Rails developer for about 4 years now. Experience with working on many Rails projects allows me to deeply understand strengths and weaknesses of each aspect of the Framework.",
     projects: [
       {
@@ -27,16 +27,35 @@
         ]
       },
       {
+        title: 'Voyagin (part of Rakuten)',
+        icon: s3_url('ror-badge.jpg'),
+        link: 'https://www.govoyagin.com',
+        description: 'Even tough at Voyagin I’m mostly responsible for frontend, I actively take part in reviewing, discussing solutions and coding particular features, so basically growing the platform as a whole.',
+        images: [
+          s3_url('voyagin.jpg')
+        ]
+      },
+      {
+        title: 'Survicate',
+        icon: s3_url('ror-badge.jpg'),
+        link: 'https://survicate.com/',
+        subtitle: 'All rights go to App\'n\'Roll',
+        description: 'Survicate is a context and user aware surveys platform, heavily integrated with international advertisement and user tracking networks. I was a member of a team responsible for writing Ruby on Rails API customer admin panel, Survicates’s widgets and other Ads providers in the ad network\\n\\nKey features:\\n- Rails API-only codebase\\n- heavy and complicated integration with multiple data providers\\n- aiming for API heigh performance due to the survey widget',
+        images: [
+          s3_url('survicate.jpg')
+        ]
+      },
+      {
         title: 'Massive E-Commerce Portal',
+        icon: s3_url('ror-badge.jpg'),
         subtitle: 'Due to NDA project details are confidential',
-        description: 'Working on complex Ecommerce applications changes the way you code. With sophisticated data model, huge codebase and future maintainability as a requirement, <b>design, coding and testing</b> practices are very important. We followed all of them.\n\nKey features:\n- Handling sophisticated data model and business rules\n- Significant amount of logic as background tasks\n- Solving performance issues\n- Search functionality backed by ElasticSearch\n- Authentication and permissions\n\nRelated Blogposts:\n- <a href=\'/#/blog/what-kind-of-code-I-want-to-see-in-controllers\' target=\'_blank\'>What kind of code I want to see in Controllers</a>\n- <a href=\'/#/blog/only-one-valid-use-of-rails-default-scope\' target=\'_blank\'>The only one valid use of Rails default scope</a>',
+        description: 'Working on complex E-commerce applications changes the way you code. With sophisticated data model, huge codebase and future maintainability as a requirement, <b>design, coding and testing</b> practices are very important. We followed all of them.\n\nKey features:\n- Handling sophisticated data model and business rules\n- Significant amount of logic as background tasks\n- Solving performance issues\n- Search functionality backed by ElasticSearch\n- Authentication and permissions\n\nRelated Blogposts:\n- <a href=\'/#/blog/what-kind-of-code-I-want-to-see-in-controllers\' target=\'_blank\'>What kind of code I want to see in Controllers</a>\n- <a href=\'/#/blog/only-one-valid-use-of-rails-default-scope\' target=\'_blank\'>The only one valid use of Rails default scope</a>',
         images: [
           s3_url('ecommerce-nda.jpg')
         ]
       },
       {
         title: 'Taptera Inc.',
-        link: 'http://www.taptera.com/',
         icon: s3_url('ror-badge.jpg'),
         subtitle: 'All rights go to codequest',
         description: 'I was a member of RoR admin panel team. Due to sophisticated data model and general project complexity, working on Taptera product required solving challenging tasks.\n\nKey features:\n- Handling sophisticated data model\n- Uploading and processing files in background\n- Authentication and permissions',
@@ -46,12 +65,21 @@
       },
       {
         title: 'BuddyBroker',
-        link: 'http://buddybroker.com/',
         icon: s3_url('ror-badge.jpg'),
         subtitle: 'All rights go to codequest',
         description: 'Buddybroker was my favourite project I was working on during my work at codequest. I had the opportunity to build and see strengths and weaknesses of my decisions. I learnt how important it is to design app architecture well.\n\nKey features:\n- Authentication and permissions\n- Image uploading and processing\n- Integration with LinkedIn and Xing\n- Integration with Buddybroker matching system\n- Building web crawlers\n- Rich integration with Frontend frameworks',
         images: [
           s3_url('buddybroker.jpg')
+        ]
+      },
+      {
+        title: 'Shards-of-Tokyo',
+        link: 'https://www.shards-of-tokyo.jp/',
+        icon: s3_url('sinatra-badge.jpg'),
+        subtitle: "The project is not yet released due to non-tech formalities still on progress",
+        description: 'Shards-of-Tokyo is my recent, personal side project, a fully event-sourced and DDDed small e-commerce platform. SoT business and web handling-related logic are strictly separated. Web routing is written in Sinatra, while business logic is a rich set of POROs and integration gems.\\n\\nKey features:\\n- Fully event-source, ddd architecture\\n- Stripe, Paypal and Dotpay integration \\n- Password-less login\\n- <a href=\'https://twitter.com/j_niewczas/status/1084483644763164672\'>Alternative tech stack</a> - dry-rb, sequel, two dbs\\n- i18n\\n- .jp domain',
+        images: [
+          s3_url('shards-of-tokyo.jpg')
         ]
       },
       {
@@ -67,7 +95,7 @@
         title: 'Aleksandra Kuls Website',
         icon: s3_url('middleman-badge.jpg'),
         link: 'http://aleksandrakuls.com/',
-        description: 'With unique design of full separation of Domain logic from presentation layer, this simple website contains advanced DDD philosophy and techniques. With strong OOP desires I TDDed the whole creation process of the website.\n\nThe Project is available on <a href=\'https://github.com/kubenstein/aleksandrakuls.com\' target=\'_blank\'>Github</a>.\n\nKey features:\n- Full separation of Domain logic from presentation layer \n- Applying TDD practices all way long \n- Integration with Middleman Static Page\n- MongoDB integration\n- PhantomJS feature specs\n\nRelated Blogposts:\n- <a href=\'/#/blog/ddd-middleman-as-view-plugin\' target=\'_blank\'>DDD and Middleman as a Just a View Plugin</a>\n- <a href=\'/#/blog/static-middleman-page-dynamic-react-admin-panel-and-heroku-redeployments\' target=\'_blank\'>React Admin Panel and Heroku Redeployments</a>\n- <a href=\'/#/blog/node-development-console\' target=\'_blank\'>Development Console for Node apps</a>\n- <a href=\'/#/blog/redux-thunk-and-why-i-dont-use-it\' target=\'_blank\'>Redux Thunk and why I don\'t use it anymore</a>',
+        description: 'With unique technical design of full separation of Domain logic from presentation layer, this simple website contains advanced DDD philosophy and techniques. With strong OOP desires I TDDed the whole creation process of the website.\n\nThe Project is available on <a href=\'https://github.com/kubenstein/aleksandrakuls.com\' target=\'_blank\'>Github</a>.\n\nKey features:\n- Full separation of Domain logic from presentation layer \n- Applying TDD practices all way long \n- Integration with Middleman Static Page\n- MongoDB integration\n- PhantomJS feature specs\n\nRelated Blogposts:\n- <a href=\'/#/blog/ddd-middleman-as-view-plugin\' target=\'_blank\'>DDD and Middleman as a Just a View Plugin</a>\n- <a href=\'/#/blog/static-middleman-page-dynamic-react-admin-panel-and-heroku-redeployments\' target=\'_blank\'>React Admin Panel and Heroku Redeployments</a>\n- <a href=\'/#/blog/node-development-console\' target=\'_blank\'>Development Console for Node apps</a>\n- <a href=\'/#/blog/redux-thunk-and-why-i-dont-use-it\' target=\'_blank\'>Redux Thunk and why I don\'t use it anymore</a>',
         images: [
           s3_url('aleksandrakuls-ddd.jpg')
         ]
@@ -122,7 +150,7 @@
     id: 'ios',
     name: 'iOS',
     subtext: 'CocoaPods, CoreData, InApp payments, AdHoc distribution, Provisioning Profiles, Crashlytics',
-    description: "As an extremely profitable and interesting system, iOS development became my secondary specialisation. By applying OOP practises and good understanding of the platform, I’ve been successfully working on big applications for big companies as well as smaller apps as a freelancer.",
+    description: "By applying OOP practises and good understanding of the platform, I’ve been successfully working on big applications for big companies as well as smaller apps as a freelancer.",
     projects: [
       {
         title: 'Apps at Mobica',
@@ -232,9 +260,44 @@
   {
     id: 'frontend',
     name: 'Frontend',
-    subtext: 'SCSS, Mobile First, React, Webpack, Middleman, Bower, Gulp, CSS Flex, i18n, Angular',
-    description: "I’m comfortable with many frontend technologies and technics, from scalable styleguided-based CSS to frontend frameworks like React and Angular.",
+    subtext: 'React, Redux, Webpack, CSS-modules, code splitting, babel plugins, ESLint, Middleman, i18n',
+    description: "I’m comfortable with building scalable, sophisticated React apps, with non-trivial business logic, code splitting, css-modules, performance challenges and interesting look’n’feel. With experience in React and pre-react technologies I just truly enjoy frontend!",
     projects: [
+      {
+        title: 'Voyagin (part of Rakuten)',
+        icon: s3_url('reactjs-badge.jpg'),
+        link: 'https://www.govoyagin.com',
+        description: 'govoyagin.com is the biggest and the most complicated React codebase I’ve been working on. With <b>tens of thousands page views per day</b> and nearly whole Frontend written in React, enterprise, industrial-scale codebase we build has to be rock solid yet flexible for constantly arriving new business requirements. Nearly all React Frontend is build, reviewed, discussed or supported by me in any other way. Though as a member of whole team I give credits to all those fantastic people I work with everyday.\\n\\nKey features:\\n- managing massive React code base\\n- using industrial scale solutions like Redux, reselect, react-redux-form\\n- heavy responsive UI\\n- code splitting\\n- SSR\\n- css-modules and post-css babel plugins as a styling solutions\\n- i18n\\n- AB testing in-house solutions',
+        images: [
+          s3_url('voyagin.jpg')
+        ]
+      },
+      {
+        title: 'Massive E-Commerce Portal',
+        icon: s3_url('css-badge.jpg'),
+        subtitle: 'Due to NDA project details are confidential',
+        description: 'My biggest and most advanced styling project. Full Mobile-first Storefront and whole Admin panel, coded in <b>more than 10000 lines of SCSS code</b>. Managing codebase that size, knowing new requirements will come, requires proper discipline, more advanced tools, and flexible technics.  \n\nKey features:\n- Design CSS as manageable, context-free components\n- Mobile-First\n- Extensive use of Flexbox\n- Use of living styleguides\n- UI transition from mobile to desktop with minimal (often non) use of JS\n- Automatically generated SVG sprites\n\nRelated Blogposts:\n- <a href=\'/#/blog/living-css-styleguides\' target=\'_blank\'>Living CSS styleguides</a>',
+        images: [
+          s3_url('ecommerce-nda.jpg')
+        ]
+      },
+      {
+        title: 'Living CSS Style Guides',
+        icon: s3_url('css-badge.jpg'),
+        subtitle: 'Due to NDA project details are confidential',
+        description: 'Building and maintaining big css codebases requires tools and technics to scale css well and track regression. TDDing css by styling style guides first, lets you design and craft independent and context-free components.\n\nKey features:\n- Ability to see most components on one page\n- Living CSS Documentation\n- Great help during designing components (markup, naming, dependencies)\n\nRelated Blogposts:\n- <a href=\'/#/blog/living-css-styleguides\' target=\'_blank\'>Living CSS styleguides</a>',
+        images: [
+          s3_url('living-style-guide.jpg')
+        ]
+      },
+      {
+        title: 'Starboard - Git-based card managment tool',
+        icon: s3_url('reactjs-nodejs-badge.jpg'),
+        description: '“Keep all aspects of a project in one place together! A card-based management tool that stores its data in a git repo.”\n\nI developed a card board managment tool, that by using git as a db, allows to keep all non-programming project components in same place as a source code.\n\nProject code is available on <a href=\'https://github.com/kubenstein/starboard\' target=\'_blank\'>Github</a>.\n\nKey features:\n- EventSource architecture\n- React frontend\n- Modular design\n- Websockets communication\n\nRelated Blogposts:\n- <a href=\'/#/blog/starboard-git-based-task-managment-tool\' target=\'_blank\'>Starboard - git-based task managment tool</a>\n- <a href=\'/#/blog/current-state-in-event-sourcing\' target=\'_blank\'>CurrentState in Event Sourcing</a>',
+        images: [
+          s3_url('starboard.jpg')
+        ]
+      },
       {
         title: 'cac.pl',
         icon: s3_url('angularjs-badge.jpg'),
@@ -242,15 +305,6 @@
         description: 'CAC Wzornictwo has been my client for many years. Recently we finished redesigning their own website.\n\nKey features:\n- Written in Angular\n- Written using node.js/gulp pipeline\n- Responsive design\n- Single page app with fullscreen splash image\n- Contact form\n- Parallax background Effect',
         images: [
           s3_url('cac.jpg')
-        ]
-      },
-      {
-        title: 'Massive E-Commerce Portal',
-        icon: s3_url('css-badge.jpg'),
-        subtitle: 'Due to NDA project details are confidential',
-        description: 'My biggest and most advanced styling project. Full Mobile-first Storefront and whole Admin panel, coded in <b>more than 10000 lines of SCSS code</b>. Managing codebase that size, knowing new requirements will come, requires proper discipline, more advanced tools, and flexible technics.  \n\nKey features:\n- Design CSS as manageable, context-free components\n- Mobile-First\n- Extensive use of Flex\n- Use of living styleguides\n- UI transition from mobile to desktop with minimal (often non) use of JS\n- Automatically generated SVG sprites\n\nRelated Blogposts:\n- <a href=\'/#/blog/living-css-styleguides\' target=\'_blank\'>Living CSS styleguides</a>',
-        images: [
-          s3_url('ecommerce-nda.jpg')
         ]
       },
       {
@@ -263,27 +317,11 @@
         ]
       },
       {
-        title: 'Starboard - Git-based card managment tool',
-        icon: s3_url('reactjs-nodejs-badge.jpg'),
-        description: '“Keep all aspects of a project in one place together! A card-based management tool that stores its data in a git repo.”\n\nI developed a card board managment tool, that by using git as a db, allows to keep all non-programming project components in same place as a source code.\n\nProject code is available on <a href=\'https://github.com/kubenstein/starboard\' target=\'_blank\'>Github</a>.\n\nKey features:\n- EventSource architecture\n- React frontend\n- Modular design\n- Websockets communication\n\nRelated Blogposts:\n- <a href=\'/#/blog/starboard-git-based-task-managment-tool\' target=\'_blank\'>Starboard - git-based task managment tool</a>\n- <a href=\'/#/blog/current-state-in-event-sourcing\' target=\'_blank\'>CurrentState in Event Sourcing</a>',
-        images: [
-          s3_url('starboard.jpg')
-        ]
-      },
-      {
         title: 'Aleksandra Kuls Admin',
         icon: s3_url('reactjs-nodejs-badge.jpg'),
         description: 'Aleksandra Kuls’s static website requires rare but frequent updates. To make the process easier I developed an admin panel to manage resources and schedule redeployments. The Admin Panel is a fully featured <b>React-Redux</b> WebApp powered by a nodejs-based backed server. Part of the app uses websockets technology to make UX even better.\n\nThe Project is available on <a href=\'https://github.com/kubenstein/aleksandrakuls.com-admin\' target=\'_blank\'>Github</a>.\n\nKey Frontend features:\n- Written in React-Redux\n- REST Backend integration\n- Using Socket.io web socket library\n\nKey Backend features:\n- Written in Express\n- MongoDB integration\n- Using Socket.io web socket library\n- Git Heroku redeployment using nodegit library\n\nRelated Blogposts:\n- <a href=\'/#/blog/ddd-middleman-as-view-plugin\' target=\'_blank\'>DDD and Middleman as a Just a View Plugin</a>\n- <a href=\'/#/blog/static-middleman-page-dynamic-react-admin-panel-and-heroku-redeployments\' target=\'_blank\'>React Admin Panel and Heroku Redeployments</a>\n- <a href=\'/#/blog/node-development-console\' target=\'_blank\'>Development Console for Node apps</a>\n- <a href=\'/#/blog/redux-thunk-and-why-i-dont-use-it\' target=\'_blank\'>Redux Thunk and why I don\'t use it anymore</a>',
         images: [
           s3_url('aleksandrakuls-admin.jpg')
-        ]
-      },
-      {
-        title: 'Wakemydyno!',
-        link: 'http://wakemydyno.com/',
-        description: 'Wakemydyno! is a little yet very useful Rails app that bypasses some limitations of Heroku platform.\n\nThe Project is available on <a href=\'https://github.com/kubenstein/wakemydyno.com\' target=\'_blank\'>Github</a>.\n\nKey features:\n- Single Page App\n- Delicate jQuery tweaking',
-        images: [
-          s3_url('wakemydyno.jpg')
         ]
       },
       {
@@ -304,15 +342,6 @@
         ]
       },
       {
-        title: 'CSS Style Guides',
-        icon: s3_url('css-badge.jpg'),
-        subtitle: 'Due to NDA project details are confidential',
-        description: 'Building and maintaining big css codebases requires tools and technics to scale css well and track regression. TDDing css by styling style guides first, lets you design and craft independent and context-free components.\n\nKey features:\n- Ability to see most components on one page\n- Living Css Documentation\n- Great help during designing components (markup, naming, dependencies)\n\nRelated Blogposts:\n- <a href=\'/#/blog/living-css-styleguides\' target=\'_blank\'>Living CSS styleguides</a>',
-        images: [
-          s3_url('living-style-guide.jpg')
-        ]
-      },
-      {
         title: 'Vatus.pl Admin panel',
         icon: s3_url('angularjs-badge.jpg'),
         description: 'An admin panel that allows owners of the page to manage content at vatus.pl. \n\nKey features:\n- Written in Angular\n- Token-based authentication\n- Communication with backend using Restangular library\n- Image upload (done by serialising an image to base64-encoded string)',
@@ -321,12 +350,11 @@
         ]
       },
       {
-        title: 'Vatus.pl',
-        icon: s3_url('angularjs-badge.jpg'),
-        link: 'http://vatus.pl',
-        description: 'Vatus.pl is the homepage of an accounting company. I decided to rewrite it in Angular from pure Rails version. With functional tests already written it was a pleasure to see that after the migration everything just works the same.\n\nKey features:\n- Written in Angular\n- Communication with backend using Restangular library',
+        title: 'Wakemydyno!',
+        link: 'http://wakemydyno.com/',
+        description: 'Wakemydyno! is a little yet very useful Rails app that bypasses some limitations of Heroku platform.\n\nThe Project is available on <a href=\'https://github.com/kubenstein/wakemydyno.com\' target=\'_blank\'>Github</a>.\n\nKey features:\n- Single Page App\n- Delicate jQuery tweaking',
         images: [
-          s3_url('vatus.jpg')
+          s3_url('wakemydyno.jpg')
         ]
       },
       {
@@ -341,7 +369,7 @@
       {
         title: 'Discover Warsaw',
         link: 'http://discoverwarsaw-com-pl.herokuapp.com/',
-        description: 'Discoverwarsaw.com.pl is the homepage of tour guide Wojciech Gmur.\n\nKey Features:\n- Static page built using Middleman\n- Flexible i18n even page is a static site\n- Random picture gallery',
+        description: 'Discoverwarsaw.com.pl is the homepage of tour guide Wojciech Gmur.\n\nKey Features:\n- Static page built using Middleman\n- Flexible i18n even though the page is a static site\n- Random picture gallery',
         images: [
           s3_url('discoverwarsaw.jpg')
         ]
@@ -358,7 +386,7 @@
         title: 'KonikPolski.pl (created in 2009)',
         link: 'http://konikpolski.pl/',
         subtitle: 'All rights go to LogicIT',
-        description: 'It is so nice to see a 7-year-old website still operating. I created a fully-featured web portal with articles, galleries, comments, shop, google maps, login and admin for the Polish Horse Association. Project was part of cooperation with LogicIT company. All written in basic CSS. Good old times...',
+        description: 'It is so nice to see a 10-year-old website still operating. I created a fully-featured web portal with articles, galleries, comments, shop, google maps, login and admin for the Polish Horse Association. Project was part of cooperation with LogicIT company. All written in basic CSS. Good old times...',
         images: [
           s3_url('konikpolski.jpg')
         ]
@@ -368,19 +396,19 @@
   {
     id: 'infrastructure',
     name: 'Infrastructure',
-    subtext: 'VPS, Docker, Tutum, Heroku, Hyper.sh, Continous Integration/Deployment',
+    subtext: 'VPS, Docker, Heroku, Continous Integration/Deployment, git',
     description: "I have experience in working with Heroku, Docker, SemaphoreCI, Codeship etc. platforms, configuring them into automate testing and deployment pipelines.",
     projects: [
       {
         title: 'Configuring and Working with Continuous Integration/Deployment Services',
-        description: 'I have experience working with and configuring <b>SemaphoreCI</b> and <b>CodeshipCI</b> for clients I was working for. Additionally most of my github open source projects <a target=\'_blank\' href=\'https://travis-ci.org/kubenstein\'>are tested using TravisCI</a> platform.',
+        description: 'I have experience working with and configuring <b>SemaphoreCI</b> and <b>CodeshipCI</b> for clients I was working for. Additionally most of my Github open source projects <a target=\'_blank\' href=\'https://travis-ci.org/kubenstein\'>are tested using TravisCI</a> platform.',
         images: [
           s3_url('ci-services.jpg')
         ]
       },
       {
         title: 'Hosting apps on Heroku',
-        description: 'I’ve been using Heroku platform for more than 5 years now. I feel comfortable with Addons, Buildpacks, Slugs, Logging, Debugging and all sorts of applications management.',
+        description: 'I’ve been using Heroku platform for more than 7 years now. I feel comfortable with Addons, Buildpacks, Slugs, Logging, Debugging and all sorts of applications management. Both Common and Private spaces.',
         images: [
           s3_url('heroku.jpg')
         ]
@@ -390,6 +418,13 @@
         description: 'Most of the time usage of AWS is narrowed to file hosting S3 services. Aspects like permissions and api keys need to be configured, however, provisioning EC2 for some specific use cases is also required from time to time.\n\nKey features:\n- Working AWS IAM, S3 buckets, Cloudfront and EC2s',
         images: [
           s3_url('aws.jpg')
+        ]
+      },
+      {
+        title: 'Everyday Development Environment',
+        description: 'Managing external app dependencies during development can be a sophisticated and problematic task. I use docker-machine and docker-compose to dockerize Postgres, Redis, ElasticSearch, Memcache etc.\n\nKey features:\n- Simplify setup and managing of external dependencies',
+        images: [
+          s3_url('everyday-docker-development.jpg')
         ]
       },
       {
@@ -418,25 +453,11 @@
       },
       {
         title: 'Automated Build and Deploy toolchain',
-        description: 'One of my static pages is hosted on very basic, non-ssh server. The deploying process is divided into two containers: builder and deployer.\n\nKey features:\n- Tools and steps of deployment process are containerized making deployment repeatable and reliable.',
+        description: 'I like to wrap deployment pipelines in docker containers. No matter if its a git push to heroku or sftp to shared apache server, I want to have deployments details hidden behind automated scripts.\n\nKey features:\n- Tools and steps of deployment process are containerized making deployment repeatable and reliable.',
         images: [
           s3_url('docker.jpg')
         ]
-      },
-      {
-        title: 'Managing containers using Tutum',
-        description: 'Setup and deploying app using Tutum makes process of managing containers way easier. Thanks to Tutum simplicity, integration with CI servers makes Continuous Deployment pipeline clean and manageable.',
-        images: [
-          s3_url('tutum.jpg')
-        ]
-      },
-      {
-        title: 'Everyday Development Environment',
-        description: 'Managing external app dependencies during development can be a sophisticated and problematic task. I use docker-machine and docker-compose to dockerize Postgres, Redis, ElasticSearch, Memcache etc.\n\nKey features:\n- Simplify setup and managing of external dependencies',
-        images: [
-          s3_url('everyday-docker-development.jpg')
-        ]
-      },
+      }
     ]
   },
 ].to_json
