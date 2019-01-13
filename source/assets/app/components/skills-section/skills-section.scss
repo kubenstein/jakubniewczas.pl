@@ -28,6 +28,18 @@
     width: 44%;
   }
 
+  .fullstack-layers-mobile {
+    margin-top: 30px;
+    display: none;
+
+    .fullstack-layer {
+      background-color: $light_gray;
+      padding: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  }
+
   @media screen and (max-width: 750px) {
     .fullstack-additional {
       float: none;
@@ -35,6 +47,14 @@
       margin-left: auto;
       margin-right: auto;
       height: inherit;
+    }
+
+    .fullstack-layers-mobile {
+      display: block;
+    }
+
+    .fullstack-layers-desktop {
+      display: none;
     }
 
     .fullstack-matrix {
@@ -133,7 +153,7 @@
     background-color: $light_orange;
   }
 
-  .fullstack-info, .fullstack-layers {
+  .fullstack-info, .fullstack-layers-desktop {
     background-color: $light_gray;
     padding: 10px;
     margin-bottom: 10px;

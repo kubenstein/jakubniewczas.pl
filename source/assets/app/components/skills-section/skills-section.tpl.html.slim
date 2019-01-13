@@ -22,7 +22,7 @@
           img.item src=asset_url("/assets/images/angularjs-logo.png")
           img.item src=asset_url("/assets/images/node-logo.png")
 
-      .fullstack-layers
+      .fullstack-layers-desktop
         div ng-hide="currentFullstackLayer"
           span.fullstack-layer-title
             | {{ 'FULLSTACK_GENERAL_TITLE' | translate }}:
@@ -65,6 +65,43 @@
         div ng-show="isCurrentLayer('infrastructure')"
           span.fullstack-layer-title
             | {{ 'FULLSTACK_INFRASTRUCTURE_TITLE' | translate }}:
+          p.fullstack-body
+            | {{ 'FULLSTACK_INFRASTRUCTURE_TEXT' | translate }}
+          .fullstack-portfolio-button ng-click="displaySkillDetails('infrastructure')"
+            | {{ 'PORTFOLIO_BUTTON_INFRASTRUCTURE' | translate }} >
+
+      .fullstack-layers-mobile
+        .fullstack-layer
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_BACKEND_TITLE' | translate }}
+          img src=asset_url("/assets/images/backend.png")
+          p.fullstack-body
+            | {{ 'FULLSTACK_BACKEND_TEXT' | translate }}
+          .fullstack-portfolio-button ng-click="displaySkillDetails('ruby-on-rails')"
+            | {{ 'PORTFOLIO_BUTTON_BACKEND' | translate }} >
+
+        .fullstack-layer
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_FRONTEND_TITLE' | translate }}
+          img src=asset_url("/assets/images/frontend.png")
+          p.fullstack-body
+            | {{ 'FULLSTACK_FRONTEND_TEXT' | translate }}
+          .fullstack-portfolio-button ng-click="displaySkillDetails('frontend')"
+            | {{ 'PORTFOLIO_BUTTON_FRONTEND' | translate }} >
+
+        .fullstack-layer
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_IOS_TITLE' | translate }}
+          img src=asset_url("/assets/images/ios.png")
+          p.fullstack-body
+            | {{ 'FULLSTACK_IOS_TEXT' | translate }}
+          .fullstack-portfolio-button ng-click="displaySkillDetails('ios')"
+            | {{ 'PORTFOLIO_BUTTON_IOS' | translate }} >
+
+        .fullstack-layer
+          span.fullstack-layer-title
+            | {{ 'FULLSTACK_INFRASTRUCTURE_TITLE' | translate }}
+          img src=asset_url("/assets/images/infrastructure.png")
           p.fullstack-body
             | {{ 'FULLSTACK_INFRASTRUCTURE_TEXT' | translate }}
           .fullstack-portfolio-button ng-click="displaySkillDetails('infrastructure')"
