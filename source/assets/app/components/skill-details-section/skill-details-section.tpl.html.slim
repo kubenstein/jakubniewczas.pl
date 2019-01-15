@@ -14,7 +14,6 @@
         | {{skill.description}}
 
       .projects
-
         .project.clearfix ng-repeat='project in skill.projects'
           .project-info
             img.icon ng-src="{{project.icon}}" ng-show="(project.icon)"
@@ -30,4 +29,8 @@
 
           .preview.clearfix
             iframe.video ng-repeat="video in project.videos" ng-src="{{video.url}}" ng-class="{landscape: (video.orientation == 'landscape'), portrait: (video.orientation == 'portrait')}" frameborder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen")
-            img.image ng-repeat="imageSrc in project.images" ng-src="{{imageSrc}}"
+
+            a href="{{project.link}}" target='_blank' ng-show="(project.link)"
+              img.image ng-repeat="imageSrc in project.images" ng-src="{{imageSrc}}"
+
+            img.image ng-repeat="imageSrc in project.images" ng-src="{{imageSrc}}" ng-hide="(project.link)"
