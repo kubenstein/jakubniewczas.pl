@@ -161,12 +161,10 @@
 
   .fullstack-info .technologies {
     display: block;
-    margin: 15px auto 0 auto;
+    margin: 15px auto 0;
     text-align: center;
-    max-width: 270px;
 
     .item {
-      display: inline-block;
       margin: 0 5px;
     }
   }

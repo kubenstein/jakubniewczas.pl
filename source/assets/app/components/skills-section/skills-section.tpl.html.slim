@@ -13,14 +13,13 @@
           | {{ 'FULLSTACK_TEXT' | translate }}
         a.additional-link href="/#/skills-beyond-technologies"
           | {{ 'SKILLS_BEYOND_TECHNOLOGIES' | translate }}
+
         .technologies
+          img.item src=asset_url("/assets/images/reactjs-logo.png")
           img.item src=asset_url("/assets/images/rails-logo.png")
           img.item src=asset_url("/assets/images/apple-logo.png")
-          img.item src=asset_url("/assets/images/heroku-logo.png")
-          img.item src=asset_url("/assets/images/reactjs-logo.png")
           img.item src=asset_url("/assets/images/docker-logo.png")
-          img.item src=asset_url("/assets/images/angularjs-logo.png")
-          img.item src=asset_url("/assets/images/node-logo.png")
+          img.item src=asset_url("/assets/images/heroku-logo.png")
 
       .fullstack-layers-desktop
         div ng-hide="currentFullstackLayer"
@@ -31,10 +30,10 @@
 
           .fullstack-portfolio-button ng-click="displaySkillDetails('ruby-on-rails')"
             | {{ 'PORTFOLIO_BUTTON_BACKEND' | translate }} >
-          .fullstack-portfolio-button ng-click="displaySkillDetails('ios')"
-            | {{ 'PORTFOLIO_BUTTON_IOS' | translate }} >
           .fullstack-portfolio-button ng-click="displaySkillDetails('frontend')"
             | {{ 'PORTFOLIO_BUTTON_FRONTEND' | translate }} >
+          .fullstack-portfolio-button ng-click="displaySkillDetails('ios')"
+            | {{ 'PORTFOLIO_BUTTON_IOS' | translate }} >
           .fullstack-portfolio-button ng-click="displaySkillDetails('infrastructure')"
             | {{ 'PORTFOLIO_BUTTON_INFRASTRUCTURE' | translate }} >
 
