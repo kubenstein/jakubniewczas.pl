@@ -1,13 +1,13 @@
 .work-section
   .section-title
-    span.title 
+    span.title
       | {{ 'EDUCATION_TITLE' | translate }}
   .section-body
     .item ng-repeat='item in items'
-      span.item-date 
       span.item-title ng-bind-html="item.title"
+      span.item-date
         | ({{item.date}})
-      span.item-subtitle 
+      span.item-subtitle
         | {{item.subtext}}
       p.item-body
         | {{item.text}}
