@@ -1,0 +1,318 @@
+This blog post is an architecture overview of my latest hobby project - Shards of Tokyo. The project itself is not yet released due to waiting for non-technical processes to finalise, it will be available at [https://shards-of-tokyo.jp/](https://shards-of-tokyo.jp/). The reason I write this post it to structure and conclude my thoughts and efforts in understanding DDD and evensourcing at this point on my DDD/ES research journey. The app is the latests of many tries to dive into DDD. Each leading me deeper and deeper, reviling interesting ideas and challenges and giving me an opportunity to see, test and try different approaches how we can build software.
+
+## DDD
+The main idea was to build an app in which the core app functionalities are modelled separately from everything else. All interactions and all data manipulations should be done in-memory, on ruby objects level. Execution triggers and data sources should be pluggable. In other words the idea was to treat web I/O interface just as <i>some</i> input and <i>some</i> output. Exactly same reasoning is applied to a database. Quoting Uncle Bob <i>“Database is just a detail”</i>. By pushing those layers outside of the core, in fact by pushing all layers outside of the core, execution contexts can be easily swapped without even touching any business logic code.
+
+![SoT architecture, Jakub Niewczas](<%= s3_url('blog/my-latests-ddd-eventsourced-app-architecture-walkthrough/brief-idea.png') %>)
+<i>Pushing all kinds of I/O outside of the App’s core with context agnostic business logic.</i>
+
+## Eventsource
+ES plays really well with DDD, events structure is flat and simple, so its easy to store (in my other project I [store events as git commits](/#/blog/starboard-git-based-task-managment-tool)), as well as using it internally in `Aggregation Roots` to track changes already made but not yet committed.
+
+Other factor is I’m just fascinated by ES idea, it is portable across all languages and, in fact, I can’t think of any field in which ES, by default, would not transform any given software to behave more like the world it tries to model.
+
+## Architecture overview
+The key architecture points of the app can be described by following points:
+
+- **Entities are POROs** (maybe with some helper utils) that interact with each other and make relationships on ruby level. So for example, `has_many` relationship is done by an ordinary ruby array.
+
+```ruby
+module SoT
+  class Order
+    include Eventable
+
+    def initialize(id:, user:, price:, created_at:, messages: [], payments: [], **_)
+      @id = id
+      @user_id = user.id
+      @price = price
+      @created_at = created_at
+      @_user = user
+      @_messages = messages
+      @_payments = payments
+    end
+    #...
+  end
+end
+```
+
+- **Entity graphs are always fully populated**, guaranteeing that you can always access all nested entities (sometimes with two ways binding), without loading anything else after initial object graph recreation.
+By doing this we can be sure that after the graph is recreated we can do all manipulations in ruby only. There will be no additional calls to any external layers. **The n+1 query problem just doesn’t exist**. Difficulties may start when the list of entities is needed, for example on some index page. Currently I have to load everything, even the data is not needed. I don’t think this is a performance bottleneck because entities are just POROs, compared to AR objects they are way more cheap.
+
+- **Entities can’t spawn themselves**, they are (re)created by their parent models or by `Repository` if there is no parent model. By doing this we always have a place/object to store events change log, always there is an object responsible for creating its children that can later ask for changes to be persisted.
+
+```ruby
+module SoT
+  class Order
+    include Eventable
+
+    # ...
+
+    def add_message(text:, from_user:)
+      message_attrs = {
+        id: GenerateId.new.call,
+        order: self,
+        user: from_user,
+        body: text,
+        created_at: Time.now,
+      }
+      Message.new(message_attrs).tap do |message|
+        @_messages << message
+        add_event(MessageCreatedV1Event.build(message))
+      end
+    end
+
+    #...
+
+  end
+end
+```
+
+- **Every interaction with the system is explicitly modelled by `Workflow` objects**. Those objects retrieve entity graphs, apply and commit necessary changes and also invoke things like sending emails or scheduling background jobs. I like to write them as procedural as possible to easily read the general execution flow. [You may check related post](/#/blog/why-do-we-write-functions).
+
+```ruby
+module SoT
+  module RegisterUser
+    class Workflow
+      # ...
+
+      def call(params)
+        email = params[:email]
+        info = params[:info]
+        session_id = params[:session_id]
+
+        validation_result = Validator.new.call(params)
+        if validation_result.valid?
+          user = create_user(email)
+          create_initial_message(user, info) unless info.to_s.empty?
+          login_token = create_login_token_for_user(user, session_id)
+          send_email_to_user(user, login_token)
+          send_email_to_me(user)
+          Results.new(user, [])
+        else
+          Results.new(nil, validation_result.errors)
+        end
+      end
+
+      # ...
+    end
+  end
+end
+
+```
+
+- **`Workflows` always return a result object**. I learned the key to well layered apps, is well written APIs. If objects respect their contracts, we can easily and confidently integrate everything together. Usually the result object is just a DTO `Struct` without much additional logic, so I like to write the `Result` class definition within a `Workflow`.
+
+```ruby
+module SoT
+  module AddOrderMessage
+    class Workflow
+      # ...
+      def call(params)
+        validation_result = Validator.new.call(params)
+        if validation_result.valid?
+
+          # ...
+
+          Results.new(order_id, [])
+        else
+          Results.new(order_id, validation_result.errors)
+        end
+      end
+
+      # ...
+
+      class Results < Struct.new(:order_id, :errors)
+        def success?
+          errors.empty?
+        end
+      end
+
+      # ...
+    end
+  end
+end
+
+```
+- **`Workflows` have their own internal validation layer** because they interact with data coming form untrusted sources - usually web requests or console commands. After an input is confirmed as valid, we can be sure about data content and types. They also serve as a form of documentation what params are expected. At this point I use basic validation rules in my app but `Validators` are perfect place to apply custom validation solutions like [dry-validation](https://dry-rb.org/gems/dry-validation/) if complexity grows.
+
+- Similar to `Validators`, a `Workflow` can have some supporting objects, like, for example, a Payment Gateway. A Payment Gateway acts nearly identical as `Workflow` - accepts, validates, executes and returns some data. I haven’t established convention for those objects yet, I think they are Workflows on they own but I would like to call them `ServiceObjects` since I don’t consider them as the App “public api”. Haven’t decided yet though…
+
+- **`Repositories` are objects responsible for recreation of whole Entity graphs**. For example, if there is `Order has_many Messages` relation, the `OrderRepository` will queue datasource for both `Order` data and `Messages` data, then rebuild the graph and return it. It is important to notice that `Repository` api should use business vocabulary. No matter where the data comes from, querying a `Repository` should return a fully populated entity graph.
+
+- **`Repositories` also spawn new objects**. I use hashes as IDs so I can assign an ID upfront without the need to wait for ID to be assigned on data commit. From DDD point of view the `User.new` is the moment when a new entity is created. Persisting is just a technical necessity.
+
+```ruby
+module SoT
+  class UserRepository
+    # ...
+
+    def new_user(email:)
+      user_attr = {
+        id: GenerateId.new.call,
+        email: email,
+        payment_gateway_customer_id: nil,
+        created_at: Time.now,
+      }
+
+      User.new(user_attr).tap { |user|
+        user.add_event(UserCreatedV1Event.build(user))
+      }
+    end
+
+    # ...
+  end
+end
+
+```
+
+- **Recreating the graph can be really complicated**, especially when there are two-way bindings between parent and children. In my code the relationships are quite trivial, yet recreation code is already complex and messy. I left it like this but I think pulling some dedicated lib would be reasonable. I was considering [rom-rb](https://rom-rb.org/).
+
+- On the other hand **persisting data is extremely simple** because all a `Repository` has to do to persist an `Aggregation Root` is to persist its uncommitted events. I use `Repositories` to initialise persisting process but in fact all `Repositories` do exactly the same, trivial event saving no matter what `Aggregation Root` they deal with.
+
+```ruby
+module SoT
+  module ResourceSavable
+    def save(obj)
+      APP_COMPONENTS[:event_store].add_events(obj.events)
+      obj.reset_events
+      obj
+    end
+  end
+end
+```
+- **Calculating `CurrentState` is done by reducing events to one, final state**. In my system, it is done synchronously, by subscribing to `EventStore` and applying proper change based on incoming event. Subscribing could be done async by external worker but I decided to go with simpler way for well… simplicity. `CurrentState` itself is a class that has a direct access to db. From `Repositories` point of view its just an `Adapter`.
+
+```ruby
+module SoT
+  class SqlState
+    # ...
+    def initialize(connection_uri, event_store, database_version: '')
+      # ...
+      @event_store = event_store
+      connect_to_event_store if configured?
+    end
+
+    def connect_to_event_store
+      @event_store.add_subscriber(self, fetch_events_from: last_event_id)
+    end
+
+    # ...
+
+    def get_resources(type, search_opts = {}, order_by = [:created_at, :asc], limit = nil)
+      #...
+    end
+
+    def add_resource(type, data)
+      #...
+    end
+
+    def remove_resource(type, search_opts)
+      #...
+    end
+
+    def update_resource(type, id, data)
+      #...
+    end
+  end
+end
+```
+
+- CurrentState schema is something relevant only to relational DBs, thats why I keep schema definition inside `SqlState` class. **On each deployment I recreate all tables and repopulate the data** by applying events one by one. I version tables to keep inter-deployment compatibility. After the old version of the app is sunset, tables from that version are dropped. We have to remember that **the source of truth is in db with events**, `CurrentState` is only a recreatable projection. Interesting thing is that in tests, instead of using `db-cleaner gem` all that is needed to reset db is:
+```ruby
+def state.reset!
+  @database_version += 1
+  configure
+end
+```
+
+- **`EventHandlers` are responsible for modifying `CurrentState` based on an incoming event**. Depending on event type, an adequate `EventHandler` is called. Data changes can’t be done via `Repositories` because that would create a loop. Instead `EventHandlers` have access to `CurrentState`. In short, `Repositories` and `EventHandlers` connect to `CurrentState`. `Repositories` only do queries while `EventHandlers` can CRUD.
+
+```ruby
+module SoT
+  module OrderPriceChangedV1Event
+    NAME = 'order_price_changed_v1'
+    # ...
+
+    def self.handle(event, state)
+      order_attrs = event.payload
+      state.update_resource(
+        :orders,
+        order_attrs[:id],
+        amount: order_attrs[:amount],
+        currency: order_attrs[:currency]
+      )
+    end
+  end
+end
+
+```
+
+- In my architecture **`EventHandlers` are also Event factories** - because they know the best how to prepare an event to be able to handle it later on.
+
+```ruby
+module SoT
+  module OrderPriceChangedV1Event
+    NAME = 'order_price_changed_v1'
+
+    def self.build(order, requester_id: nil)
+      payload = Serialize.new.call(order).slice(:id, :amount, :currency)
+      Event.build(name: NAME, payload: payload, requester_id: requester_id)
+    end
+
+    # ...
+  end
+end
+```
+
+- The thing I was struggling for quite a while was: **should I version events?** I do, I do version events to be able to modify handlers without altering past, already processed events. If we change an `EventHandler`, we would end up with a different `CurrentState`. Also historical events may have incompatible structure which would most likely lead to a crash. Thats why I think versioning events is a good practice. The downside of it is, `EventHandlers` written once will stay in the system forever\*.
+
+<small>*The strategy I see is to snapshot current state at some point, remove previous events and corresponding `EventHandlers`.</small>
+
+Whole flow looks like on the sequence cart below:
+![Sequence Chart, Jakub Niewczas](<%= s3_url('blog/my-latests-ddd-eventsourced-app-architecture-walkthrough/sequence-chart.png') %>)
+<i>A sequence graph of execution flow of changing an `Aggregate Root` by a `Workflow`</i>
+
+
+## Dependency Injection
+Inspired by [dry-auto_inject](https://dry-rb.org/gems/dry-auto_inject/) syntax I build my own custom DI solution, [see here](https://github.com/kubenstein/shards-of-tokyo.jp/blob/master/app/lib/auto_inject.rb). The goal was to:
+
+- Use DI as a system configuration. Instead of having config files and dev modes, switching between tests, dev and production environment is done by injecting different objects.
+- I wanted to limit general number of object in the system to heavily reduce memory footprint of the app. Except `Aggregate Roots` and `DTO`s all objects in the system are created once and reused later on.
+- To be able to reuse objects. But to achieve that, object have to be written in more functional fashion. Most of objects have `call` method and they never mutate its own state.
+
+Example of injecting `Mailer` to a `Workflow`:
+```ruby
+module SoT
+  module AddOrderMessage
+    class Workflow
+      include Import[
+        :mailer
+      ]
+
+      def call(params)
+        # ...
+        if validation_result.valid?
+          # ...
+          message = #...
+          send_email_to_user(message)
+        end
+        # ...
+      end
+
+      # ...
+
+      def send_email_to_user(message)
+        mailer.send_email_about_new_message_to_user(message)
+      end
+    end
+  end
+end
+
+```
+
+### Things in DDD, I haven’t yet figured out
+
+- While doing research on DDD I have a feeling that `Aggregate Roots` are spawned only when the goal is to introduce a change. It looks like having fully populated Entity graph for reading only purposes is something different.. Similar when we want to display a list of Entities but without corresponding, nested relationships How this should be done? I have a feeling that there should be some sort of `View Aggregation Root` that will contain only data used in very specific context..
+- My ES/DDD is still not fully ES. Events are not yet a first-class communication channel. `EventHandlers` don’t dispatch new events. `Repository` layer set some sort of mental line: towards core things are just normal OOP, towards datastore things are saved as events with `CurrentState` as a redundant projection. Moving towards fully ES system will be the next step on my DDD/ES journey.
+
+Whole project can be found on my [Github](https://github.com/kubenstein/shards-of-tokyo.jp).
