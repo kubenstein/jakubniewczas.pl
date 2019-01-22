@@ -69,6 +69,7 @@
       text-align: left;
       background-color: $light_gray;
       white-space: pre;
+      -webkit-overflow-scrolling: touch;
     }
 
     a {
