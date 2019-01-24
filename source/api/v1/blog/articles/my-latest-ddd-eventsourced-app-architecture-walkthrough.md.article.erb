@@ -3,7 +3,7 @@ This blog post is an architecture overview of my latest hobby project - Shards o
 ## DDD
 The main idea was to build an app in which the core app functionalities are modelled separately from everything else. All interactions and all data manipulations should be done in-memory, on ruby objects level. Execution triggers and data sources should be pluggable. In other words the idea was to treat web I/O interface just as <i>some</i> input and <i>some</i> output. Exactly same reasoning is applied to a database. Quoting Uncle Bob <i>“Database is just a detail”</i>. By pushing those layers outside of the core, in fact by pushing all layers outside of the core, execution contexts can be easily swapped without even touching any business logic code.
 
-![SoT architecture, Jakub Niewczas](<%= s3_url('blog/my-latests-ddd-eventsourced-app-architecture-walkthrough/brief-idea.png') %>)
+![SoT architecture, Jakub Niewczas](<%= s3_url('blog/my-latest-ddd-eventsourced-app-architecture-walkthrough/brief-idea.png') %>)
 <i>Pushing all kinds of I/O outside of the App’s core with context agnostic business logic.</i>
 
 ## Eventsource
@@ -269,12 +269,12 @@ end
 <small>*The strategy I see is to snapshot current state at some point, remove previous events and corresponding `EventHandlers`.</small>
 
 Whole flow looks like on the sequence cart below:
-![Sequence Chart, Jakub Niewczas](<%= s3_url('blog/my-latests-ddd-eventsourced-app-architecture-walkthrough/sequence-chart.png') %>)
+![Sequence Chart, Jakub Niewczas](<%= s3_url('blog/my-latest-ddd-eventsourced-app-architecture-walkthrough/sequence-chart.png') %>)
 <i>A sequence graph of execution flow of changing an `Aggregate Root` by a `Workflow`</i>
 
 
 ## Dependency Injection
-Inspired by [dry-auto_inject](https://dry-rb.org/gems/dry-auto_inject/) syntax I build my own custom DI solution, [see here](https://github.com/kubenstein/shards-of-tokyo.jp/blob/master/app/lib/auto_inject.rb). The goal was to:
+Inspired by [dry-auto_inject](https://dry-rb.org/gems/dry-auto_inject/) syntax I build my own custom DI solution, [see here](https://gist.github.com/kubenstein/8eedfdda7db288e3ad598e70e8d11f8a). The goal was to:
 
 - Use DI as a system configuration. Instead of having config files and dev modes, switching between tests, dev and production environment is done by injecting different objects.
 - I wanted to limit general number of object in the system to heavily reduce memory footprint of the app. Except `Aggregate Roots` and `DTO`s all objects in the system are created once and reused later on.
