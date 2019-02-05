@@ -1,0 +1,228 @@
+<html>
+<head>
+  <style>
+  @keyframes scaleAnimation {
+    0%   { transform: scale(0.6); }
+    5%   { transform: scale(0.6); }
+    10%  { transform: scale(1.2); }
+    15%  { transform: scale(1); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes colorAnimation {
+    0%   { background-position: 0; }
+    15%  { background-position: 0; }
+    20%  { background-position: -140px; }
+    25%  { background-position: -360px; }
+    80%  { background-position: -360px; }
+    100% { background-position: -1000px; }
+  }
+
+  @keyframes shineMovementAnimation {
+    0%   { left: -15px; transform: scaleX(0.5); opacity: 0; }
+    35%  { left: -15px; transform: scaleX(0.5); opacity: 0; }
+    36%  { transform: scaleX(1); opacity: 1; }
+    38%  { left: 2px; }
+    39%  { left: 0px; }
+    100% { left: 0px; }
+  }
+
+  .wrapper {
+    margin: 250px auto 0;
+    position: relative;
+    width: 85px;
+    height: 102px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #cecece 11%, #ed00b5 11%, #ed00b5 26%, #7f00d6 26%, #6c696f 62%, #6c696f 100%);
+    background-size: 1320px;
+    -webkit-transform-style: preserve-3d;
+    animation: scaleAnimation 5s infinite, colorAnimation 5s infinite, backgroundMixin 5s infinite;
+  }
+
+  .outer > .top_left:before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: 6px;
+    width: 38px;
+    height: 0;
+    border-top: 10px solid white;
+    transform: rotateZ(-12deg);
+  }
+
+  .outer > .top_left:after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: -16px;
+    width: 12px;
+    height: 12px;
+    border: 16px solid #fff;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    border-top-left-radius: 28px;
+  }
+
+  .outer > .top_right:before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: 41px;
+    width: 38px;
+    height: 0;
+    border-top: 10px solid white;
+    transform: rotateZ(12deg);
+  }
+
+  .outer > .top_right:after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 57px;
+    width: 12px;
+    height: 12px;
+    border: 16px solid #fff;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-top-right-radius: 28px;
+  }
+
+  .outer > .bottom_left {
+    position: absolute;
+    top: 22px;
+    left: -110px;
+    width: 50px;
+    height: 79px;
+    border-left: 110px solid white;
+    border-bottom: 110px solid white;
+    border-bottom-left-radius: 98% 90%;
+  }
+
+  .outer > .bottom_right {
+    position: absolute;
+    top: 22px;
+    left: 35px;
+    width: 50px;
+    height: 79px;
+    border-left: 110px solid white;
+    border-bottom: 110px solid white;
+    border-bottom-left-radius: 98% 90%;
+    transform: rotateZ(-180deg) rotateX(180deg);
+  }
+
+  .innerWrapper {
+    position: absolute;
+    top: 23px;
+    left: 14px;
+  }
+
+  .inner {
+    position: relative;
+  }
+
+  .inner > .left:before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    width: 30px;
+    height: 10px;
+    background-color: white;
+    transform: rotateZ(-12deg);
+  }
+
+  .inner > .left:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 30px;
+    height: 64px;
+    background-color: white;
+    border-bottom-left-radius: 100% 80%;
+  }
+
+  .inner > .right:before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 28px;
+    width: 28px;
+    height: 10px;
+    background-color: white;
+    transform: rotateZ(12deg);
+  }
+
+  .inner > .right:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 27px;
+    width: 30px;
+    height: 64px;
+    background-color: white;
+    border-bottom-right-radius: 100% 80%;
+  }
+
+  .inner > .shine {
+    position: relative;
+    animation: shineMovementAnimation 5s infinite;
+  }
+
+  .inner > .shine::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 11px;
+    width: 18px;
+    height: 6px;
+    background: linear-gradient(135deg, #cecece 11%, #ed00b5 11%, #ed00b5 26%, #7f00d6 26%, #6c696f 62%, #6c696f 100%);
+    background-size: 1320px;
+    transform: skewY(-12deg);
+    animation: colorAnimation 5s infinite;
+  }
+
+  .inner > .shine::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 11px;
+    width: 18px;
+    height: 44px;
+    background: linear-gradient(135deg, #cecece 11%, #ed00b5 11%, #ed00b5 26%, #7f00d6 26%, #6c696f 62%, #6c696f 100%);
+    background-size: 1320px;
+    border-bottom-left-radius: 100% 85%;
+    animation: colorAnimation 5s infinite;
+  }
+
+  .info {
+    display: block;
+    margin-top: 50px;
+    text-align: center;
+  }
+
+  .info a {
+    color: #7C0FC7;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="outer">
+      <div class="top_left"></div>
+      <div class="top_right"></div>
+      <div class="bottom_left"></div>
+      <div class="bottom_right"></div>
+    </div>
+    <div class="innerWrapper">
+      <div class="inner">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="shine"></div>
+      </div>
+    </div>
+  </div>
+  <span class="info">Firefox tracking protection icon css recreation. Go to <a href="https://github.com/kubenstein/css-firefox-tracking-protection-icon">Github page</a> for more info.</span>
+</body>
+</html>
