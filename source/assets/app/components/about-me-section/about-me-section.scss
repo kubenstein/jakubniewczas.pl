@@ -37,7 +37,10 @@
 
     .social-item {
       color: $black;
-      font-size: 20px;
+
+      .icon {
+        font-size: 20px;
+      }
     }
   }
 
@@ -65,31 +68,41 @@
   }
 
   .social-item {
-    color: $white;
-    font-size: 32px;
     margin-left: 22px;
-
-    // set fontello font
-    font-family: "fontello";
-    font-style: normal;
-    font-weight: normal;
     display: inline-block;
-    text-decoration: inherit;
-    font-variant: normal;
-    text-transform: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    // -------
+    color: $white;
+    font-size: 12px;
+    text-decoration: none;
 
     &:first-child {
       margin-left: 0;
     }
 
-    &:hover {
+    &:hover .icon {
       -webkit-animation: social-icon-jiggle 1s 1;
       -moz-animation:    social-icon-jiggle 1s 1;
       -o-animation:      social-icon-jiggle 1s 1;
       animation:         social-icon-jiggle 1s 1;
+    }
+
+    .icon {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 32px;
+
+      // set fontello font
+      font-family: "fontello";
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      // -------
+
+      &:first-child {
+        margin-left: 0;
+      }
     }
   }
 

@@ -10,8 +10,16 @@
             | {{ 'ABOUT_ME_TITLE' | translate }}
           span ng-bind-html="'ABOUT_ME' | translate | nl2br"
         .social-section
-          = link_to '&#xf0e6;', '#/blog', title: 'blog', class: 'social-item blog'        
-          = link_to '&#xe802;', 'mailto:niewczas.jakub@gmail.com', title: 'email', class: 'social-item email'
-          = link_to '&#xe801;', 'https://github.com/kubenstein', title: 'github', class: 'social-item github', target: '_blank'
-          = link_to '&#xe800;', 'https://twitter.com/j_niewczas', title: 'twitter', class: 'social-item twitter', target: '_blank'
+          a.social-item href='https://twitter.com/j_niewczas' title='twitter' target='_blank'
+            .icon.twitter &#xe800;
+            | twitter
+          a.social-item href='https://github.com/kubenstein' title='github' target='_blank'
+            .icon.github &#xe801;
+            | github
+          a.social-item href='mailto:niewczas.jakub@gmail.com' title='email'
+            .icon.email &#xe802;
+            | email
+          a.social-item href='/#/blog' title='blog'
+            .icon.blog &#xf0e6;
+            | blog
 warning-section
