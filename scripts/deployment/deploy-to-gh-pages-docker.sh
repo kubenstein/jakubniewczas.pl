@@ -6,6 +6,7 @@ fi
 
 docker run -it --rm \
   -v "$PWD":/usr/src/app \
+  -v "$HOME/.ssh":/root/.ssh \
   -p 3000:3000 \
   jakubniewczas-com-dev \
-  middleman -p 3000
+  middleman deploy

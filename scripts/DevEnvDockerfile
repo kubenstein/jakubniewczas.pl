@@ -2,6 +2,8 @@ FROM ruby:2.3.1-alpine
 
 RUN apk update
 RUN apk add --no-cache \
+        git \
+        openssh \
         make \
         libc-dev \
         g++ \
