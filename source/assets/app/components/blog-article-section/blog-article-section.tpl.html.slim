@@ -9,6 +9,11 @@
       h3.article-title
         | {{article.title}}
 
+      span.date(ng-show="article.date")
+        | {{ 'PUBLISHED' | translate }}
+        | &nbsp;
+        | {{article.date}}
+
       markdowned-text.article-content content="article.content"
 
   comments-section

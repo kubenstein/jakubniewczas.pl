@@ -1,6 +1,13 @@
 @import 'components/common/common';
 
 .blog-article-section {
+  .date {
+    display: block;
+    padding-bottom: 8px;
+    font-size: 12px;
+    color: $black;
+  }
+
   .article {
     padding: 30px 0;
 

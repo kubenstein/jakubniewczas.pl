@@ -9,6 +9,7 @@ angular.module('jakubniewczas')
           function initialize() {
             $scope.article = {
               title: null,
+              date: null,
               content: null
             }
             loadArticleData();
@@ -17,7 +18,7 @@ angular.module('jakubniewczas')
 
           function loadArticleData() {
             loadArticleContent();
-            loadArticleTitle();
+            loadArticleTitleAndDate();
           }
 
           function loadOtherArticlesData() {
@@ -36,10 +37,11 @@ angular.module('jakubniewczas')
             });
           }
 
-          function loadArticleTitle() {
+          function loadArticleTitleAndDate() {
             $http.get('/api/v1/blog/index.json').success(function(response) {
               currentArticleData = selectArticleFromList(response, $routeParams['id']);
               $scope.article.title = currentArticleData.title;
+              $scope.article.date = currentArticleData.date;
             });
           }
 

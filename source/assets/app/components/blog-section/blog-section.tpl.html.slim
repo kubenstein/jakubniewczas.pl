@@ -7,6 +7,11 @@
       a.article-title ng-href="#/blog/{{article.id}}"
         | {{article.title}}
 
+      span.date
+        | {{ 'PUBLISHED' | translate }}
+        | &nbsp;
+        | {{article.date}}
+
       p.article-content
         | {{article.preview}}
 

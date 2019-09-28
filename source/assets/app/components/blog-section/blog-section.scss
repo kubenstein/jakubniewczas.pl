@@ -21,7 +21,13 @@
     line-height: 1.618;
     font-size: 13pt;
     color: $black;
-    padding-top: 8px;
+  }
+
+  .date {
+    display: block;
+    padding: 8px 0;
+    font-size: 12px;
+    color: $black;
   }
 
   .more {
