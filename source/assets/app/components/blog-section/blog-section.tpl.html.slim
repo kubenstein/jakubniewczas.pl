@@ -1,4 +1,12 @@
 .blog-section.inner-wrapper
+  .twitter-pitch.two-cols-narrower
+    .title.col-one
+      | !
+    .pitch.col-two
+      | {{ 'BLOG_TWITTER_PITCH' | translate }}
+      br
+      a.link href='https://twitter.com/j_niewczas' title='twitter' target='_blank'
+        | {{ 'BLOG_TWITTER_PITCH_LINK' | translate }}
   .articles
     .article.clearfix ng-repeat='article in articles'
       a ng-href="#/blog/{{article.id}}"
