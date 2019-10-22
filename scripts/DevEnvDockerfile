@@ -9,6 +9,9 @@ RUN apk add --no-cache \
         g++ \
         nodejs
 
+RUN git config --global user.email "niewczas.jakub@gmail.com" \
+ && git config --global user.name "Jakub Niewczas"
+
 WORKDIR /usr/src/app
 
 COPY Gemfile Gemfile.lock ./
