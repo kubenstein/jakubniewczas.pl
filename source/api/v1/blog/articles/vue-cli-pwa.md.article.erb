@@ -1,0 +1,90 @@
+Recently I was working on a Vue app heavily based on vue-cli with `@vue/cli-plugin-pwa` package added. When enabling PWA support the nearly empty `registerServiceWorker.ts` file is added:
+```js
+import { register } from 'register-service-worker'
+
+if (process.env.NODE_ENV === 'production') {
+  register(`${process.env.BASE_URL}service-worker.js`, {
+    ready() {
+      console.log(
+        'App is being served from cache by a service worker.\n' + 'For more details, visit https://goo.gl/AFskqB'
+      )
+    },
+    registered() {
+      console.log('Service worker has been registered.')
+    },
+    cached() {
+      console.log('Content has been cached for offline use.')
+    },
+    updatefound() {
+      console.log('New content is downloading.')
+    },
+    updated() {
+      console.log('New content is available; please refresh.')
+    },
+    offline() {
+      console.log('No internet connection found. App is running in offline mode.')
+    },
+    error(error) {
+      console.error('Error during service worker registration:', error)
+    }
+  })
+}
+```
+Since this file is nearly empty, containing only empty callbacks I wanted to check if we for sure need it. Below there is the copy of PR I wrote researching the PWA in Vue.
+
+~~~~~~~~~~
+
+### Summary of research I made on PWA
+So [`@vue/cli-plugin-pwa`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa) enables running a page as PWA, which means a page can be installed as a Chrome App on desktops and mobiles. We can't control much how its done nor we can't implement custom behaviours. Its just to turn page into a simple PWA. We can configure basic appearance features but we have no access to underlaying service-worker.
+
+The plugin uses under the hood [`Workbox`](https://github.com/GoogleChrome/workbox) package - is a tool from Google simplifying and providing powerful defaults. `@vue/cli-plugin-pwa` binds to workbox [here](https://github.com/vuejs/vue-cli/blob/master/packages/@vue/cli-plugin-pwa/index.js).
+
+`@vue/cli-plugin-pwa` is very tightly coupled with webpack.
+
+#### Steps to enable PWA (revert the process to disable PWA):
+1) add manifest link to index.html
+```
+<link rel="manifest" href="manifest.json" />
+```
+2) add [`pwacompat`](https://github.com/GoogleChromeLabs/pwacompat) - a tool that grabs page meta data and recreates manifest.json functionality in case of old browsers or old mobile OSs.
+
+```
+<script
+  async
+  src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.10/pwacompat.min.js"
+  integrity="sha384-I1iiXcTSM6j2xczpDckV+qhhbqiip6FyD6R5CpuqNaWXvyDUvXN5ZhIiyLQ7uuTh"
+  crossorigin="anonymous"
+/>
+```
+(can be bundled as well)
+
+3) install `@vue/cli-plugin-pwa`. It will add `register-service-worker` as a dependency, and create `registerServiceWorker.js` file.
+
+4) `import 'registerServiceWorker'` somewhere in the app.
+
+All of those steps are necessary to have PWA enabled, so my initial thought that `registerServiceWorker.js` is not needed was INCORRECT. It is needed! The key to understand is: it is not the actual service-worker code. We don't have much control over actual service-worker as workbox hides it from us.
+
+#### How to run PWA on localhost
+`@vue/cli-plugin-pwa` serves actual fully working service-worker only under production env and only with https enabled. For localhost though, it serves `noopServiceWorker` which is good to test the whole setup. No https is required.
+
+
+1) Disable production check in `registerServiceWorker.ts`. It is not needed as `@vue/cli-plugin-pwa` serves dev version as well. If we don't do this we will see the error:
+```
+"No matching service worker detected"
+```
+
+![pwa debug](<%= s3_url('blog/vue-cli-pwa/no-matching-service-worker-detected.jpg') %>)
+
+2) current `noopServiceWorker` has an issue causing google to show error:
+```
+"Page does not work offline"
+```
+I [submitted a PR](https://github.com/vuejs/vue-cli/pull/5327) fixing it. With changes from the PR we can see everything being correctly installed and install button being displayed.
+
+![install button](<%= s3_url('blog/vue-cli-pwa/install-button.jpg') %>)
+
+#### Current setup
+(removed due to confidentiality...)
+
+#### Conclusion
+We know how exactly to enable and disable PWA now. I think we can keep it so this PR can be closed. Additionally some debugging reviled how to enable staging version of PWA.
