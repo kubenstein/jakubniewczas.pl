@@ -1,6 +1,6 @@
-Adding functionality to an object can be done by mixing a ruby module. I used this approach to add view formatting logic to a model object. In one of projects I was working on, requirement was to convert an article text from markdown to its html representation. Additionally some other transformations had to take place.
+Adding functionality to an object can be done by mixing in a ruby module. I used this approach to add a text formatting logic to a model object. In one of projects I was working on, requirement was to convert an article text from markdown to its html representation. Additionally some other transformations had to take place as well.
 
-Since my initial feeling was that applying markdown functionality is some form of extending object set of features, I decided to go with `obj.extend(module)` solution.
+Since my initial feeling was that applying markdown functionality is some form of extending an object set of features, I decided to go with `obj.extend(module)` solution.
 
 ```ruby
 def article
@@ -21,10 +21,10 @@ module ArticleRemoveOrphansDecorator
 end
 ```
 
-Whats important here is where this code happens? All is done in [view layer](/#/blog/rails-view-layer), which is aware of mixing purpouse and circumstances. It has knowledge how and why to add functionality to other object.
+What is important here is where this code happens? All is done in a [view layer](/#/blog/rails-view-layer). View layer has knowledge why and how to add functionality to an object, yet not poluting whole system.
 
-Alternatively we could create formatting method that takes article content and returns markdowned text.
+Alternatively we could create formatting method that takes an article's content and return markdowned text.
 
-Ruby module can be shared across many usecases which is big advantage (as same as method approach). Disadvantage I see is, we irreversibly modify an object.
+A ruby module can be shared which is a big advantage (same as a method approach). The only disadvantage I see is, we irreversibly modify an object, thou this object is already in a view layer so at the end of execution flow.
 
-I don’t have a strong opinion, yet I find this approach very interesting.
+Very interesting.
