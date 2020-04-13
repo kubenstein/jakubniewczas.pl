@@ -1,16 +1,16 @@
-As a freelancer I was asked to develop a home page website for a violin artist Aleksandra Kuls. After familiarising myself with requirements, I decided to build the site using Middleman static sites generator. Later on, but still keeping Middleman as a build tool, I refactored the project using DDD technics [achieving quite interesting technical characteristics](/#/blog/ddd-middleman-as-view-plugin). The main advantage of DDD approach was separating the page logic from its persistence infrastructure.
+As a freelancer I was asked to develop a website for a violin artist Aleksandra Kuls. I decided to build the site using Middleman static sites generator. Later on, but still keeping Middleman as a build tool, I refactored the project using DDD technics [achieving quite interesting technical characteristics](/#/blog/ddd-middleman-as-view-plugin). The main advantage of DDD approach was separating the page logic from its persistence infrastructure.
 
-With rare, yet regular content updates, I thought it would be quite convenient to have a web-based admin panel where I can quickly update the artist’s concerts schedule.
+With rare, yet regular content updates, It would be quite convenient to have a web-based admin panel where I can quickly update the artist’s concerts schedule.
 
 ### The Plan
-Knowing how well-made the main page (the Middleman one) is written, I instantly knew, I can easily plug an additional data source. To use a remote database, all I needed was to write another data adapter and inject it instead of previous, yml one. Having data stored in an external database allows me to write a completely separate Admin Panel app.
+Knowing how well-made the main page (the Middleman one) is written, I instantly knew, I can easily plug an additional data source. To use a remote database, all I needed was to write another data adapter and use it instead of yml one. Having data stored in an external database allows me to write a completely separate Admin Panel app.
 
-The main page is a static website, so to commit changes I need to rebuild it. Unfortunately, on Heroku, this can be done only by `git push`. Adding an empty commit, then pushing the repo is the only way to go.
+The main page is a static website, so to reflect any change I need to rebuild the whole website. Unfortunately, on Heroku, this can be done only by `git push`... Adding an empty commit, then pushing the repo is the only way to go.
 
 #### The Admin Panel
 I decided to write an admin panel as a react-redux-express app. I picked MongoDB as a database because it is distributed as a npm package. All dependencies, both the client and the database engine inself, are installed with an ordinary `npm i`.
 
-Many interesting decisions related with React and Redux had to be made, which I will try cover in future blogposts, but the one I want to discuss here is a Heroku redeployment. I use `nodegit` npm package that provides all git features in an async node-like way. Instead of discussing steps the app needs to do as a parts of the redeployment process, please take a look at `deploy()` method:
+Many interesting decisions related with React and Redux had to be made, which I will try cover in future blogposts, but the one I want to discuss here is a Heroku redeployment. I use `nodegit` npm package that provides all git features in an async node-like way. Instead of discussing steps the app needs to do as a parts of the redeployment process, please just take a look at `deploy()` method:
 
 ```
   deploy(statusUpdateCallback, errorCallback) {
@@ -39,10 +39,10 @@ Diving deeper into the `deployPush()` we can see:
   }
 ```
 
-We push twice, in fact. The first push is the push with an empty commit - it is required for a rebuild triggering. The second one is a form of a rollback commit, just not to unnecessarily pollute a git repo I force push back to the orginal commit. A link to the project code can be found at the bottom of the blogpost.
+We push twice. The first push is the push with an empty commit - it is required for a rebuild triggering. The second one is a form of a rollback commit, just not to unnecessarily pollute git repo. A link to the project code can be found at the bottom of the blogpost.
 
 #### Progress Notifications
-In the code above we can see several calls to the `statusUpdateCallback()` method. Express server injects this callback to the Heroku Deployer, to be notified about a progress of a deployment.
+In the code above we can see several calls to the `statusUpdateCallback()` method. Express server injects this callback to the Heroku Deployer service object. It will be needed to notify about progress of a deployment.
 
 ```
 function startDeployment(socket) {
@@ -57,13 +57,13 @@ function startDeployment(socket) {
 }
 ```
 
-Progress messages are directly pushed, through a WebSocket, to a react client. End result looks like this:
+Progress messages are directly pushed through a WebSocket to react client. End result looks like this:
 
 ![Development Console Jakub Niewczas](<%= s3_url('blog/static-middleman-page-dynamic-react-admin-panel-and-heroku-redeployments/deployment-console.gif') %>)
 
 
 ### The Main App changes
-On the main app, as I expected, only writing a new adapter was needed. It was 3rd adapter. First is a yml, and the second a memory one. With an adapter interface already defined, providing a MongoDB adapter was a trivial task.
+On the main app only adding new adapter was needed. It was 3rd adapter. First is a yml, second is a memory one. With an adapter interface already defined, providing a MongoDB adapter was a trivial task.
 
 The Main Page code can be found [here](https://github.com/kubenstein/aleksandrakuls.com).
 
