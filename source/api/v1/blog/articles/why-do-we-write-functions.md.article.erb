@@ -1,25 +1,23 @@
-In any application, functions or methods are considered the smallest code units. Nearly like a mathematical function, eventually all programming efforts boil down to provide some output from a particular input. It can be a click on an icon in a windowed application, triggering some action in a video game or, as in web development, sending a request. In web development, because of stateless nature of http protocol, the input-output relation is even more emphasised.
+In any application, functions or methods are considered the smallest code units. Nearly like a mathematical function, eventually all programming efforts boil down to provide some output from a particular input. It can be a click on an icon in a windowed application, triggering some action in a video game or, as in web development, sending a request. In web development the input-output pattern is even more emphasised because of stateless nature of http protocol.
 
-From this perspective any system is, in fact, just a one, big function. User wants to buy things online, that's the function of Ebay or Amazon etc. User wants to browse products, that's the function of product page on those portals. User wants to finally purchase what he has in his shopping cart, that's the function of some buy button.
+From this perspective any system is, in fact, just one, big function. User wants to buy a product online, that's the function of Ebay or Amazon etc. User wants to browse products, that's the function of product page on those portals. User wants to finally purchase whats in a shopping cart, that's the function of buy CTA button and corresponding logic.
 
-As a programmers, we know how complex systems can be. Knowing all those usecases, all integrations and supporting code, saying that system is just some function is quite a simplification. Important thing is each function represents some level of abstraction. It groups things that we can talk about without being distracted.
+As programmers, we know how complex systems are. Knowing all those usecases, all integrations and supporting code, saying a system is just a function, is quite a simplification. But it is exactly how it is. Each function represents a very specific level of abstraction, grouping things we can talk and reason about without being distracted.
 
-Each function focuses on important details from its level and keep rest just <i>fairy understandable</i>.
+Each function should focus on important details from its own level keeping rest just <i>fairy understandable</i>.
 
-Those details are reviled because, in context of the function, those matter. If details are from different abstraction level, usually person who reads a function considered them, often unconsciously, as a code noise.
+Reviled details should be only those that matter. When details are from a different abstraction level, a reader will get confused, considered majority of a code as a annoying noise.
 
-### What is important for details parts?
-Details part should focus on things that really matter. Usually `if`s or other control flow are those things. Those are essence of the function.
+### What is important?
+Content of a function should focus only on things that really matter. Usually `if`s, loops and `return`s are those things. Those are the essence of functions.
+On the other hand invoking other functions should be done in <i>fairy understandable</i> way. A reader should understand what a function will do without telling too much unimportant implementation details.
 
-### What is important for <i>fairy understandable</i> parts?
-Those should be fairy understandable! Those should tell what the function will do without telling too much unimportant details. Usually telling anything about a particular implementation is already too much. We hide details in a separate function or we can [delegate execution to a different object](/#/blog/what-kind-of-code-I-want-to-see-in-controllers).
-As a function reader, I should be fully aware where I am and what is going to happen next. Do I really know what does it mean to `charge_user(user, amount)`? yes and no, fairy enough.
+As a reader, I should be fully aware where I am and what is going to happen next. For example, `charge_user(user, amount)` tells us the general purpose confidently yet hides all the details.
 
-Good naming is the key and all programmers know that very well. For sure also know how hard can be to came up with a meaningful so, descriptive and not too detailed, name. Sometimes name is already used, sometimes semantically name is the same as name of some other function. Sometimes the best name we can think of is `doSomethingIfNeeded`.
-Problem with names that have `and` or `if` is that, from reader perspective, we are forced to think about some details that should be hidden. From writer perspective it's a hint that system in that area may required little redesign becasue the function doesn’t represent any higher level concept.
+Good naming is the key and all programmers know that very well. Also know how hard can be to came up with a meaningful so, descriptive and not too detailed, name. Sometimes the best name we can think of is `doSomethingIfSomething`. Often it's a hint a function doesn’t represent any higher level concept.
 
 ### Bash script example
-Recently I had to write a few bash scripts. Text manipulation in Bash or piping things from command to command usually makes code quite messy. I like to start with a `main` function and write step by step what will be executed.
+Whenever I have to write bash scripts I follow same writing strategy. I like to start with a `main` function and write step by step what will be executed.
 
 ```bash
 function main() {
@@ -38,13 +36,15 @@ function main() {
 main
 ```
 
-Above example is taken from one of my project, see [here](https://github.com/kubenstein/docker-webserver-vps-setup/blob/master/bootstrap.zip/setup-containers-configuration/configurate.sh).
+Above example is taken from one of my project, see [docker-webserver-vps-setup](https://github.com/kubenstein/docker-webserver-vps-setup/blob/master/bootstrap.zip/setup-containers-configuration/configurate.sh) on my Github.
 
 ```
 configure.sh -> main -> setup_git_receiver_storage -> docker command
 ```
 
-Each level tells enough to understand what will happen. Lets take a look at `setup_git_receiver_storage` function. We know we are dealing with some containers, we see that a container may exist and if so, we run a docker command. All is fairy understandable.
+Each level tells enough to understand where we are and what will happen next.
+
+Lets take a look at `setup_git_receiver_storage` function. We know we are dealing with some containers, we see a container may exist but may also not exist. if it doesnt, we run a docker command. All is fairy understandable.
 
 
 ```bash
@@ -59,9 +59,9 @@ function setup_git_receiver_storage() {
 ```
 
 ### Ruby specs example
-Other example which I like to show is a rspec code from one of my project. Especially in a test codebase, functions have to tell a clear story. Usually we look at a test when that test fails. Often the test is not related with a feature we are currently working on. Readability of the test is crucial to understand what we just broke.
+Other example which I like to show is a rspec code from one of my project. Especially in a test codebase, functions have to tell a clear story. Usually we look at a test when that test fails. Readability of the test is crucial to understand what we just broke.
 
-I like to write specs nearly as it would be a Cucumber file. Building high level DSL lets me understand what feature and what part of code we are dealing with. Then we dive into sub functions to look for more and more details.
+I like to write specs nearly as it would be a Cucumber file. Building high level DSL allows me to understand what feature and what part of code we are dealing with. Then we dive into sub functions to look for details.
 
 ```ruby
 it 'includes branches diff' do
@@ -72,6 +72,6 @@ it 'includes branches diff' do
 end
 ```
 
-Test like this is short and descriptive. It shows sequence of events and expectations. By passing variable, relation between steps is clear.
+Test like this is short and descriptive. It shows sequence of events and expectations. By passing variables, relations between steps are clear.
 
-Programmers with some experience usually already have developed most of those guides and heuristics. I also intuitively feel when code is readable or when something is still out of place. I was glad to learn about the reason. It is all about mixing abstraction levels. Understanding and classifying code inside functions based on that criteria is another solid tool in my craftsmanship toolbox.
+Programmers with some experience usually already have developed most of those guides and heuristics. I also intuitively feel when code is readable or when something is still out of its place. I was happy to learn about the reason of such a feelings. It is all about mixing abstraction levels. Understanding and classifying code inside functions based on that criteria is another solid tool in my craftsmanship toolbox.
