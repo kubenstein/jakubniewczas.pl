@@ -1,4 +1,4 @@
-Releasing an npm module can be a bit tricky because, as in case of every library or utility tool, you can't predict how people are going to use it. Compared to fully functional application, where you are aware of, and then program most of usecases. Libraries don't have that luxury.
+Releasing an npm module can be a bit tricky. Especially when releasing a library or an utility tool, you can't predict how people are going to use it. Compared to fully functional application, where you are aware of most of usecases, libraries don't have that luxury.
 
 I like to build tools that do relatively one thing. Relatively means solving one problem a user has. Under the hood it may require to pull other, more sophisticated tools but from a usecase perspective it is just one problem-solving unit.
 
@@ -24,12 +24,10 @@ The Starbucket npm module file structure is listed below:
 ```
 
 #### The lib source code (1)
-The place where all the source code sits. As I noticed, it is a standard to include also original sources into npm package.
+The place where all the source code sits. It is a standard practice to include also original sources into an npm package.
 
 #### The lib distribution version (2/3)
-I introduced distribution version of the lib to extend a range of supported node versions. I use webpack to compile the code to vanilla js to be sure, the lib can be used on nearly any node version. Starbucket uses lots of strict backend resources, so by definition can’t be run in a browser, but in other project I successfully [use exactly same code](#/blog/current-state-in-event-sourcing) across front and backend.
-
-I prevent webpack from minifing the dist code because, I myself, also occasionally dive into code of some other library for debugging purposes. Additionally, on a backend, minification is actually not needed.
+I introduced distribution version of the lib to extend a range of supported node versions. I use webpack to compile the code to vanilla js to be sure, the lib can be used on nearly any node version. Starbucket uses lots of strictly backend resources, so by definition can’t be run in a browser, but in other project I successfully [use exactly same code on both ends](#/blog/current-state-in-event-sourcing) across front and backend.
 
 Here is webpack config I use:
 
@@ -99,7 +97,7 @@ output: {
 
 Those settings instruct webpack to add special code at the beginning of bundled file that allows Starbucket lib to be required by external scripts.
 
-It is worth mention, that entry point for a webpack bundling process is special export module definition file  - `lib.js`. It allows to require each component individually:
+Entry point for a webpack bundling process is special export module definition file  - `lib.js`. It allows to require each component individually:
 ```
 exports.Starbucket = require('./lib/starbucket.js')
 exports.GitServer = require('./lib/git-server.js')
@@ -109,7 +107,7 @@ exports.ProxyServer = require('./lib/proxy-server.js')
 
 #### The executable client (4)
 
-The executable client, a script in a `bin/` folder, represents the main usecase. It is a usecase, I as a developer, predict to be the primary way of using my tool. Tools usually have such a usecase, libs rather not.
+The executable client, a script in a `bin/` folder, represents the main usecase. It is a usecase, I as a developer predict to be the primary way of using my tool. Tools usually have such a usecase, libs rather not.
 
 In Starbucket the client configures and starts Starbucket server. It is not only a runner but also a form of documentation. It shows what params I can pass, what are default settings, and generally it explains how to use the tool.
 
@@ -144,6 +142,6 @@ If you install the package globally, the command line program is available under
 `main` key instructs what actually should be included when a node script `require('starbucket')`.
 
 ### Boilerplate
-During development of an npm module or a ruby gem, I noticed that the code responsible for packing the solution is quite complex and challenging. I recommend to set those things very soon and have fully functional building and releasing process ready from day one. In fact, having  a releasing piepeline ready is called having a "walking skeleton" and sometimes a special 'zero' iteration is dedicated for such a setup.
+During development of an npm module or a ruby gem, I noticed that the code responsible for packing the solution is quite complex and challenging. I recommend to set those things very soon and have fully functional building and releasing process ready from day one. In fact, having a releasing piepeline ready early is called a "walking skeleton". Sometimes a special 'zero' iteration is dedicated for such a setup.
 
 Starbucket code can be found on [Github](https://github.com/kubenstein/starbucket).
