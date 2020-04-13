@@ -1,15 +1,15 @@
-During developing of [Plant Calculator Project](http://cim-mes.com.pl/plant-selector/), quite unusual, thus interesting challenge arised. Main goal of the project was to provide a list of plants filtered by very specific cryteria. Additionally, based on configuration of those cryteria, system should calculate duration and kind of watering over the year that is required for effective growing of a plant.
+During developing of [Plant Calculator Project](http://cim-mes.com.pl/plant-selector/) ([backup](https://plant-calculator.herokuapp.com/)), quite unusual, thus interesting challenge arised. Main goal of the project was to provide a list of plants filtered by a very specific cryteria. Based on those cryteria, system should calculate required duration and watering characterisitc for an effective growing of a plant.
 
 ![PlantCaluculator Jakub Niewczas](<%= s3_url('blog/storing-map-data-as-image/plant-calculator-animation.gif') %>)
 
-Plant Calculator is a tool and its main purpose is to solve or provide data in easy and useful way. With database of plants already prepared by a client (some transformation was still needed) the only missing part was to correlate a special geo-position information with a set of filters as a clickable map. Unlucky distribution of those zones was provided to me as images.
+Plant Calculator main purpose is to provide and present data in an easy and useful way. With database of plants already prepared by a client (some transformation was still needed) the only missing part was to mariage geo-position information with a set of filters as a clickable map. Distribution of those zones was provided to me as images.
 
-My initial thought was to transform pixels to database point representation and based on this apply proper SQL filtering. Even after removing points that make no sense, like seas areas, amount of data was enormous.
+My initial thought was to transform pixels to database records and based on this apply proper SQL filtering. Even after removing points that bring no useful information (seas areas) amount of data was enormous.
 
-I realised that for purposes of clickable UI, an image may be the best representation of map data. Each pixel color represent proper zone.
+I realised for purposes of clickable UI, an image may be the best representation of map data. Each pixel color represent proper zone after all!
 
-After sharping image edges and forcing very narrow set of colors, I was able to use images as first-class data stores.
-In application clicking on the map triggers a `mapClick` function.
+After sharping image edges and forcing very narrow set of colors, I was able to use images as <i>first-class</i> databases.
+In the app clicking on the map triggers a `mapClick` function.
 
 ```javascript
 $scope.mapClick = function(event) {
