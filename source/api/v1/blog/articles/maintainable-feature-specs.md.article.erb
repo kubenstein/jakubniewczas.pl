@@ -1,8 +1,10 @@
-Features specs are specs in which a whole feature is considered a testing unit. Each programmer may understand what is "a feature" a bit different but for me features specs are usually related with end-to-end testing - testing a system by simulating user actions and behaviour against that system UI.
-I noticed that the key to have readable and maintainable specs is to pay a great attention not to mix code abstraction levels. I wrote a [separate blog post](#/blog/why-do-we-write-functions) about this, feel free to check it also.
+Features specs are specs in which a whole feature is considered a unit. Each programmer may understand what "a feature" is a bit different but for me features specs are usually related with end-to-end testing - testing a system by simulating user actions and behaviour against system UI.
+I noticed that the key to have readable and maintainable specs is to pay a great attention not to mix code abstraction levels. I wrote a [separate blog post](#/blog/why-do-we-write-functions) about this, feel free to check it.
 
 ### Structure
-I follow `given, when, then` structuring but I often skip writing those words explicitly. Especially `given` word, as well as, a whole its part can be omitted. From a client/spec reader perspective some parts are implicitly obvious, for example that there is a user and that user is already logged in. Or that we have to visit main page first. I try to move those steps out of a spec block, leaving only the esense of what is being tested.
+I follow `given, when, then` structures but I often skip writing those words explicitly. Especially `given` word or whole its part can be omitted. From a client/spec reader perspective some parts are implicitly obvious. It is obvious that there is a user and that user is already logged in. Or that we have to visit the main page first.
+
+I try to move those steps out of a spec block, leaving only the essence of what is being tested.
 Adding user creation or logging step will just decrease spec readability.
 
 `Then` word also can be skipped in most cases because most cases have only one final assertion. However sometimes if we want to emphasise testing a change in a system, adding `then` may improve readability.
@@ -15,19 +17,16 @@ it('allows to change user nickname', () => {
 });
 ```
 
-I encapsulate every single action in a well named corresponding step helper. Clicking tests often have to operate on a website DOM level which from spec perspective is completely not important and noisy. Sometimes steps can be reusable, often though, it is just 1-1 relation.
-
-I use steps params to build a relation between `when` and `then` steps. This way I can clearly see the connection, highlighting why do we expect some value or action to happen.
-
+I encapsulate every single action in a well named corresponding step helper. Clicking tests often have to operate on a DOM elements which from spec perspective is a not important detail. Sometimes steps can be reusable, often though, it is just 1-1 relation.
 
 ![Spec structure, Jakub Niewczas](<%= s3_url('blog/maintainable-feature-specs/spec-structure.jpg') %>)
 <i>Spec structure</i>
 
 ### Scaling
-At the beginning I put all steps in a single file. After a while patterns will emerge naturally. Usually steps are grouped by type: `given`, `when`, `then` or by system area like `login page`, `settings page` etc. If it becomes too clumsy and unreadable I split steps into smaller files. File structure is not that important as a responsibility/abstraction layering and I keep it loosely organised. True structure will emerge naturally.
+At the beginning I put all steps in a single file. After a while patterns will emerge naturally. Usually steps are grouped by type: `given`, `when`, `then` or by system area like `login page`, `settings page` etc. If it becomes too clumsy and unreadable, I split and extract steps into separate files. File structure is not that important - true structure will emerge eventually.
 
 
-Before, I used to add `given, when, then` words as prefixes to spec steps helpers method names, so `whenVisitingMainPage()`, but recently I found an interesting approach/trick to make things even more readable.
+Before, I used to add `given, when, then` words as prefixes to spec helpers method names: `whenVisitingMainPage()`, but recently I found an interesting approach to make things even more readable.
 
 In JS, but I think in ruby would be also easy to implement, my steps definition file looks like:
 
@@ -66,9 +65,9 @@ The magic happens at a first line:
 this.when = this.and = this.then = this.following = this.again = when = then = this;
 ```
 
-With this line I can prefix method inside and outside of steps module. Inside, I can clearly separate actions and assertions: `when.openingSideMenu` vs  `then.userCanSeeColumn`. Outside I can do the same to emphasise spec actions flow.
+With this line I can prefix method inside and outside of steps module. Inside, I can clearly separate actions and assertions: `when.openingSideMenu` vs  `then.userCanSeeColumn`. Outside I can do the same to emphasize spec actions flow.
 
-I added a few more words like `and`, `again` and `following`. With such syntax sugar I can built more readable chains like `when.again.openingCardDetails(...)`.
+I added a few more words like `and`, `again` and `following` so I can buitd more readable chains like `when.again.openingCardDetails(...)`.
 
 ```
 it('allows to change a description', () => {
@@ -80,7 +79,7 @@ it('allows to change a description', () => {
 });
 ```
 
-With such a carefully crafted js module (juggling js scopes, `function() {}` vs `() => {}`) all I need to make those steps available in my test suite, is:
+With such a carefully crafted js module , all I need to make those steps available in my test suite, is:
 
 ```
 require('./support/steps.js')();
