@@ -1,13 +1,13 @@
-Recently, I have been intensively working on [Starboard project](#/blog/starboard-git-based-task-managment-tool) which, due to its domain and technical nature, is designed around event sourcing architecture. Keeping only state deltas in a database has many advantages but eventually in the end an app still needs to know its current state.
+Recently, I have been intensively working on [Starboard project](#/blog/starboard-git-based-task-managment-tool) which is designed around event sourcing architecture. Keeping only state deltas in a database has many advantages but eventually in the end, an app still needs to know its current state.
 
 I introduced the `CurrentState` class that is a read-only projection of the app state. It is calculated by traversing through all existing events and applying each change one by one.
 
-To have a full control of the process, I decided not to pull, for example, Redux, but write my own solution from scratch instead. It is really simple code, that boils down to one loop iterating over events. At the end, I reached quite similar architectural structure as Redux, but in more OO fashion, with explicit communication, and without any dedicated code for connecting to React. In fact, browsing react-redux source code was the trigger to realise all that code is actually not needed. You can apply current state to a React root component and React will take care of propagating changes down the component tree in a optimised way.
+To have a full control of the process, I decided not to pull, for example, Redux, but write my own solution from scratch instead. It is really simple code, that boils down to one loop iterating over events. At the end, I reached quite similar architectural structure as Redux, but in more OO fashion, with explicit communication and without any dedicated code for connecting to React. In fact, browsing react-redux source code was I realised all that code is actually not needed. You can apply current state to a React root component and React will take care of propagating changes down the component tree in an optimised way.
 
 ![ES architecture, Jakub Niewczas](<%= s3_url('blog/current-state-in-event-sourcing/es-architecture.jpg') %>)
 <i>Overall Architecture</i>
 
-I guess there are some cases that my solution doesn’t cover yet, in opposite to Redux, but picking a minimal, sufficient toolset for proper tasks is one of our duties after all (of course with some glimpse at known project future and with some programmers heuristics already developed). I still find passing state object explicitly to React components as an advantage.
+I guess there are some cases that my solution doesn’t cover yet, in opposite to Redux, but picking a minimal, sufficient toolset for proper tasks is one of our duties as devs after all (of course with some glimpse at known project future and with some programmers heuristics already developed). I still find passing state object explicitly to React components as an advantage.
 
 So the `CurrentState` class just holds a few arrays of data (I call them buckets). There are three main types of collaborators:
 
@@ -20,7 +20,7 @@ So the `CurrentState` class just holds a few arrays of data (I call them buckets
 The first two naturally evolved and emerged from the code, fitting nicely to CQRS model.
 
 #### Repositories
-Repositories answer business questions about needed data, like retrieving particular objects or meaningful (filtered and sorted) data subsets.
+Repositories answer business questions about needed data, like retrieving particular objects or data subsets.
 
 ```js
 export default class ColumnsRepository {
@@ -36,7 +36,7 @@ export default class ColumnsRepository {
 ```
 
 #### EventHandlers
-EventHandlers are responsible for modifying `currentState`. As the name explains, they know what to do when a particular event appears. For example, removing a column in a Trello like app would be stored in a DB as a single event:
+EventHandlers are responsible for modifying `currentState`. As the name explains, they know what to do when a particular event arrives. For example, removing a column in a Trello like app would be stored in a DB as a single event:
 
 ```js
 {
@@ -50,7 +50,7 @@ EventHandlers are responsible for modifying `currentState`. As the name explains
 
 ```
 
-but a corresponding event handler would have to have to remove all cards, their comments and finally the column itself. Lets not forget about changing positions of columns that left on a board. That kind of logic has to be implemented somewhere, so being guided and gently pushed to have all transformation functions with same interfaces and collaborators, stored in a one place, helps keeping clean and maintainable code.
+but a corresponding event handler will have to remove all cards, their comments and finally the column itself. Lets not forget about changing positions of columns that left on a board. All that kind of logic has to be implemented somewhere, so being guided and gently pushed to have all transformation functions with same interfaces and collaborators, stored in a one place, helps keeping clean and maintainable code.
 
 ```js
 import { columnRemovedEventType } from '../event-definitions.js';
@@ -74,26 +74,26 @@ export default class ColumnRemoved {
 ```
 
 #### EventStorages
-`EventStorages` are mechanisms that provide a list of events. Additionally, `EventStorages` have to notify about new events when those appear. `CurrentState` is a single source of truth and has only one event storage, however, in my app, frontend uses WebSockets as an eventStorage, so in fact, on frontend side, its not a storage <i>per se</i> but rather a proxy or just a backend client. On the other hand, a backend uses same `CurrentState` class but this time with a “normal” event storage.
+`EventStorages` are mechanisms that provide a list of events.  `CurrentState` is a single source of truth and has only one event storage, however, in my app, frontend uses WebSockets as an eventStorage, so in fact, on frontend side, its not a storage <i>per se</i> but a backend client. On the other hand, a backend uses same `CurrentState` class but this time with a “normal” event storage.
 
 ![Client-Server events flow, Jakub Niewczas](<%= s3_url('blog/current-state-in-event-sourcing/client-server-events-flow.jpg') %>)
 <i>Events propagation path between frontend and backend components.</i>
 
-I also built simple `memory-event-storage.js` which I used to use at the begining of the project when there was no backend yet at all. Now I can use it for testing both frontend and backend or `CurrentState` class itself in separation.
+I also built simple `memory-event-storage.js` which I used to use at the begining of the project when there was no backend at all. Now I can use it for testing both frontend and backend.
 
 ### Current State is not an App state
-I designed my `CurrentState` class to be a lite, read-only version of traditional database. I realised though, that besides data, the app usually has its own state like opened modals or currently logged in user. My approach is to keep those two state sources separated as a classes, but composed as a functionality.
+I designed my `CurrentState` class to be a lite, read-only version of traditional database. I realised though, besides data, the app usually has its own state like opened modals or currently logged in user. My approach is to keep those two state sources separated, combined in a composiition way.
 
 By this separation I can just use `CurrentState` class on a backend while extending it for frontend needs.
 
 ### Too many events to calculate
-First thought I had starting with ES was how does it scale when there are so many events? Even though, in my current project, I don't see any lag during initial events processing, I already have a solution prepared in my mind. Basically what I will do is to periodically create a `snapshot`. A `Snapshot` will be an event (or any other mechanism) that will contain a dump of whole current state of the app.
+When starting with ES I was sceptical how does it actually scale when there are so many events!? So far I don't see any lag during initial events processing, but I already have a solution prepared in my mind. Basically what I will do is to periodically create a `snapshot`. A `Snapshot` will be an event that will contain a dump of whole current state of the app.
 
 In such case:
 
 - `EventHandler` - will just overwrite whole `currentState` based on provided `snapshot`.
 
-- `EventStorage` - will initially look for the most up-to-date `snapshot` treating it as a beginning of the event stream. Such an event storage can be a wrapper for a normal, fully iterating storage. New functionality - new class. No need to modify existing codebase, especially that I can already see some cases when we may want to ignore snapshots and just follow original flow.
+- `EventStorage` - will initially look for the most up-to-date `snapshot` treating it as a beginning of the event stream. Such an event storage can be a wrapper for a normal, fully iterating storage. New functionality - new class. No need to modify existing codebase.
 
 ### ES Observations
 With `Repository -> CurrentState -> EventStorage` the app doesn't even know that its DB is calculated on the fly. Repositories, as they should, are data gateways and what is beyond them is just not the app concern.
