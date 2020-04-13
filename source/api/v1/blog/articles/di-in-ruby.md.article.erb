@@ -1,13 +1,13 @@
-A core idea of Dependency Injection pattern is to be able to run a code while being loosely coupled with its definition. To do this, the dependency has to be passed as a param to a “runner” class.
+Core idea of Dependency Injection pattern is to be able to run a code while being loosely coupled with its definition. To do this, the dependency has to be passed (inject) as a param to a “runner” class.
 
-We usually pass all dependencies to an object as its constructor params. Dependencies can also be passed to ordinary methods but I would call this a `Strategy pattern` rather a Dependency Injection. However, I agree that technically those two do the same, and in a same way, so the difference is very subtle and blurry.
+We usually pass all dependencies to an object through constructor params. Dependencies can also be passed to ordinary methods but I would call this a `Strategy pattern` rather than a Dependency Injection. However, I agree that technically those two do the same and in a same way.
 
-From my experience, dependency injections really shine, or to be honest there is no other way around, while programming in a TDD manner. Usually in a production code there is not many swapping of dependencies. There is a set of dependencies for a particular class that is consider “normal”. However even though in a particular moment production dependencies are rather fix from a usecase logic perspective, it may change when new requirement comes. With DI it is very easy to plug some code “in between” of existing functionality in form of wrappers or middlewares. Tests and maybe different env configurations (production vs development or different levels of logging) use DI.
+From my experience, dependency injections really shine while programming in a TDD manner. With DI it is very easy to plug some code “in between” of existing functionality in form of wrappers or middlewares. Tests, different env configurations (production vs development, different levels of logging) use different DI.
 
-Dependency Injection, by need of providing all dependencies in constructors, can be actually really cumbersome. Mostly because some root component has to accept dependencies for its child components, even though the root component won’t use those dependencies itself. That being said a dependency list can be really huge and passing all those params makes code cluttered and harder to maintain.
+Dependency Injection, by requires providing all dependencies through constructors, which can be actually really cumbersome. Mostly because root component will have to accept dependencies for their children components, even though those root component won’t be using all those dependencies themseves. That being said a dependency list can be really huge and passing all those params makes code cluttered and harder to maintain.
 
 ### The Solution
-Solution is to pass only one object as a dependency - a Dependency Manager. A Dependency Manager usually is a global state, or namespaced to a root app namespace, but thats perfectly acceptable because managing dependencies is a global concern.
+Solution is to pass only one object as a dependency - a Dependency Manager. A Dependency Manager usually is a global state but thats perfectly acceptable because <i>managing dependencies is a global concern.</i>
 
 In Ruby, with a bit of metaprogramming, we can achieve a really beautiful DI DSL.
 
@@ -20,10 +20,10 @@ class SomeClass
   end
 end
 ```
-For those who were also researching the topic, the code above may remind of [dry-auto_inject](http://dry-rb.org/gems/dry-auto_inject/) gem. `dry-auto_inject` is a beautiful piece of software, I highly recommend you to study its code and, in fact, whole [dry-rb](http://dry-rb.org/) ecosystem. Great engineering and lots of inspiration!
+For those who were also researching the topic, the code above may remind of [dry-auto_inject](http://dry-rb.org/gems/dry-auto_inject/) gem. `dry-auto_inject` is a beautiful piece of software, I highly recommend you to study its code. Great engineering and lots of inspiration!
 
 ### My Own “dry-auto_inject”
-While experimenting with `dry-auto_inject`, I came across a problem, that because of how the solution is designed, I can’t pass any params to an object initializer. The initializer params are reserved for auto_injecting dependencies only. That was a problem for me, because I still prefer to have a setup phase in an object lifecycle.
+While experimenting with `dry-auto_inject`, I came across a problem specific to my project - I can’t pass any normal params to an object initializer. The initializer params are reserved for auto_injecting dependencies. That was quite a problem, because I still prefer to have a setup phase in an object lifecycle.
 
 So *I wrote my own implementation* of `Dry::AutoInject` with similar interface. It uses `deps` hash param in initializer to pass all dependencies. Thanks to that nesting, you can explicitly provide your own custom code instead of default injections.
 
@@ -66,7 +66,7 @@ UploadFileFromLocalDirectoryUsecase.new(
 ```
 
 ### How it works
-My solution is a ~40LoC class, that acts as a factory for dynamically created ruby modules. The Factory requires a `resolver`, that can be anything that responds to a `resolve(dependency_name)` method. A ruby module, that is later `include'd`, is returned from a `[]` method. The module adds getters for all dependencies and an initializer that handles custom dependencies passed during object creation. Because of this additional initializer we have to call `super`, but thats perfectly understandable.
+My solution is a ~40LoC class, that acts as a factory for dynamically created ruby modules. The Factory requires a `resolver`, that can be anything that responds to a `resolve(dependency_name)` method. A ruby module, that is later `include'd`, is returned from a `[]` method. The module adds getters for all dependencies and an initializer that handles custom dependencies passed during object creation.
 
 ### The implementation
 I will probably release my solution in a form of a ruby gem, but for now its just a standalone class.
