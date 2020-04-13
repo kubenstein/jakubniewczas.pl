@@ -1,15 +1,15 @@
-This blog post is an architecture overview of my latest hobby project - Shards of Tokyo ([https://shards-of-tokyo.jp/](https://shards-of-tokyo.jp/)). The reason I write this post it to structure and conclude my thoughts and efforts in understanding DDD and evensourcing at this point on my DDD/ES research journey. The app is the latests of many tries to dive into DDD. Each leading me deeper and deeper, reviling interesting ideas and challenges and giving me an opportunity to see, test and try different approaches how we can build software.
+This blog post is an architecture overview of my latest hobby project - Shards of Tokyo ([https://shards-of-tokyo.jp/](https://shards-of-tokyo.jp/)). The reason I write this post is to structure and conclude my thoughts and efforts in understanding DDD and evensourcing at this point on my DDD/ES research journey. The app is the latests of many tries in diving into DDD. Each attempt leads me deeper and deeper, reviling interesting ideas and challenges and giving me an opportunity to see, test and try different approaches how we can build software.
 
 ## DDD
-The main idea was to build an app in which the core app functionalities are modelled separately from everything else. All interactions and all data manipulations should be done in-memory, on ruby objects level. Execution triggers and data sources should be pluggable. In other words the idea was to treat web I/O interface just as <i>some</i> input and <i>some</i> output. Exactly same reasoning is applied to a database. Quoting Uncle Bob <i>“Database is just a detail”</i>. By pushing those layers outside of the core, in fact by pushing all layers outside of the core, execution contexts can be easily swapped without even touching any business logic code.
+The main idea was to build an app in which the core app functionalities are modelled separately from everything else. All interactions and all data manipulations should be done in-memory. Execution triggers and data sources should be pluggable. In other words the idea was to treat web I/O interface just as <i>some</i> input and <i>some</i> output. Exactly same reasoning applies to a database. Quoting Uncle Bob <i>“Database is just a detail”</i>. By pushing those layers outside of the core, in fact by pushing all layers outside of the core, execution contexts can be easily swapped without even touching any business logic code.
 
 ![SoT architecture, Jakub Niewczas](<%= s3_url('blog/my-latest-ddd-eventsourced-app-architecture-walkthrough/brief-idea.png') %>)
 <i>Pushing all kinds of I/O outside of the App’s core with context agnostic business logic.</i>
 
 ## Eventsource
-ES plays really well with DDD, events structure is flat and simple, so its easy to store (in my other project I [store events as git commits](/#/blog/starboard-git-based-task-managment-tool)), as well as using it internally in `Aggregation Roots` to track changes already made but not yet committed.
+ES plays really well with DDD, event structure is flat and simple, so its easy to store (in my other project I [store events as git commits](/#/blog/starboard-git-based-task-managment-tool)), as well as using it internally in `Aggregation Roots` to track changes already made but not yet committed.
 
-Other factor is I’m just fascinated by ES idea, it is portable across all languages and, in fact, I can’t think of any field in which ES, by default, would not transform any given software to behave more like the world it tries to model.
+Other factor is I’m just fascinated by ES idea, it is portable across all languages and, in fact, I can’t think of any field in which ES, would not transform software to behave more like the world it tries to model.
 
 ## Architecture overview
 The key architecture points of the app can be described by following points:
@@ -36,9 +36,9 @@ end
 ```
 
 - **Entity graphs are always fully populated**, guaranteeing that you can always access all nested entities (sometimes with two ways binding), without loading anything else after initial object graph recreation.
-By doing this we can be sure that after the graph is recreated we can do all manipulations in ruby only. There will be no additional calls to any external layers. **The n+1 query problem just doesn’t exist**. Difficulties may start when the list of entities is needed, for example on some index page. Currently I have to load everything, even the data is not needed. I don’t think this is a performance bottleneck because entities are just POROs, compared to AR objects they are way more cheap.
+By doing this we can be sure that after the graph is recreated we can do all manipulations in ruby only. There will be no additional calls to any external layers. **The n+1 query problem just doesn’t exist**. Difficulties may start when the list of entities is needed. Currently I have to load everything, even the data that is not needed. I don’t think this is a performance bottleneck because entities are just POROs, compared to AR objects they are way more cheap.
 
-- **Entities can’t spawn themselves**, they are (re)created by their parent models or by `Repository` if there is no parent model. By doing this we always have a place/object to store events change log, always there is an object responsible for creating its children that can later ask for changes to be persisted.
+- **Entities can’t spawn themselves**, they are (re)created by their parent models or by `Repository` if there is no parent model. By doing this we always have a place/object to store events change log, always there is an object responsible for creating its children that can later ask to persist the changes.
 
 ```ruby
 module SoT
@@ -133,9 +133,9 @@ module SoT
 end
 
 ```
-- **`Workflows` have their own internal validation layer** because they interact with data coming form untrusted sources - usually web requests or console commands. After an input is confirmed as valid, we can be sure about data content and types. They also serve as a form of documentation what params are expected. At this point I use basic validation rules in my app but `Validators` are perfect place to apply custom validation solutions like [dry-validation](https://dry-rb.org/gems/dry-validation/) if complexity grows.
+- **`Workflows` have their own internal validation layer** because they interact with data coming form untrusted sources - usually web requests or console commands. After an input is confirmed as valid, we can be sure about data content and types. They also serve as a form of documentation what params are expected. At this point I use basic validation rules but `Validators` are perfect place to apply any custom validation solutions like [dry-validation](https://dry-rb.org/gems/dry-validation/) if complexity grows.
 
-- Similar to `Validators`, a `Workflow` can have some supporting objects, like, for example, a Payment Gateway. A Payment Gateway acts nearly identical as `Workflow` - accepts, validates, executes and returns some data. I haven’t established convention for those objects yet, I think they are Workflows on they own but I would like to call them `ServiceObjects` since I don’t consider them as the App “public api”. Haven’t decided yet though…
+- Similar to `Validators`, a `Workflow` can have some supporting objects, like, for example, a Payment Gateway. A Payment Gateway acts nearly identical as `Workflow` - accepts, validates, executes and returns some data. I haven’t established convention for those objects yet, I think they are Workflows on they own but I would like to call them `ServiceObjects` since I don’t consider them as the App “public api”. Haven’t decided yet though...
 
 - **`Repositories` are objects responsible for recreation of whole Entity graphs**. For example, if there is `Order has_many Messages` relation, the `OrderRepository` will queue datasource for both `Order` data and `Messages` data, then rebuild the graph and return it. It is important to notice that `Repository` api should use business vocabulary. No matter where the data comes from, querying a `Repository` should return a fully populated entity graph.
 
@@ -167,7 +167,7 @@ end
 
 - **Recreating the graph can be really complicated**, especially when there are two-way bindings between parent and children. In my code the relationships are quite trivial, yet recreation code is already complex and messy. I left it like this but I think pulling some dedicated lib would be reasonable. I was considering [rom-rb](https://rom-rb.org/).
 
-- On the other hand **persisting data is extremely simple** because all a `Repository` has to do to persist an `Aggregation Root` is to persist its uncommitted events. I use `Repositories` to initialise persisting process but in fact all `Repositories` do exactly the same, trivial event saving no matter what `Aggregation Root` they deal with.
+- On the other hand **persisting data is extremely simple** because all a `Repository` has to do to persist an `Aggregation Root` is to persist its uncommitted events. I use `Repositories` to initialise persisting process but in fact all `Repositories` do exactly the same: trivial events saving.
 
 ```ruby
 module SoT
@@ -180,7 +180,7 @@ module SoT
   end
 end
 ```
-- **Calculating `CurrentState` is done by reducing events to one, final state**. In my system, it is done synchronously, by subscribing to `EventStore` and applying proper change based on incoming event. Subscribing could be done async by external worker but I decided to go with simpler way for well… simplicity. `CurrentState` itself is a class that has a direct access to db. From `Repositories` point of view its just an `Adapter`.
+- **Calculating `CurrentState` is done by reducing events to one, final state**. In my system, it is done synchronously, by subscribing to `EventStore` and applying proper change based on incoming event. Subscribing could be done async by external worker but I decided to go with simpler way for well... simplicity. `CurrentState` itself is a class that has a direct access to db. From `Repositories` point of view its just an `Adapter`.
 
 ```ruby
 module SoT
