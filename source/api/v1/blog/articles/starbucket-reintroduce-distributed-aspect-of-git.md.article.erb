@@ -1,28 +1,28 @@
-The idea of redecentralising git repositories again popped in my mind some time ago. It is nothing new and many people mention how actually funny this situation is.
+The idea of redecentralising git repositories popped in my mind some time ago... again... It is nothing new and many people mention how actually funny this situation is.
 
-![Git tagline ](<%= s3_url('blog/starbucket-reintroduce-distributed-aspect-of-git/git-tagline.jpg') %>)
+![Git tagline](<%= s3_url('blog/starbucket-reintroduce-distributed-aspect-of-git/git-tagline.jpg') %>)
 <i>GIT tagline (https://git-scm.com/)</i>
 
-Especially during Github temporary unavailability... The reasons why companies use a centralised repository model can be narrowed to a synchronisation problem. No matter if we talk about a synchronisation between developer-to-developer or computer-to-computer (all kind of CIs and deployments hooks) it is much more easy to use a client-server model. With a single master node, a server, we can build other services around it easily, but, as every dependency, problems with it will cause problems with our infrastructure or workflows as well.
+Especially during Github temporary unavailability... The reasons why companies use a centralised repository model can be narrowed to a synchronisation problem. No matter if we talk about a synchronisation between developer-to-developer or computer-to-computer (all kind of CIs and deployments hooks) it is much more easy to use a client-server model. With a single master node, a server, we can build other services around it easily, but as every dependency, problems with main node will cause problems with our infrastructure as well.
 
 ### The Usecase
-The initial use case, one of many as I think now, is when Github happens to “unicorn”. Each developer can pull Starbucket from npm, start it and continue to work.
-I intentionally keep amount of dependencies low to make installation fast and simple. I was considering using `nodegit` to do all git related work, as I did [here](/#/blog/static-middleman-page-dynamic-react-admin-panel-and-heroku-redeployments), but installing it takes really long.
+The initial use case is when Github happens to “unicorn”. Each developer can pull Starbucket from npm, start it and continue to work.
+I intentionally keep amount of dependencies low to make installation fast and simple. I was considering using `nodegit` to do all git related work, as I did [here](/#/blog/static-middleman-page-dynamic-react-admin-panel-and-heroku-redeployments), but installing it takes really long..
 
 ### First attempt
-In my first design sketch, a system operated on a network with a star topology. Each node ran a local git server and broadcasted events related with code updates to the network. Other nodes pulled from the broadcasting node.
+In my first design sketch, a system operated on a network with a star topology. Each node ran a local git server and broadcasted to the network events related with code updates. Other nodes pulled from the broadcasting node.
 
 <i>A communication schema. Broadcasting an update event from a node:</i>
 ![Starbucket Star Topology](<%= s3_url('blog/starbucket-reintroduce-distributed-aspect-of-git/star-topology.gif') %>)
 
-I used `Serf` for a service discovery and bunch of scripts to execute git commands and glue all together.
+I used `Serf` for a discovery service and bunch of scripts to execute git commands glueing everything together.
 
 The project was shutdown when I was trying to ‘hide’ Serf dependency by dockerizing the code. I faced some problems with accessing host network from a docker container.
 
 ### Final Architecture
-To avoid as much dependencies as possible I decided to use NodeJS ecosystem. By picking only one language I narrowed dependencies to node-based dependencies only. I picked NodeJS becasue I found packages that solve most of low level infrastructure problems. Additionally I can use npm as a distribution channel. You can read about how do I prepare a lib for a release [here](/#/blog/blog/releasing-npm-module).
+To avoid as much dependencies as possible I decided to use NodeJS ecosystem. By picking only one language I narrowed dependencies to node-based only. I picked NodeJS becasue I found packages that solve most of low level infrastructure problems. Additionally I can use npm as a distribution channel. You can read about how do I prepare a lib for an npm release [here](/#/blog/blog/releasing-npm-module).
 
-The Package that is responsible for a service discovery and basic events broadcasting also provides a mechanism to elect (and reelect) a master node. Having this already provided I changed the system design to a master-slaves model, where the master role can be transferred dynamically to any other node.
+The Package that is responsible for a service discovery and basic events broadcasting also provides a mechanism to elect (and reelect) a master node. Having this already provided, I changed the system design to a master-slaves model. The master role can be transferred dynamically to any other node.
 
 There are 3 main components on each node:
 
@@ -36,7 +36,7 @@ There are 3 main components on each node:
 ![Starbucket Master-Slaves Topology](<%= s3_url('blog/starbucket-reintroduce-distributed-aspect-of-git/master-slaves-topology.gif') %>)
 
 
-From a user perspective we always communicate only with a local proxy server. It will proxy to currently selected master node git server.
+From a user perspective we always communicate only to a local proxy server. It will proxy to currently selected master node git server.
 
 The heart of the system is a `onMasterChosen` method which handles election results of a new master node.
 
@@ -53,9 +53,9 @@ onNewMasterChosen (netNodeInfo) {
 }
 ```
 
-As we can see when a new master is selected, `gatewayServer` switches its target to that master node. Additionally we subscribe to a `update-available` events channel. When the event arrived a local gitServer pulls all data from the broadcasting node.
+As we can see when a new master is selected `gatewayServer` switches its target to that node. We also subscribe to a `update-available` events channel. When an event arrived a local gitServer pulls all data from the broadcasting node.
 
-On the other hand, a master node, right after being elected, reconfigures itself as well. This is done by a `onPromoteToMaster` method.
+On the other hand, a master node, right after being elected, reconfigures itself.
 
 ```javascript
 onPromoteToMaster () {
@@ -64,12 +64,12 @@ onPromoteToMaster () {
 }
 ```
 
-Important to notice here is that the node gateway reconfigures itself to point to git server on the same node.
+The gateway on the master node reconfigures itself to point to its own local git server.
 
-Having a gateway server switching from one node to another (in some cases to itself) makes a master node and a slave node behaving nearly identical. Reducing differences between nodes roles greatly simplifies the system as a whole.
+Having a gateway server switching from one node to another (in some cases to itself) makes a master node and a slave node behaving nearly identical. Reducing differences between nodes roles greatly simplified the system as a whole.
 
 ### Note on testing
-I went through 3 phases of testing Starbucket. At first, when I was experimenting with a main idea, the code was still in a dirty, hackathon-ish shape. All was in a one file, changing very frequently. At that stage I had two console windows opened and just manually test and debug the code. When the core idea was proofed, I started to extract and clean the code. I wrote only integration tests, skipping units tests at all, because I knew that details of implementation may change. Thanks to making tests automatic, I caught a few additional cases that manual testing missed. Mostly raceconditions on stopping/restarting the service. At that stage I was confident that Starbucket works as it should. I still wanted to see though, how it behaves in a real multi-computers environment.
+I went through 3 phases of testing Starbucket. At first, when I was experimenting with a main idea, the code was still in a dirty, hackathon-ish shape. All was in a one file, changing very frequently. At that stage I had two console windows opened and just manually test and debug the code. When the core idea was proofed, I started to extract and clean the code. I wrote only integration tests, skipping units tests at all, because I knew that details of implementation may change. Thanks to making tests automatic, I caught a few additional cases that manual testing missed. At that stage I was confident that Starbucket works as it should. I still wanted to see though, how it behaves in a real multi-computers environment.
 
 To spawn a whole fleet of computers I used [hyper.sh](https://hyper.sh/). It is extremely convenient docker hosting service. Creating a node and installing Starbucket on it can be done really easily:
 
