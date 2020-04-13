@@ -1,8 +1,9 @@
-During recent years we can see significant increase in interest in static pages. Simplicity in hosting, mixed with an ability to still build fully dynamic pages are key points here. From ruby stack I usually use Middleman.
-I’ve always seen many advantages of splitting code into smaller components and trying to keep proper layering, so DDD approach is very interesting for me. Promise of, for example, separation of persistence and business logic and ability to change each layer independently, is something that really attracts my attention.
-Many concepts from DDD are mixed in Rails world into a single class, making things really hard to change later.
+During recent years we can see significant increase in interest in static pages. Hosting static pages is extremely simple, yet we don't have to compromise on dynamic and convenient dev environment. For ruby stack I usually use [Middleman](https://middlemanapp.com/).
 
-Middleman offers yml-based form of storing data inside a template. Quite quickly I realised it would be convenient just to have OO representation of those data. I started by introducing a `Repository` with hardcoded list of `OpenStruct`s.
+I’ve always seen many advantages of splitting code into smaller components and trying to keep proper layering, so DDD approach is very interesting for me. Promise of separation of persistence and business logic and ability to change each layer independently, is something that really excites me.
+Many concepts DDD explicitly separate are mixed togather in Rails world within single class.
+
+Middleman offers yml-based form of storing data inside a template but I quickly realised it would be much convenient just to have OO representation of data. I started by introducing a `Repository` with hardcoded dummy list of `OpenStruct`s.
 
 ```ruby
 module Ak
@@ -17,9 +18,9 @@ module Ak
 end
 ```
 
-This is all you need to fetch objects. Repository defines a business interface. In this case it is quite generic `all` but that's exactly what, from the page perspective, is expected.
+`NewsRepository` provides `all` method that will be utilised by a page. Thanks to Repository layer, pages dont't have to worry where the data come from.
 
-Later on, I changed OpenStruct to PORO to have more control over params. Now having Entities ready, you can iterate over them and just ask for well defined attributes.
+Next step was to changed OpenStruct to PORO to have more control over params. Having Entities ready, we can iterate over them and use api they expose.
 
 ```ruby
 def all
@@ -44,10 +45,10 @@ end
 ```
 
 ### Inversion of Dependencies
-Interesting to notice is, who is actually calling who? Middleman is calling our logic, which means, we are no longer depending on 3rd party tools. It is generally better when a framework calls your code than your code calls a framework. Who supposed to serve who actually!
+Interesting aspect to notice is: who is actually calling who? Middleman is calling our logic, which means, our code is no longer depending on any 3rd party tools. It is generally better when a framework calls your code than your code calls a framework. Who supposed to serve who actually!
 
 ### Back to Repository
-We can provide real data without changing anything related with middleman. I went for Yml files as a datastorage, becasue most of data was already prepared in that format. For testing purposes, I preferred to have also in-memory data storage. So thats how an Adapter layer was introduced.
+We can switch to provide real data without changing much in the app and nothing in Middleman. For production data I use Yml becasue most of data were already prepared in that format. For testing purposes, I prefer in-memory data storage. New layer has to be introduced: Adapter.
 
 ```
 module Ak
@@ -67,9 +68,9 @@ end
 Difference between a repository interface and an adapter one is, repository speaks business language: `all`, `all_comments_for_article`, `all_sorted_descending`, while adapter uses persistence or data structure vocabulary: `load_data`, `flush`, `add`, `remove`, etc.
 
 ### Interfaces in Ruby
-All adapters need to answer the same set of methods. This is typical example of an `Interface`. I decided to build a module that has that purpose. Probably most of Rails devs will banish me for this but I still see great value, mosty in providing hints and guidelines.
+All adapters need to answer the same set of methods. This is typical example of an `Interface`. I decided to build a module that serves such a purpose. Not very popular in Rails world but I still see its great value - Providing hints and guidelines for devs.
 
-Additionally I preferred to have a `defaultAdapter` defined somewhere, so I can easily change it for testing purposes. I came up with that structure:
+I also prefer to have `defaultAdapter` defined somewhere. Structure I came up with:
 
 ```ruby
 module Adapters
@@ -129,9 +130,9 @@ class MemoryAdapter
 end
 ```
 
-What is also worth noticing here is, Repositories are within AK module (AK is a product code), while adapters are not. The reason fro this is, adapters are not part of a domain/business logic.
+Repositories are within AK module (AK is a product code and namespace), while adapters are not. The reason is, adapters are not part of a domain/business logic.
 
 ### What about Middleman?
-Exactly! Thats the most surprising and fun fact! We can talk about, and work on the application while nearly forgetting about Middleman. It is just a plugin, somehwere at the end of a chain.
+Exactly! That's the most surprising and fun fact! We can talk about and work on the application while nearly completely forgetting about Middleman. It is just a plugin, somehwere at the end of a chain.
 
-You can check whole codebase on [Github](https://github.com/kubenstein/aleksandrakuls.com).
+Check whole codebase on [Github](https://github.com/kubenstein/aleksandrakuls.com).
