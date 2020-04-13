@@ -1,75 +1,78 @@
-Observer Pattern is an extremely handy way to implement communication channel between two or more objects. Thanks to its simplicity, it allows to have a full control over a communication contract. It solves, in an easy way, problem of returning multiple values from a function and naturally and gently forces us to follow *Tell Don’t Ask* principle. It emphasises importance of messages and can be nearly transparently replaced with more advances async message queues approaches.
+Observer Pattern is an extremely handy way to implement communication channel between two or more objects. Thanks to simplicity ot this design pattern, we can have full control over a communication contract. It solves, in an easy way, problem of returning multiple values from a function and naturally and gently forces us to follow *Tell Don’t Ask* principle. It emphasises importance of messages and can be nearly transparently replaced with more advances async message queues approaches.
 
-I'm [experimenting with a convention](/#/blog/what-kind-of-code-I-want-to-see-in-controllers) how to build and use objects in that way. I like to separate objects by their Command or Query nature.
+I'm [experimenting with a convention](/#/blog/what-kind-of-code-I-want-to-see-in-controllers) how to build and use objects driven by messages rather by data. I like to separate objects by their Command or Query nature.
 
 ### Query
-If an object is a Query, I force passing at least one observer via constructor. By having this requirement, user of a class will be reminded that purpose of the class is to return some data. Additionally you can add more observers if needed but this is done by a separate method call.
+If an object is a Query, I force passing at least one observer via constructor. By having this requirement, user of a class will be reminded that the purpose of the class is to provide data. You can add more observers if needed but this is done by a separate method call.
 
 ```ruby
-class SomeClass 
-  def call 
-    PullRequestValidator.new( 
-      pull_request: PullRequest.new(@params), 
-      result_handler: self 
-    ).call 
-  end  
-
-  def pull_request_valid(pull_request) 
-  end  
-
-  def pull_request_not_valid(invalid_pull_request, pull_request_errors) 
+class SomeClass
+  def call
+    PullRequestValidator.new(
+      pull_request: PullRequest.new(@params),
+      result_handler: self
+    ).call
   end
- end 
+
+  def pull_request_valid(pull_request)
+  end
+
+  def pull_request_not_valid(invalid_pull_request, pull_request_errors)
+  end
+end
 ```
 
 The question that pops in my heads is: ok but how do I know what callbacks a particular class will fire? The answer is very trivial, since we expect collbacks invocations, it is not that hard to scan code of a class. In my case it's `notify(:callback_name, params)` method. It would be really handy to have interfaces that force us to fulfil contracts but after following, for a while, I realised that discovering a class contract is not a problem.
+<i>(plug after years: it may be difficult so having explicit list of callbacks helps a lot)</i>
 
 ```ruby
-class PullRequestValidator 
-  include Notifiable  
+class PullRequestValidator
+  include Notifiable
 
-  def initialize(pull_request:, result_handler:) 
-    @pull_request = pull_request 
-    add_observer(result_handler) 
-  end  
+  def initialize(pull_request:, result_handler:)
+    @pull_request = pull_request
+    add_observer(result_handler)
+  end
 
-  def call 
-    if valid? 
-      notify(:pull_request_valid, @pull_request) 
-    else 
-      notify(:pull_request_not_valid, @pull_request, errors) 
+  def call
+    if valid?
+      notify(:pull_request_valid, @pull_request)
+    else
+      notify(:pull_request_not_valid, @pull_request, errors)
     end
   end
 
   #...
- end
+end
 
 ```
 
 ### Command
-If an object is a Command, receiving any result is not obligatory. However it is often handy to be notified about status of execution. In that case I configure observers as a separate `add_observer()` method call.
+If an object is a Command, receiving any result is not obligatory. It is often handy to be notified about status of execution but due to async nature we usually can only be notifed that an action was dispatched succesfully. I configure observers via separate `add_observer()` method call.
 ```
-CreatePullRequestCommand.new(params: params[:pull_request]) 
-                        .add_observer(self) 
+CreatePullRequestCommand.new(params: params[:pull_request])
+                        .add_observer(self)
                         .call
 ```
 
 ### Implementation
 
-Ruby provides `Observable` functionality in the language standard library, however I found its API problematic and  hard to work with. Mostly because it can callback only to one function. Additionally implementing Observers from scratch is extremely easy. I called it `Notifiable` because thats the true purpose, to notify not to being observed. I think this subtle difference also fits well in *Tell Don’t Ask* principle.
+Ruby provides `Observable` functionality out of the box, via language standard library, however I found its API problematic and hard to work with. Mostly because it can callback only to one function.
+
+Implementing Observers from scratch is extremely easy. I called it `Notifiable` because thats the actual true purpose - to notify, not to be observed. This subtle difference also fits well in *Tell Don’t Ask* philosophy.
 
 ```ruby
-module Notifiable 
-  def add_observer(observer) 
-    (@observers ||= []) << observer 
+module Notifiable
+  def add_observer(observer)
+    (@observers ||= []) << observer
     self
   end
 
-  def notify(method_name, *args) 
-    (@observers ||= []).each do |observer| 
-      observer.send(method_name, *args) 
+  def notify(method_name, *args)
+    (@observers ||= []).each do |observer|
+      observer.send(method_name, *args)
     end
   end
- end
+end
 ```
 
