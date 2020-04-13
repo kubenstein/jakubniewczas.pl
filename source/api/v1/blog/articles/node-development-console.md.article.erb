@@ -1,11 +1,11 @@
-While developing one of my React projects, I realised that over time, I introduced quite a few external dependency services. Starting with `webpack-dev-server`, I ended up adding also an express-based backend server, a mongoDB server and a general JS linter. First, I prefer to have all of them in a one place just not to have to open 4 terminal windows. Second, in case of a linter, it is more convenient to have it in an accessible place so you can monitor and quickly fix all JS warnings.
+While developing one of my React projects, it was not a surprise quite a few external dependency services had to be introduced. `webpack-dev-server`, an express-based backend server, a mongoDB server and a general JS linter. First, I prefer to have all of them in a one place just not to have to open 4 terminal windows. Second, in case of a linter, it is more convenient to have it in an accessible place so you can monitor and quickly fix all JS warnings.
 
-Recently I came across [Blessed-Contrib](https://github.com/yaronn/blessed-contrib) npm package. After being amazed by their demos, I decided to give it a try. This powerful tool has an extremely simple API which allows to build rich console interfaces in, in my case, less than 50 lines of code.
+I came across [Blessed-Contrib](https://github.com/yaronn/blessed-contrib) npm package and after being amazed by their demos, I decided to give it a try. This powerful tool has an extremely simple API which allows us building rich console interfaces. In my case, in less than 50 lines of code.
 
 ![Development Console Jakub Niewczas](<%= s3_url('blog/node-development-console/development-console.gif') %>)
 
 ### Implementation
-The console script is responsible for capturing outputs from several commands and presenting them in a grid-based console interface. To keep things nicely separated and simple, each command is encapsulated in a different `npm run` task.
+The console script is responsible for capturing outputs from several commands and presenting them as a grid-based console interface. To keep things nicely separated, each command is encapsulated in a different `npm run` task.
 
 Whole script:
 
@@ -62,11 +62,11 @@ function writeStreamDataToWindow(window, data) {
 }
 ```
 
-The only tricky part is to realised that node data-stream from a `spawn` command returns blobs of data. It is required to stringify it and split in lines, before displaying each line. See `writeStreamDataToWindow()` function.
+The only tricky part is node data-stream from a `spawn` command returning blobs of data. It is required to stringify it and split in lines, before displaying. See `writeStreamDataToWindow()` function.
 
 ### Limitations
 
-I still keep improving the tool. One limitation which prevents it to be truly perfect is an ability to scroll both vertically and horizontally inside each window. I saw examples of windows that implement scrolling, so it should be possible.
+I still keep improving the tool. One limitation which prevents it to be a truly perfect is an ability to scroll both vertically and horizontally inside each window. I saw examples of scrollable windows, so it should be possible...
 
 ### Other Usecases
 
