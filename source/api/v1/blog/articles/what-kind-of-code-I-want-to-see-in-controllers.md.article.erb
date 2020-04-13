@@ -1,20 +1,19 @@
-I like to keep logic related with a purpose of a class in that class. One may say that the logic will define the purpose of a class. It sounds very similar, indeed, and in fact difference in thinking about logic and its place only depends on if we create a new class or have to deal with a class that exists already.
-We create new classes because we can’t find any good place that the logic fits. It's desirable way of <i>growing</i>  software according to OOP practices. We add new stuff and plug it to existing codebase. Usually there are no need to significantly change any other class.
+We create new classes because we can’t find any other good place that the logic could fit. It's desirable way of <i>growing</i> software according to OOP practices. We add new stuff and plug it to existing codebase. Usually there are no need to significantly change any other classes.
 
-However frameworks create some classes for us because those classes are crucial components from a framework perspective. In web development classes related with handling web requests are those components. Receiving request and sending response back. Having those classes already provided, combined with some community driven guidelines, result with choices that we would normally see as not very fortunate.
+In web development, classes related with handling web requests are often provided by frameworks. Forced structure combined with community driven guidelines, often result in quite unfortunate choices.
 
 ```ruby
-def create 
-  @ticket = Ticket.new(permitted_attributes) 
-  if @ticket.save 
+def create
+  @ticket = Ticket.new(permitted_attributes)
+  if @ticket.save
     redirect_to [:tickets]
-  else 
-    render :new 
-  end 
+  else
+    render :new
+  end
 end
 ```
 
-This is a typical Rails `create` action. For me it has two issues. A serious one is, now Http Handler (aka. Controller) is responsible for constructing an entity. Entities may, and ofter are subjects of very specific business rules. Problem is even more clear when we need to set an extra field:
+This is a typical Rails `create` action. A serious issue is a Http Handler (aka. Controller) is responsible for constructing an entity. Entities are often subjects of a very specific business rules that not related with http controllers. Problem is even more clear when we need to update data.
 
 ```ruby
 @ticket = Ticket.new(permitted_attributes)
@@ -22,30 +21,32 @@ This is a typical Rails `create` action. For me it has two issues. A serious one
 @ticket.status = Ticket::STATUS_PENDING
 ```
 
-Changing to a Factory will clean the code a bit by delegating business decisions from a Http Handler:
+Changing to a Factory will clean the code a bit by extracting business decisions from a Http Handler:
 
 ```ruby
 @ticket = Ticket.create_pending_for_user(user: current_user, permitted_attributes)
 ```
 
-Name could be better though, because it won’t create anything yet actually. We have to wait for a controller to save `@ticket.save`, which brings us back again to the question why a Http Handler is responsible for constructing an entity? It is done that way because we need to know the result. First thought is to return `true/false` from the factory:
+Name could be better though, because it won’t create anything yet actually. We have to wait for a controller to save `@ticket.save`, which brings us back again to the question why a Http Handler is responsible for constructing an entity? It is done because we need to know the result.
+
+We could return `true/false` from the factory:
 
 ```
-if Ticket.create_pending_for_user(user: current_user, permitted_attributes) 
+if Ticket.create_pending_for_user(user: current_user, permitted_attributes)
   redirect_to [:tickets]
-else 
-  # no @ticket here! 
+else
+  # no @ticket here!
   render :new
 end
 ```
 
-We traded problems, we removed creation logic from a Http Handler but we lost access to both, the entity and the creation process result. How to pass both then? We can return a tuple with result and an entity, [Trailblazer does this](http://trailblazer.to/gems/operation/1.1/#run), but I don’t like tuples solution becasue, items order in that tuple matters and you just have to know what is what. What I prefer is to go for <b>OOP techniques</b> and [delegate to proper method](/#/blog/observers-as-objects-communication-channel) back, based on a result:
+We traded problems, we removed creation logic from a Http Handler but we lost access to both, the entity and the creation process result. How to pass both then? We can return a tuple with result and an entity, [Trailblazer does this](http://trailblazer.to/gems/operation/1.1/#run). I not a big fan of tuples mostly because of order of fields that matter - you just have to know what is what. So I prefer <b>OOP techniques</b> and [delegate to proper method](/#/blog/observers-as-objects-communication-channel) based on a result:
 
 ```
-def create 
+def create
   Ticket.create_pending_for_user(result_handler: self,
                                  user: current_user,
-                                 permitted_attributes) 
+                                 permitted_attributes)
 end
 
 def ticket_created(_ticket)
@@ -58,19 +59,19 @@ def ticket_creation_failed(ticket)
 end
 ```
 
-This version meets all criteria. It keeps http related logic in a Http Handler, creating entity logic is in a factory and necessary <i>messages</i> are passed in a clear way while providing all necessary resources.
+This version meets all criteria. It keeps http related logic in a Http Handler, creating entity logic is in a factory. Necessary <i>messages</i> are passed in a clear way while providing all resources.
 
 This is a typical example of `Tell don't ask` principle.
 
-We have to set a contract between a factory and a `result_handler`, and we do it in most descriptive way. I really would like to have java like interfaces in ruby to guard the contract. Now users of our factory just have to know what callbacks a factory will use. But it's easy to discover. We intuitively expect that sort of messages, so scanning a factory code will quickly reveal exact interface.
+We have to set a contract between a factory and a `result_handler`, and we do it in most descriptive way. (I really would like to have java like interfaces in ruby to guard the contract). Users of our factory just have to know names and signatures of callbacks.
 
 Final practical touch would be to extract factory to a separate class instead keeping it as an AR class method:
 
 ```
-def create 
+def create
   InitialTicketCreator.call(result_handler: self,
                             user: current_user,
-                            permitted_attributes) 
+                            permitted_attributes)
 end
 
 def ticket_created(_ticket)
