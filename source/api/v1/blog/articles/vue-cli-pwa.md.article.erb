@@ -35,7 +35,7 @@ Since this file is nearly empty, containing only empty callbacks I wanted to che
 ~~~~~~~~~~
 
 ### Summary of research I made on PWA
-So [`@vue/cli-plugin-pwa`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa) enables running a page as PWA, which means a page can be installed as a Chrome App on desktops and mobiles. We can't control much how its done nor we can't implement custom behaviours. Its just to turn page into a simple PWA. We can configure basic appearance features but we have no access to underlaying service-worker.
+So [`@vue/cli-plugin-pwa`](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa) enables running a page as PWA, which means a page can be installed as a Chrome App on desktops and mobiles. We can't control much how its done nor we can't implement custom behaviours. It's just to turn page into a simple PWA. We can configure basic appearance features but we have no access to underlaying service-worker.
 
 The plugin uses under the hood [`Workbox`](https://github.com/GoogleChrome/workbox) package - is a tool from Google simplifying and providing powerful defaults. `@vue/cli-plugin-pwa` binds to workbox [here](https://github.com/vuejs/vue-cli/blob/master/packages/@vue/cli-plugin-pwa/index.js).
 
