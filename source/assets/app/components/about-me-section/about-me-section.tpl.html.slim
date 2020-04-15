@@ -5,10 +5,7 @@
         a ng-href="/#/"
           = image_tag 'me.jpg', class: 'avatar'
       .col-two
-        p.text
-          span.header
-            | {{ 'ABOUT_ME_TITLE' | translate }}
-          span ng-bind-html="'ABOUT_ME' | translate | nl2br"
+        p.text ng-bind-html="'ABOUT_ME' | translate | nl2br"
         .social-section
           a.social-item href='/#/twitter' title='twitter'
             .icon.twitter &#xe800;
