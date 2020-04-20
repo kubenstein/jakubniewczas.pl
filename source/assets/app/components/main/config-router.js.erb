@@ -5,6 +5,7 @@ angular.module('jakubniewczas')
       .when('/skill-:id', { templateUrl: '<%= ng_template_url("main/routes/skill") %>' })
       .when('/skills-beyond-technologies',
                           { templateUrl: '<%= ng_template_url("main/routes/skills-beyond-technologies") %>' })
+      .when('/twitter',   { templateUrl: '<%= ng_template_url("main/routes/twitter") %>' })
       .when('/blog',      { templateUrl: '<%= ng_template_url("main/routes/blog") %>' })
       .when('/blog/:id',  { templateUrl: '<%= ng_template_url("main/routes/blog-article") %>' })
       .otherwise({redirectTo: '/'});

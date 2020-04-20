@@ -1,0 +1,41 @@
+@import 'components/common/common';
+
+.twitter-section {
+  .twitter-pitch {
+    margin: 30px 0 15px;
+    padding: 10px 0;
+    background-color: rgba(29, 161, 242, 0.1);
+
+    .title {
+      color: $twitter_blue;
+      font-size: 40px;
+      text-align: center;
+    }
+
+    .pitch {
+      line-height: 1.618;
+      font-size: 13pt;
+      color: $black;
+      text-align: center;
+    }
+
+    .link {
+      color: $twitter_blue;
+    }
+  }
+
+  .twitter-feed {
+    max-width: 800px;
+    margin: 50px auto;
+  }
+
+  .error {
+    margin: 100px 0;
+    text-align: center;
+    color: $gray;
+
+    .link {
+      color: $twitter_blue;
+    }
+  }
+}

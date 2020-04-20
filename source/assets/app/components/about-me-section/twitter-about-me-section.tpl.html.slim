@@ -2,22 +2,21 @@
   .inner-wrapper
     .two-cols
       .col-one
-        a ng-href="/#/blog"
+        a ng-href="/#/"
           = image_tag 'me.jpg', class: 'avatar'
       .col-two
         p.text
-          | Jakub Niewczas Blog
+          | {{ 'TWITTER_TITLE' | translate }}
         .social-section
           a.social-item href='/#/' title='home'
             .icon.www &#xe803;
             | home
-          a.social-item href='https://twitter.com/j_niewczas' title='twitter' target='_blank'
-            .icon.twitter &#xe800;
-            | twitter
+          a.social-item href='/#/blog' title='twitter'
+            .icon.blog &#xf0e6;
+            | blog
           a.social-item href='https://github.com/kubenstein' title='github' target='_blank'
             .icon.github &#xe801;
             | github
           a.social-item href='mailto:niewczas.jakub@gmail.com' title='email'
             .icon.email &#xe802;
             | email
-warning-section

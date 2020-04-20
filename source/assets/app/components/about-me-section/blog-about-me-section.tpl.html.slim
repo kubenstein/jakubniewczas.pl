@@ -1,15 +1,16 @@
-.about-me-section
+.about-me-section.compact
   .inner-wrapper
     .two-cols
       .col-one
-        a ng-href="/#/"
+        a ng-href="/#/blog"
           = image_tag 'me.jpg', class: 'avatar'
       .col-two
         p.text
-          span.header
-            | {{ 'ABOUT_ME_TITLE' | translate }}
-          span ng-bind-html="'ABOUT_ME' | translate | nl2br"
+          | {{ 'BLOG_TITLE' | translate }}
         .social-section
+          a.social-item href='/#/' title='home'
+            .icon.www &#xe803;
+            | home
           a.social-item href='/#/twitter' title='twitter'
             .icon.twitter &#xe800;
             | twitter
@@ -19,7 +20,3 @@
           a.social-item href='mailto:niewczas.jakub@gmail.com' title='email'
             .icon.email &#xe802;
             | email
-          a.social-item href='/#/blog' title='blog'
-            .icon.blog &#xf0e6;
-            | blog
-warning-section

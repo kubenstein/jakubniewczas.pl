@@ -68,7 +68,8 @@
   }
 
   .social-item {
-    margin-left: 22px;
+    min-width: 40px;
+    margin-left: 15px;
     display: inline-block;
     color: $white;
     font-size: 12px;

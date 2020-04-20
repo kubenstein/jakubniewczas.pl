@@ -2,17 +2,21 @@ angular.module('jakubniewczas')
   .directive('aboutMeSection', function() {
     return {
       scope: {
-        compact: '='
+        type: '@'
       },
       template: '<ng-include src="getTemplateUrl()" />',
 
       controller: ['$scope', function($scope) {
         $scope.getTemplateUrl = function() {
-          if($scope.compact) {
-            return '<%= ng_template_url("about-me-section/compact-about-me-section") %>';
-          } else {
-            return '<%= ng_template_url("about-me-section/") %>';
+          if($scope.type === 'blog') {
+            return '<%= ng_template_url("about-me-section/blog-about-me-section") %>';
           }
+
+          if($scope.type === 'twitter') {
+            return '<%= ng_template_url("about-me-section/twitter-about-me-section") %>';
+          }
+
+          return '<%= ng_template_url("about-me-section/") %>';
         }
       }]
     }

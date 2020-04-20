@@ -1,0 +1,20 @@
+angular.module('jakubniewczas')
+  .directive('twitterSection', [function() {
+    return {
+      scope: {},
+      templateUrl: '<%= ng_template_url("twitter-section/") %>',
+      controller: ['$scope', function($scope) {
+        $scope.loadingError = false
+        var twitterEl = document.getElementById('twitter-feed')
+        var script = document.createElement('script');
+        script.async = 1;
+        script.onerror = function() {
+          $scope.$apply(function() {
+            $scope.loadingError = true
+          });
+        }
+        script.src = 'https://platform.twitter.com/widgets.js';
+        twitterEl.appendChild(script);
+      }]
+    }
+  }])

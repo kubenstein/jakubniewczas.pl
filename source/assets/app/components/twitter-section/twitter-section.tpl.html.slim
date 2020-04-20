@@ -1,0 +1,20 @@
+.twitter-section.inner-wrapper
+  .twitter-pitch.two-cols-narrower
+    .title.col-one
+      | !
+    .pitch.col-two
+      | {{ 'BLOG_TWITTER_PITCH' | translate }}
+      br
+      a.link href='https://twitter.com/j_niewczas' title='twitter' target='_blank'
+        | @j_niewczas
+
+
+  .error.inner-wrapper ng-if="loadingError"
+    | {{ 'TWITTER_FEED_ERROR' | translate }}
+    br
+    br
+    a.link href='https://twitter.com/j_niewczas' title='twitter' target='_blank'
+      | https://twitter.com/j_niewczas
+
+  #twitter-feed.twitter-feed
+    a class="twitter-timeline" href="https://twitter.com/j_niewczas"
