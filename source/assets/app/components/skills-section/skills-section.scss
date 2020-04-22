@@ -4,8 +4,20 @@
   @extend .two-cols-section;
 
   .item-body {
-    padding-bottom: 40px;
     white-space: pre-line;
+  }
+
+  .logos {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(104, 194, 236, 0.1);
+    margin-bottom: 35px;
+
+    img {
+      width: 50px;
+      margin: 0 5px;
+    }
   }
 
   .link {
@@ -158,16 +170,6 @@
     background-color: $light_gray;
     padding: 10px;
     margin-bottom: 10px;
-  }
-
-  .fullstack-info .technologies {
-    display: block;
-    margin: 15px auto 0;
-    text-align: center;
-
-    .item {
-      margin: 0 5px;
-    }
   }
 
   .fullstack-title {

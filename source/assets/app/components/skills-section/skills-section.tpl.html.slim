@@ -5,6 +5,17 @@
   .section-body
     p.item-body
       | {{ 'SKILLS' | translate }}
+    .logos
+      img src=asset_url("/assets/images/reactjs-logo.png")
+      img src=asset_url("/assets/images/vuejs-logo.png")
+      img src=asset_url("/assets/images/babeljs-logo.png")
+      img src=asset_url("/assets/images/webpackjs-logo.png")
+      img src=asset_url("/assets/images/nodejs-logo.png")
+      img src=asset_url("/assets/images/rails-logo.png")
+      img src=asset_url("/assets/images/aws-logo.png")
+      img src=asset_url("/assets/images/heroku-logo.png")
+      img src=asset_url("/assets/images/docker-logo.png")
+
     .fullstack-additional
       .fullstack-info
         span.fullstack-title
@@ -13,13 +24,6 @@
           | {{ 'FULLSTACK_TEXT' | translate }}
         a.additional-link href="/#/skills-beyond-technologies"
           | {{ 'SKILLS_BEYOND_TECHNOLOGIES' | translate }}
-
-        .technologies
-          img.item src=asset_url("/assets/images/reactjs-logo.png")
-          img.item src=asset_url("/assets/images/rails-logo.png")
-          img.item src=asset_url("/assets/images/apple-logo.png")
-          img.item src=asset_url("/assets/images/docker-logo.png")
-          img.item src=asset_url("/assets/images/heroku-logo.png")
 
       .fullstack-layers-desktop
         div ng-hide="currentFullstackLayer"
