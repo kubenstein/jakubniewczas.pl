@@ -14,10 +14,10 @@
   }
 
   @extend .odd-section;
-  padding: 40px 0;
+  padding: 40px 0 20px;
 
   &.compact {
-    padding: 10px 0;
+    padding: 20px 0;
     background-color: $white;
     border-bottom: 1px solid $gray;
 
@@ -32,7 +32,7 @@
     }
 
     .social-section {
-      margin-top: 5px;
+      margin-top: 10px;
     }
 
     .social-item {
@@ -48,6 +48,7 @@
   .text {
     color: $white;
     text-align: justify;
+    margin-bottom: 10px;
   }
 
   .header {
