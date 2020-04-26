@@ -16,109 +16,43 @@
       img src=asset_url("/assets/images/heroku-logo.png")
       img src=asset_url("/assets/images/docker-logo.png")
 
-    .fullstack-additional
-      .fullstack-info
-        span.fullstack-title
-          | {{ 'FULLSTACK_TITLE' | translate }}
-        p.fullstack-body
-          | {{ 'FULLSTACK_TEXT' | translate }}
-        a.additional-link href="/#/skills-beyond-technologies"
-          | {{ 'SKILLS_BEYOND_TECHNOLOGIES' | translate }}
-
-      .fullstack-layers-desktop
-        div ng-hide="currentFullstackLayer"
-          span.fullstack-layer-title
-            | {{ 'FULLSTACK_GENERAL_TITLE' | translate }}:
-          p.fullstack-body
-            | {{ 'FULLSTACK_GENERAL_TEXT' | translate }}
-
-          .fullstack-portfolio-button ng-click="displaySkillDetails('ruby-on-rails')"
-            | {{ 'PORTFOLIO_BUTTON_BACKEND' | translate }} >
-          .fullstack-portfolio-button ng-click="displaySkillDetails('frontend')"
-            | {{ 'PORTFOLIO_BUTTON_FRONTEND' | translate }} >
-          .fullstack-portfolio-button ng-click="displaySkillDetails('ios')"
-            | {{ 'PORTFOLIO_BUTTON_IOS' | translate }} >
-          .fullstack-portfolio-button ng-click="displaySkillDetails('infrastructure')"
-            | {{ 'PORTFOLIO_BUTTON_INFRASTRUCTURE' | translate }} >
-
-        div ng-show="isCurrentLayer('frontend')"
-          span.fullstack-layer-title
-            | {{ 'FULLSTACK_FRONTEND_TITLE' | translate }}:
-          p.fullstack-body
-            | {{ 'FULLSTACK_FRONTEND_TEXT' | translate }}
-          .fullstack-portfolio-button ng-click="displaySkillDetails('frontend')"
-            | {{ 'PORTFOLIO_BUTTON_FRONTEND' | translate }} >
-
-        div ng-show="isCurrentLayer('ios')"
-          span.fullstack-layer-title
-            | {{ 'FULLSTACK_IOS_TITLE' | translate }}:
-          p.fullstack-body
-            | {{ 'FULLSTACK_IOS_TEXT' | translate }}
-          .fullstack-portfolio-button ng-click="displaySkillDetails('ios')"
-            | {{ 'PORTFOLIO_BUTTON_IOS' | translate }} >
-
-        div ng-show="isCurrentLayer('backend')"
-          span.fullstack-layer-title
-            | {{ 'FULLSTACK_BACKEND_TITLE' | translate }}:
-          p.fullstack-body
-            | {{ 'FULLSTACK_BACKEND_TEXT' | translate }}
-          .fullstack-portfolio-button ng-click="displaySkillDetails('ruby-on-rails')"
-            | {{ 'PORTFOLIO_BUTTON_BACKEND' | translate }} >
-
-        div ng-show="isCurrentLayer('infrastructure')"
-          span.fullstack-layer-title
-            | {{ 'FULLSTACK_INFRASTRUCTURE_TITLE' | translate }}:
-          p.fullstack-body
-            | {{ 'FULLSTACK_INFRASTRUCTURE_TEXT' | translate }}
-          .fullstack-portfolio-button ng-click="displaySkillDetails('infrastructure')"
-            | {{ 'PORTFOLIO_BUTTON_INFRASTRUCTURE' | translate }} >
-
-      .fullstack-layers-mobile
-        .fullstack-layer
-          span.fullstack-layer-title
-            | {{ 'FULLSTACK_BACKEND_TITLE' | translate }}
-          img src=asset_url("/assets/images/backend.png")
-          p.fullstack-body
-            | {{ 'FULLSTACK_BACKEND_TEXT' | translate }}
-          .fullstack-portfolio-button ng-click="displaySkillDetails('ruby-on-rails')"
-            | {{ 'PORTFOLIO_BUTTON_BACKEND' | translate }} >
-
-        .fullstack-layer
-          span.fullstack-layer-title
-            | {{ 'FULLSTACK_FRONTEND_TITLE' | translate }}
-          img src=asset_url("/assets/images/frontend.png")
-          p.fullstack-body
-            | {{ 'FULLSTACK_FRONTEND_TEXT' | translate }}
-          .fullstack-portfolio-button ng-click="displaySkillDetails('frontend')"
-            | {{ 'PORTFOLIO_BUTTON_FRONTEND' | translate }} >
-
-        .fullstack-layer
-          span.fullstack-layer-title
-            | {{ 'FULLSTACK_IOS_TITLE' | translate }}
-          img src=asset_url("/assets/images/ios.png")
-          p.fullstack-body
-            | {{ 'FULLSTACK_IOS_TEXT' | translate }}
-          .fullstack-portfolio-button ng-click="displaySkillDetails('ios')"
-            | {{ 'PORTFOLIO_BUTTON_IOS' | translate }} >
-
-        .fullstack-layer
-          span.fullstack-layer-title
-            | {{ 'FULLSTACK_INFRASTRUCTURE_TITLE' | translate }}
-          img src=asset_url("/assets/images/infrastructure.png")
-          p.fullstack-body
-            | {{ 'FULLSTACK_INFRASTRUCTURE_TEXT' | translate }}
-          .fullstack-portfolio-button ng-click="displaySkillDetails('infrastructure')"
-            | {{ 'PORTFOLIO_BUTTON_INFRASTRUCTURE' | translate }} >
-
     .fullstack-matrix
-      .layer-connector.connector-infrastructure-backend ng-class="'active-'+currentFullstackLayer"
-      .layer-connector.connector-backend-ios ng-class="'active-'+currentFullstackLayer"
-      .layer-connector.connector-backend-frontend ng-class="'active-'+currentFullstackLayer"
-      .layer.frontend ng-click="skillClicked('frontend')" ng-class="{active: isCurrentLayer('frontend')}"
+      .frontend-layer ng-click="skillClicked('frontend')"
         .icon
-      .layer.ios ng-click="skillClicked('ios')" ng-class="{active: isCurrentLayer('ios')}"
+      .ios-layer ng-click="skillClicked('ios')"
         .icon
-      .layer.backend ng-click="skillClicked('backend')" ng-class="{active: isCurrentLayer('backend')}"
+      .backend-layer ng-click="skillClicked('backend')"
         .icon
-      .layer.infrastructure ng-click="skillClicked('infrastructure')" ng-class="{active: isCurrentLayer('infrastructure')}"
+      .infrastructure-layer ng-click="skillClicked('infrastructure')"
         .icon
+      .connector-infrastructure-backend
+      .connector-backend-ios
+      .connector-backend-frontend
+      .frontend-text
+        h5
+          | {{ 'SKILL_FRONTEND' | translate }}
+        p
+          | {{ 'SKILL_FRONTEND_TEXT' | translate }}
+
+      .backend-text
+        h5
+          | {{ 'SKILL_BACKEND' | translate }}
+        p
+          | {{ 'SKILL_BACKEND_TEXT' | translate }}
+
+      .mobile-text
+        h5
+          | {{ 'SKILL_MOBILE' | translate }}
+        p
+          | {{ 'SKILL_MOBILE_TEXT' | translate }}
+
+
+      .infrastructure-text
+        h5
+          | {{ 'SKILL_DEVOPS' | translate }}
+        p
+          | {{ 'SKILL_DEVOPS_TEXT' | translate }}
+
+
+
+

@@ -32,69 +32,24 @@
 
   .fullstack-matrix {
     position: relative;
-    float: left;
-    width: 54%;
-    height: 500px;
-  }
+    height: 453px;
 
-  .fullstack-additional {
-    float: right;
-    width: 44%;
-  }
-
-  .fullstack-layers-mobile {
-    margin-top: 30px;
-    display: none;
-
-    .fullstack-layer {
-      background-color: $light_gray;
-      padding: 10px;
-      margin-bottom: 10px;
-      text-align: center;
+    @media screen and (max-width: 435px) {
+      transform: scale(0.6);
+      margin-top: -117px;
+      height: 310px;
     }
-  }
-
-  @media screen and (max-width: 750px) {
-    .fullstack-additional {
-      float: none;
-      width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-      height: inherit;
-    }
-
-    .fullstack-layers-mobile {
-      display: block;
-    }
-
-    .fullstack-layers-desktop {
-      display: none;
-    }
-
-    .fullstack-matrix {
-      display: none;
-    }
-  }
-
-  .layer, .icon {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 1;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
   }
 
   .layer {
-    cursor: pointer;
     position: relative;
-    background-color: $orange;
     width: 150px;
     height: 130px;
-
-    &.active {
-      background-color: $light_orange;
-    }
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-color: $orange;
+    cursor: pointer;
+    z-index: 1;
 
     //
     // hexagon left and right wings
@@ -117,96 +72,151 @@
     &:after {
       right: 0;
     }
+
+    .icon {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 1;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: 66%;
+    }
   }
 
-  .frontend { float: left; }
-  .ios { float: right; }
-  .backend { margin: 150px auto 0 auto; }
-  .infrastructure { margin: 70px auto 0 auto; }
+  .frontend-layer {
+    @extend .layer;
+    position: absolute;
+    left: calc(50% + -215px);
+    top: 70px;
 
-  .frontend .icon { background-image: image-url('frontend.png'); }
-  .ios .icon { background-image: image-url('ios.png'); }
-  .backend .icon { background-image: image-url('backend.png'); }
-  .infrastructure .icon { background-image: image-url('infrastructure.png'); }
+    .icon { background-image: image-url('frontend.png'); }
+   }
 
+  .ios-layer {
+    @extend .layer;
+    position: absolute;
+    right: calc(50% + -215px);
+    top: 70px;
+
+    .icon { background-image: image-url('ios.png'); }
+   }
+
+  .backend-layer {
+    @extend .layer;
+    position: absolute;
+    left: calc(50% - 75px);
+    top: 155px;
+
+    .icon { background-image: image-url('backend.png'); }
+   }
+
+  .infrastructure-layer {
+    @extend .layer;
+    position: absolute;
+    left: calc(50% - 75px);
+    top: 320px;
+
+    .icon { background-image: image-url('infrastructure.png'); }
+   }
 
   .layer-connector {
     width: 2px;
-    height: 50px;
+    height: 25px;
     z-index: 2;
     background-color: $black;
     position: absolute;
   }
 
   .connector-infrastructure-backend {
+    @extend .layer-connector;
     top: 290px;
     left: 50%;
   }
 
   .connector-backend-ios {
-    top: 107px;
-    right: 34%;
-    -ms-transform: rotate(30deg);
-    -webkit-transform: rotate(30deg);
-    transform: rotate(30deg);
+    @extend .layer-connector;
+    top: 164px;
+    right: calc(50% - 70px);
+    -ms-transform: rotate(55deg);
+    -webkit-transform: rotate(55deg);
+    transform: rotate(55deg);
   }
 
   .connector-backend-frontend {
-    top: 107px;
-    left: 34%;
-    -ms-transform: rotate(-30deg);
-    -webkit-transform: rotate(-30deg);
-    transform: rotate(-30deg);
+    @extend .layer-connector;
+    top: 164px;
+    left: calc(50% - 70px);
+    -ms-transform: rotate(-55deg);
+    -webkit-transform: rotate(-55deg);
+    transform: rotate(-55deg);
   }
 
-  .connector-infrastructure-backend.active-backend,
-  .connector-infrastructure-backend.active-ios,
-  .connector-infrastructure-backend.active-frontend,
-  .connector-backend-ios.active-ios,
-  .connector-backend-frontend.active-frontend {
-    background-color: $light_orange;
-  }
-
-  .fullstack-info, .fullstack-layers-desktop {
-    background-color: $light_gray;
+  .text-bubble {
+    width: 150px;
     padding: 10px;
-    margin-bottom: 10px;
-  }
-
-  .fullstack-title {
-    font-size: 21px;
-    text-align: center;
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  .fullstack-body {
-    font-size: 14px;
-  }
-
-  .additional-link {
-    display: block;
-    margin: 10px 0;
-    font-size: 14px;
-    color: $main;
-    text-align: center;
-  }
-
-  .fullstack-layer-title {
-    font-size: 18px;
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  .fullstack-portfolio-button {
-    text-align: center;
-    width: 60%;
-    padding: 5px 20px;
-    background-color: $orange;
-    color: $white;
-    font-size: 18px;
+    border: 2px solid $orange;
+    border-radius: 4px;
+    background-color: $white;
+    color: $black;
+    z-index: 10;
     cursor: pointer;
-    margin: 10px auto;
-    white-space: nowrap;
+
+    @media screen and (max-width: 435px) {
+      display: none;
+    }
+
+    h5 {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 13px;
+    }
+
+    a {
+      display: inline-block;
+      font-size: 13px;
+      margin-top: 2px;
+    }
+  }
+
+  .frontend-text {
+    @extend .text-bubble;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .mobile-text {
+    @extend .text-bubble;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .backend-text {
+    @extend .text-bubble;
+    position: absolute;
+    top: 240px;
+    left: 16%;
+
+    @media screen and (max-width: 615px) {
+      left: 0;
+    }
+
+  }
+
+  .infrastructure-text {
+    @extend .text-bubble;
+    position: absolute;
+    top: 281px;
+    right: 16%;
+
+    @media screen and (max-width: 615px) {
+      right: 0;
+    }
+
   }
 }
