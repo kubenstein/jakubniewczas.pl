@@ -1,0 +1,37 @@
+This is step by step short guide how to install and use iOS Simulator to test your website on different iOS devises.
+
+Having an ability to test UI and UX on several devises at once is a huge advantage and productivity boost, especially when installing is so simple. By using Simulators we are one step closer to real environment allowing devs and designers spotting potential issues faster.
+
+### Step 1/5
+First we need to install Xcode (we won't use it but we need to have it installed).
+The easiest way is to go to AppStore and install it for free.
+Alternatively you can download it from [https://developer.apple.com/download/more/](https://developer.apple.com/download/more/). Please not that you can also download earlier versions of Xcode, which is especially useful if you haven't yet updated your mac system.
+
+![install xcode](<%= s3_url('blog/how-to-use-ios-simulators-for-frontend-development/1.jpg') %>)
+
+### Step 2/5
+After Xcode has been installed, open it and go to its preferences. Then open "components" tab and install latest iOS Simulator.
+
+![install simulator](<%= s3_url('blog/how-to-use-ios-simulators-for-frontend-development/2.jpg') %>)
+
+### Step 3/5
+Open Simulator.
+
+- To add more devices go to `Hardware -> Device -> iOS` and just add as many devices as you want.
+- I prefer to have device outlines disabled. To do so go to Window and uncheck "Show Device Bezels".
+
+![add simulators](<%= s3_url('blog/how-to-use-ios-simulators-for-frontend-development/3.jpg') %>)
+
+### Step 4/5
+Open Safari from within an iPhone or iPad and simply navigate to desired website. You have also access to `localhost` to target development server.
+
+![use simulator](<%= s3_url('blog/how-to-use-ios-simulators-for-frontend-development/4.jpg') %>)
+
+### Step 5/5
+To debug a site using a web inspector open Safari on your mac (not on iPhone!). Go to Develop menu, pick a simulator and a page you want to inspect. You are now ready to start debugging using Safari dev tools!
+
+![debugging](<%= s3_url('blog/how-to-use-ios-simulators-for-frontend-development/5.jpg') %>)
+
+
+![debugging](<%= s3_url('blog/how-to-use-ios-simulators-for-frontend-development/6.jpg') %>)
+
