@@ -17,42 +17,134 @@
       img src=asset_url("/assets/images/docker-logo.png")
 
     .fullstack-matrix
-      .frontend-layer ng-click="skillClicked('frontend')"
+      a.frontend-layer ng-click="scrollTo('#skill-frontend')"
         .icon
-      .ios-layer ng-click="skillClicked('ios')"
+      a.ios-layer ng-click="scrollTo('#skill-ios')"
         .icon
-      .backend-layer ng-click="skillClicked('backend')"
+      a.backend-layer ng-click="scrollTo('#skill-backend')"
         .icon
-      .infrastructure-layer ng-click="skillClicked('infrastructure')"
+      a.infrastructure-layer ng-click="scrollTo('#skill-infrastructure')"
         .icon
       .connector-infrastructure-backend
       .connector-backend-ios
       .connector-backend-frontend
-      .frontend-text
+      .frontend-text ng-click="scrollTo('#skill-frontend')"
         h5
           | {{ 'SKILL_FRONTEND' | translate }}
         p
           | {{ 'SKILL_FRONTEND_TEXT' | translate }}
 
-      .backend-text
+      .backend-text ng-click="scrollTo('#skill-backend')"
         h5
           | {{ 'SKILL_BACKEND' | translate }}
         p
           | {{ 'SKILL_BACKEND_TEXT' | translate }}
 
-      .mobile-text
+      .ios-text ng-click="scrollTo('#skill-ios')"
         h5
           | {{ 'SKILL_MOBILE' | translate }}
         p
           | {{ 'SKILL_MOBILE_TEXT' | translate }}
 
 
-      .infrastructure-text
+      .infrastructure-text ng-click="scrollTo('#skill-infrastructure')"
         h5
           | {{ 'SKILL_DEVOPS' | translate }}
         p
           | {{ 'SKILL_DEVOPS_TEXT' | translate }}
 
+    .skill-extended#skill-frontend
+      h3
+        | {{ 'SKILL_FRONTEND' | translate }}
+      p
+        | As a Senior Engineer I’m supervising and leading tech side of several frontend projects in Virtusize. Our main app is a fully fledged Vue app integrated with pages of clients such as <a href='https://www.virtusize.jp/partners' target="_blank">Kate Spate, Balenciaga, United Arrows, Marui etc..</a> We handle <b>millions of requests / week</b>, so my main focus is on <em>scalability</em>, <em>performance</em> and <em>maintainability (constant deliverability)</em> of the whole setup.\n\n
+        | &nbsp;&nbsp;&nbsp;• Taking responsible for making tech decisions\n
+        | &nbsp;&nbsp;&nbsp;• Conducting strict code reviews, guarding code quality level at any stage of the app lifetime\n
+        | &nbsp;&nbsp;&nbsp;• Nourishing engineering culture in the team (coaching, leading and motivating)\n
+        | &nbsp;&nbsp;&nbsp;• Spotting potential threats early and planing mitigation strategies\n
+        | &nbsp;&nbsp;&nbsp;• Closely collaborating with CTO\n
+        | &nbsp;&nbsp;&nbsp;• Backing up my teammates when collaborating with other teams\n
+        | &nbsp;&nbsp;&nbsp;• Staying on call and handling emergencies\n
+        | &nbsp;&nbsp;&nbsp;• Delivering tons of features myself\n
 
+        img src=asset_url("/assets/s3/main-page/virtusize.jpg")
 
+        | <b>Previously...</b>\n\n
+        | At Voyagin (part of Rakuten Travel), a travel agency and tours and tickets booking platform, I was a Full Stack (react/rails) developer. I was responsible for <b>rewriting nearly all of <a href="https://govoyagin.com" target="_blank">govoyagin.com</a> frontend to React</b>. Due to scale of the app and amount of traffic hitting us, we faced and solved all kind of big React app challenges:\n\n
+        | &nbsp;&nbsp;&nbsp;• maintainability of components\n
+        | &nbsp;&nbsp;&nbsp;• SSR\n
+        | &nbsp;&nbsp;&nbsp;• code splitting\n
+        | &nbsp;&nbsp;&nbsp;• state management\n
+        | &nbsp;&nbsp;&nbsp;• forms\n
+        | &nbsp;&nbsp;&nbsp;• access tokens\n
+        | &nbsp;&nbsp;&nbsp;• css modularity\n
+        | &nbsp;&nbsp;&nbsp;• GTM\n
+        | &nbsp;&nbsp;&nbsp;• i18n\n
+        | &nbsp;&nbsp;&nbsp;• testing\n
+        | &nbsp;&nbsp;&nbsp;• AB testing\n
+        | &nbsp;&nbsp;&nbsp;• payments\n
+        | &nbsp;&nbsp;&nbsp;• responsiveness\n
+        | &nbsp;&nbsp;&nbsp;• error monitoring etc..\n
 
+        img src=asset_url("/assets/s3/main-page/voyagin.jpg")
+      a.more href='/#/skill-frontend' See Frontend portfolio >
+
+    .skill-extended#skill-backend
+      h3
+        | {{ 'SKILL_BACKEND' | translate }}
+      p
+        | I've been building websites for over a decade now, 8 full-time professionally, mainly in Ruby and NodeJS ecosystems. Rails was dominating Ruby scene, and ExpressJS with surrounding libraries for JS.\n
+        | I know strengths and weaknesses of each technology, architecture or framework depending on project scale and stage. Past few years I was involved in huge apps with massive databases, complicated use-cases, <b>serving hundreds of thousands request / week</b>. I faced and overcame all sort of challenges bigger apps bring.\n
+        | \n
+        | &nbsp;&nbsp;&nbsp;• Building and maintaining scalable codebases operating on huge data volumes\n
+        | &nbsp;&nbsp;&nbsp;• Integrating with payment gateways (Stripe, Paypal)\n
+        | &nbsp;&nbsp;&nbsp;• Integrating with Fraud Protection services \n
+        | &nbsp;&nbsp;&nbsp;• Full-text search support (Solr, ElasticSearch)\n
+        | &nbsp;&nbsp;&nbsp;• Monitoring, handing spikes and emergencies\n
+        | &nbsp;&nbsp;&nbsp;• Heavy background queuing\n
+        | &nbsp;&nbsp;&nbsp;• Photos and Videos processing\n
+        | &nbsp;&nbsp;&nbsp;• Programming in Event Sourced fashon\n
+        | &nbsp;&nbsp;&nbsp;• Responding with pdfs, sms, slack messages\n
+        | &nbsp;&nbsp;&nbsp;• Familiarity with Heroku ecosystem\n
+        | \n
+        | <b><i>I know how to build web apps.</i></b>\n
+
+      a.more href='/#/skill-backend' See Backend portfolio >
+
+    .skill-extended#skill-ios
+      h3
+        | {{ 'SKILL_MOBILE' | translate }}
+      p
+        | Even though iOS mobile development is my off-spec I still have been building apps professionally, as a freelancer and as personal projects. Some of my apps were developed as early as in 2012 (and still are in AppStore).\n
+        | When living in Hong Kong <b>I was iOS dev in financial sector</b>.\n
+        |\n
+        | &nbsp;&nbsp;&nbsp;• Communication with backend using REST API\n
+        | &nbsp;&nbsp;&nbsp;• Managing data using CoreData framework\n
+        | &nbsp;&nbsp;&nbsp;• Custom, non-trivial UI\n
+        | &nbsp;&nbsp;&nbsp;• Configuring and Displaying notifications\n
+        | &nbsp;&nbsp;&nbsp;• Integrating accelerometer and GPS\n
+        | &nbsp;&nbsp;&nbsp;• Facebook Integration\n
+        | &nbsp;&nbsp;&nbsp;• In-App Purchase\n
+        |\n
+        |<i>The beauty of having iOS dev background is, I have a great understanding of mobile usecases needed when building api backends.</i>
+
+        img src=asset_url("/assets/s3/main-page/ios.jpg")
+
+      a.more href='/#/skill-ios' See iOS portfolio >
+
+    .skill-extended#skill-infrastructure
+      h3
+        | {{ 'SKILL_DEVOPS' | translate }}
+      p
+        | To run an app at scale you have to understand the underlying infrastructure. I believe every developer should have an ability to deploy or rollback any part of the system at any given time. That's why I try to automate everything, narrowing necessary actions to a single command per task (ofter run from CI/CD servers).\n
+        | Besides knowalge, <b>applying discipline and maintainability principles to infra configurations is especially essential when it comes to staying confident at scale.</b>\n
+        |\n
+        | &nbsp;&nbsp;&nbsp;• daily usage of AWS\n
+        | &nbsp;&nbsp;&nbsp;• years of experience with Heroku platform (including private space) and dozens of its addons\n
+        | &nbsp;&nbsp;&nbsp;• configuring docker for development and emergency cross platform script environment\n
+        | &nbsp;&nbsp;&nbsp;• configuring CI servers (CircleCI, SemaphoreCI, CodeshipIo, Travis)\n
+        | &nbsp;&nbsp;&nbsp;• setting up monitoring infrastructure\n
+        | &nbsp;&nbsp;&nbsp;• writing all glueing bash scripts in an extremely readable way\n
+        |\n
+        | <i>"How many keystrokes does it take you to deploy a new version, and how many to roll it back?"</i>
+      a.more href='/#/skill-infrastructure' See Devops portfolio >

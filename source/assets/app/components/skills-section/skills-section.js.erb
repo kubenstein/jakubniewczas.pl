@@ -8,8 +8,10 @@ angular.module('jakubniewczas')
       templateUrl: '<%= ng_template_url("skills-section/") %>',
 
       controller: ['$scope', function($scope) {
-        $scope.skillClicked = function(layer) {
-          //...
+        $scope.scrollTo = function(selector) {
+          document.querySelector(selector).scrollIntoView({
+            behavior: 'smooth'
+          });
         }
       }]
     }
