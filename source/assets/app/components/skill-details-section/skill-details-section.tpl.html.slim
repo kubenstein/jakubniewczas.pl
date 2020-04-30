@@ -10,8 +10,7 @@
           | {{skill.name}}
         span.skill-subtext
           | {{skill.subtext}}
-      p
-        | {{skill.description}}
+      p.skill-desc ng-bind-html="skill.description"
 
       .projects
         .project.clearfix ng-repeat='project in skill.projects'

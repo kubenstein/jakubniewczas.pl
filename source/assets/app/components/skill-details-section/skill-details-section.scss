@@ -24,6 +24,10 @@
     margin-bottom: 10px;
   }
 
+  .skill-desc {
+    white-space: pre-line;
+  }
+
   .project-info {
     float: left;
     width: 50%;
@@ -50,7 +54,7 @@
   .portrait {
     width: 177px;
     height: 310px;
-  }  
+  }
 
   @media screen and (max-width: 690px) {
     .project-info {
