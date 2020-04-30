@@ -395,33 +395,33 @@
   {
     id: 'infrastructure',
     name: 'Infrastructure',
-    subtext: 'VPS, Docker, Heroku, Continous Integration/Deployment, git',
-    description: "I have experience in working with Heroku, Docker, SemaphoreCI, Codeship etc. platforms, configuring them into automate testing and deployment pipelines.",
+    subtext: 'AWS, Docker, Heroku, Continous Integration/Deployment, git, Github, maintainability, logs, bash scripts',
+    description: "I use AWS platform daily, previously I was heavy on Heroku and its ecosystem. Usually I'm the one configuring all CI actions and workflows. I strongly push for readable bash scripts, cross linking to all necessary data needed to easily understand the whole setup.\\nI also usually set docker-based dev and deployment envs so <i>'We can still deploy/rollback even from Mom's computer, using 3g, during Christmas dinner.'</i>",
     projects: [
       {
-        title: 'Configuring and Working with Continuous Integration/Deployment Services',
-        description: 'I have experience working with and configuring <b>SemaphoreCI</b> and <b>CodeshipCI</b> for clients I was working for. Additionally most of my Github open source projects <a target=\'_blank\' href=\'https://travis-ci.org/kubenstein\'>are tested using TravisCI</a> platform.',
-        images: [
-          s3_url('ci-services.jpg')
-        ]
-      },
-      {
-        title: 'Hosting apps on Heroku',
-        description: 'I’ve been using Heroku platform for more than 7 years now. I feel comfortable with Addons, Buildpacks, Slugs, Logging, Debugging and all sorts of applications management. Both Common and Private spaces.',
-        images: [
-          s3_url('heroku.jpg')
-        ]
-      },
-      {
-        title: 'Configuring AWS products',
-        description: 'Most of the time usage of AWS is narrowed to file hosting S3 services. Aspects like permissions and api keys need to be configured, however, provisioning EC2 for some specific use cases is also required from time to time.\n\nKey features:\n- Working AWS IAM, S3 buckets, Cloudfront and EC2s',
+        title: 'AWS',
+        description: 'Majority of our apps are hosted on AWS, both frontend and backend. At Virtusize I’m mostly responsible for frontend so I configure S3, Cloudfront, domains, IAM user permissions and all sort of api keys. In my previous jobs I was also managing EC2s and logging.\n\nKey features:\n • Configurin S3, Cloudfront, domains, IAM user permissions and all sort of api keys.\n • Occasional managing of EC2',
         images: [
           s3_url('aws.jpg')
         ]
       },
       {
+        title: 'Heroku',
+        description: 'I’ve been using Heroku platform for more than 7 years now. In majority of companies I worked for we were using Heroku as a hosting platform.\\nI feel fluent and comfortable with Addons, Buildpacks, Slugs, DBs, Logging, Debugging and all sorts of applications management. In Voyagin we were using Private Spaces for additional layers of security.',
+        images: [
+          s3_url('heroku.jpg')
+        ]
+      },
+      {
+        title: 'Continuous Integration/Deployment',
+        description: 'Usually I’m responsible for configuring CIs (CircleCI, SemaphoreCI, CodeshipIo, Travis) for clients I work for. Since those are external services I’m extremely strict when it comes to readability and maintainability of scripts and config files. <b>I have full confidence in my deployment workflows.</b>',
+        images: [
+          s3_url('ci-services.jpg')
+        ]
+      },
+      {
         title: 'Everyday Development Environment',
-        description: 'Managing external app dependencies during development can be a sophisticated and problematic task. I use docker-machine and docker-compose to dockerize Postgres, Redis, ElasticSearch, Memcache etc.\n\nKey features:\n- Simplify setup and managing of external dependencies',
+        description: 'Managing external app dependencies during development can be a sophisticated and problematic task. I use docker-machine and docker-compose to dockerize Postgres, Redis, ElasticSearch, Memcache etc.\n\nKey features:\n • Simplify setup and managing of external dependencies',
         images: [
           s3_url('everyday-docker-development.jpg')
         ]
@@ -429,7 +429,7 @@
       {
         title: 'Starbucket - building autoscaling, distributed Git server',
         link: 'https://github.com/kubenstein/starbucket',
-        description: 'Git workflow became strictly client-server, which results in inability to deliver any feature when code Repository service is down. I built an elegant node tool that addresses this issue by bringing back a distributed aspect of Git.\n\nKey features:\n- Setup distributed, autoscaling git server in a local network\n\nRelated Blogposts:\n- <a href=\'/#/blog/starbucket-reintroduce-distributed-aspect-of-git\' target=\'_blank\'>Starbucket - reintroduce the \'distributed\' aspect of Git</a>\n- <a href=\'/#/blog/releasing-npm-module\' target=\'_blank\'>Releasing an NPM module</a>',
+        description: 'Git workflow became strictly client-server, which results in inability to deliver any feature when code Repository service is down. I built an elegant node tool that addresses this issue by bringing back a distributed aspect of Git.\n\nKey features:\n • Setup distributed, autoscaling git server in a local network\n\nRelated Blogposts:\n- <a href=\'/#/blog/starbucket-reintroduce-distributed-aspect-of-git\' target=\'_blank\'>Starbucket - reintroduce the \'distributed\' aspect of Git</a>\n- <a href=\'/#/blog/releasing-npm-module\' target=\'_blank\'>Releasing an NPM module</a>',
         images: [
           s3_url('starbucket.jpg')
         ]
@@ -437,7 +437,7 @@
       {
         title: 'Serf-based Loadbalancing',
         link: 'https://github.com/kubenstein/docker-serf-haproxy-loadbalancing',
-        description: 'Goal of this project was to create a web servers environment with fully dynamic loadbalancing. Working example of my multi-host setup can be found on Github.\n\nKey features:\n- Dynamic servers discovery\n- Dynamic binding to HAProxy loadbalancer\n- Fault tolerance of nodes based on supervisord deamon',
+        description: 'Goal of this project was to create a web servers environment with fully dynamic loadbalancing. Working example of my multi-host setup can be found on Github.\n\nKey features:\n• Dynamic servers discovery\n• Dynamic binding to HAProxy loadbalancer\n• Fault tolerance of nodes based on supervisord deamon',
         images: [
           s3_url('docker-serf.jpg')
         ]
@@ -445,14 +445,14 @@
       {
         title: 'Single Host Web App',
         link: 'https://github.com/kubenstein/docker-webserver-vps-setup',
-        description: 'Goal of this project was to create simple VPS server configuration for my Rails and Node.js apps. Working example and backbone of single-host setup can be found on Github.\n\nKey features:\n- Git push-based app container rebuilding\n- Postgres db\n- S3 backups\n\nRelated Blogposts:\n- <a href=\'/#/blog/why-do-we-write-functions\' target=\'_blank\'>Why do we write functions</a>',
+        description: 'Goal of this project was to create simple VPS server configuration for my Rails and Node.js apps. Working example of single-host setup can be found on my Github.\n\nKey features:\n • Git push-based app container rebuilding\n• Postgres db\n• S3 backups\n\nRelated Blogposts:\n- <a href=\'/#/blog/why-do-we-write-functions\' target=\'_blank\'>Why do we write functions</a>',
         images: [
           s3_url('docker.jpg')
         ]
       },
       {
         title: 'Automated Build and Deploy toolchain',
-        description: 'I like to wrap deployment pipelines in docker containers. No matter if its a git push to heroku or sftp to shared apache server, I want to have deployments details hidden behind automated scripts.\n\nKey features:\n- Tools and steps of deployment process are containerized making deployment repeatable and reliable.',
+        description: 'I like to wrap deployment pipelines in docker containers. No matter if its a git push to heroku, ansible script or sftp to shared apache server, I want to have deployments details hidden behind automated scripts, ready to be executed in a single command\n\nKey features:\n• Tools and steps of deployment process are containerized making deployments repeatable and reliable.',
         images: [
           s3_url('docker.jpg')
         ]
