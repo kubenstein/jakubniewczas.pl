@@ -10,11 +10,17 @@
 
   .skill-name {
     font-weight: normal;
-    font-size: 28px;
+    font-size: 26px;
     display: inline-block;
+    text-decoration: none;
+    color: $black;
     padding: 0 10px 4px 10px;
-    margin-bottom: 13px;
-    border-bottom: 2px solid $orange;
+    margin: 0 10px 13px;
+
+    &.active {
+      font-size: 28px;
+      border-bottom: 2px solid $orange;
+    }
   }
 
   .skill-subtext {

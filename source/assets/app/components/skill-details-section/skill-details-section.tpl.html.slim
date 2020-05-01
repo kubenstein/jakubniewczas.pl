@@ -6,8 +6,15 @@
   .section-body
     .item-body
       .header
-        h3.skill-name
-          | {{skill.name}}
+        a.skill-name href='/#/skill-frontend' ng-class="{active: skillId === 'frontend' }"
+          | {{ 'SKILL_LINK_FRONTEND' | translate }}
+        a.skill-name href='/#/skill-backend' ng-class="{active: skillId === 'backend' }"
+          | {{ 'SKILL_LINK_BACKEND' | translate }}
+        a.skill-name href='/#/skill-ios' ng-class="{active: skillId === 'ios' }"
+          | {{ 'SKILL_LINK_MOBILE' | translate }}
+        a.skill-name href='/#/skill-infrastructure' ng-class="{active: skillId === 'infrastructure' }"
+          | {{ 'SKILL_LINK_DEVOPS' | translate }}
+
         span.skill-subtext
           | {{skill.subtext}}
       p.skill-desc ng-bind-html="skill.description"

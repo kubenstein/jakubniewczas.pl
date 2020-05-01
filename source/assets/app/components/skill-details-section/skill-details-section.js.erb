@@ -9,6 +9,7 @@ angular.module('jakubniewczas')
 
       controller: ['$scope', function($scope) {
         function initialize() {
+          $scope.skillId = $routeParams['id']
           $rootScope.$on('$translateChangeSuccess', function() {
             loadData();
           });
