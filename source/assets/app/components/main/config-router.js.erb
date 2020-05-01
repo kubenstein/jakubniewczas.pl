@@ -9,4 +9,9 @@ angular.module('jakubniewczas')
       .when('/blog',      { templateUrl: '<%= ng_template_url("main/routes/blog") %>' })
       .when('/blog/:id',  { templateUrl: '<%= ng_template_url("main/routes/blog-article") %>' })
       .otherwise({redirectTo: '/'});
+}])
+.run(['$rootScope', function($rootScope) {
+  $rootScope.$on('$locationChangeStart', function() {
+    $rootScope.previousHash = location.hash;
+  });
 }]);

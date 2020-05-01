@@ -7,13 +7,14 @@ angular.module('jakubniewczas')
       scope: {},
       templateUrl: '<%= ng_template_url("skill-details-section/") %>',
 
-      controller: ['$scope', function($scope) {
+      controller: ['$scope', '$rootScope', function($scope, $rootScope) {
         function initialize() {
           $scope.skillId = $routeParams['id']
           $rootScope.$on('$translateChangeSuccess', function() {
             loadData();
           });
           loadData();
+          scrollToTop();
         }
 
         function loadData() {
@@ -29,6 +30,16 @@ angular.module('jakubniewczas')
         }
 
         // private
+
+        function scrollToTop() {
+          if ($rootScope.previousHash === '#/') {
+            setTimeout(function() {
+              document.querySelector('.about-me-section').scrollIntoView({
+                behavior: 'smooth'
+              });
+            }, 300)
+          }
+        }
 
         function selectSkill(skills, skillId) {
           return $filter('filter')(skills, {id: skillId}, true)[0];
