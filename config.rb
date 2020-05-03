@@ -1,7 +1,7 @@
 ## middleman config
 set :css_dir, 'assets/app'
 set :js_dir, 'assets/app'
-set :images_dir, 'assets/images'
+set :images_dir, 'assets/s3/page-artifacts'
 
 ignore 'views/*'
 ignore 'pages/*'
