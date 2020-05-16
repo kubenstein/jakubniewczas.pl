@@ -240,6 +240,7 @@
 
     p {
       white-space: pre-line;
+      clear: both;
     }
 
     h3 {
@@ -288,7 +289,7 @@
 
     .more {
       float: right;
-      margin-top: 10px;
+      margin-bottom: 10px;
       color: $orange;
       text-decoration: none;
       font-style: normal;
