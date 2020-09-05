@@ -1,6 +1,5 @@
 #!/bin/bash
-if [ "$NO_BUILD" = "" ] ; then
-  echo -e "!!\n!! You can skip building part by setting NO_BUILD env var\n!!\n"
+if [ -n "$REBUILD" ] || [ $(docker images | grep 'jakubniewczas-com-dev' | wc -l) -eq 0 ] ; then
   docker build -t jakubniewczas-com-dev -f ./scripts/DevEnvDockerfile .
 fi
 
