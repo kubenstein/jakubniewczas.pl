@@ -8,4 +8,4 @@ docker run -it --rm \
   -v "$HOME/.ssh":/root/.ssh \
   -p 3000:3000 \
   jakubniewczas-com-dev \
-  middleman deploy
+  sh -c "bundle ; sh ./scripts/deployment/deploy-to-gh-pages.sh"
