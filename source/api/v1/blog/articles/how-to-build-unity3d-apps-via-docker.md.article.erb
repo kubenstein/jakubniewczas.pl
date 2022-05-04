@@ -1,0 +1,129 @@
+The main reason why one wants to have a dockerised Unity3d build pipeline is to have repeatable, automated, platform-independed, one-click-to-go build solution.
+With automated setup you can focus on building a product knowing that building an app is as simple as running a one command.
+
+(I usually just push the code to Github and let CI do the job).
+
+### Demo code:
+
+[https://github.com/kubenstein/how-to-build-unity3d-apps-via-docker](https://github.com/kubenstein/how-to-build-unity3d-apps-via-docker)
+
+## Step 1/4 - Prepare build script (bash)
+I usually extract build process to a bash script to have a clear overview of what will happen during build process. The script below is responsible for building WebGL client files.
+
+```bash
+#!/bin/bash
+
+# stop on error
+set -e
+
+function main () {
+  remove_dist_folder
+
+  build_unity3d_webgl
+}
+
+########
+
+function remove_dist_folder () {
+  rm -rf ./dist
+  mkdir -p ./dist
+}
+
+function build_unity3d_webgl () {
+  echo "- build unity3d project (WebGL)"
+  unity-editor -batchmode -nographics -quit -logfile -projectPath "${PWD}/src/unity3d" -executeMethod ExportTool.ExportProjectWebGl
+}
+
+
+# go!
+main
+
+```
+
+## Step 2/4 - Prepare build script (unity3d)
+Inside the unity project, at: `Assets/Editor/ExportTools.cs`, we have to specify how the project should be built. In the example below I build the app as WebGL.
+
+```c#
+using System.Collections.Generic;
+using UnityEditor;
+
+class ExportTool {
+  public static void ExportProjectWebGl() {
+    List<string> scenes = new List<string>();
+    foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes) {
+      if (scene.enabled) scenes.Add(scene.path);
+    }
+
+    BuildPipeline.BuildPlayer(scenes.ToArray(), "../../dist/webgl", BuildTarget.WebGL, BuildOptions.None);
+  }
+}
+```
+
+## Step 3/4 - Generate license file for dockerised editor
+To generate a license file for dockerised editor, we have to go through a one-time, manual license generation process.
+
+Please note adding `--hostname unity-docker-builder` flag - the reason is, unity license considers host name when checking license validity, so same hostname hast to be used when, both, generating and activiating license file.
+```bash
+docker run --rm \
+  --hostname unity-docker-builder \
+  -v $PWD:/usr/app \
+  unityci/editor:ubuntu-2021.1.7f1-webgl-0.15.0 \
+  sh -c '
+    cd /usr/app
+    unity-editor -batchmode -nographics -quit -logfile -createManualActivationFile
+  '
+```
+As a result, a `Unity_v2021.1.7f1.alf` file is generated.
+Next go to [https://license.unity3d.com/manual](https://license.unity3d.com/manual), upload the `.alf` file and download the `.ulf` license file. The file name will look something like this: `Unity_v2021.x.ulf`. The `.ulf` file is what we will use to automatically activate dockerised editor each time we build a unity project. I like to rename it to `unity_license_docker.ulf`.
+
+
+## Step 4/4 - Dockerise build script
+Dockerising Unity3d build script we wrote in Step 1 is fairly straightforward process. The app's source code is mounted at `/usr/app`, then the unity editor is activated with a license file we generated in step 3, and then, finally, the build script is triggered.
+Please note adding `--hostname unity-docker-builder`, unity license considers host name when checking validity, so it the same host has t be used when generating and activiating license file.
+
+```bash
+docker run --rm \
+  --name unity-docker-builder \
+  --hostname unity-docker-builder \
+  --memory 4gb \
+  -v $PWD:/usr/app \
+  unityci/editor:ubuntu-2021.1.7f1-webgl-0.15.0 \
+  sh -c '
+    cd /usr/app
+    unity-editor -batchmode -nographics -quit -logfile -manualLicenseFile ./scripts/support/unity_license_docker.ulf
+
+    ./scripts/build.sh
+  '
+```
+
+## Bonus - Github actions configuration yml
+
+I suggest to have everything automated and ran by CI server. I use mostly Github Actions so here is configuration yaml I use:
+
+```yml
+name: Build and deploy to production
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy-to-production:
+    name: Build and deploy to production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Build project
+        run: |
+          ./scripts/build-docker.sh
+
+      - name: deploy to XXX
+        run: |
+          # Deploy to AWS, or Heroku...
+          # Files are under: ./dist/webgl/
+```
